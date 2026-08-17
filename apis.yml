@@ -1,20 +1,84 @@
 aid: probabl
 name: Probabl
-description: 'Probabl is a company surfaced as a portfolio company of serena and added to the API Evangelist
-  network as a stub for enrichment. Sector: open-source. This profile is a lead awaiting the enrichment
-  pipeline.'
+description: >-
+  Probabl (styled ":probabl.") is the French, Inria-spun-out company behind scikit-learn — "the Tabular AI company by
+  the creators of scikit-learn" — founded in 2023 to develop, maintain and commercially sustain the open-source Python
+  data-science stack (scikit-learn, skrub, skore). Its commercial product is Skore: an open-source Python library
+  (`skore`) that turns model training into structured, auditable artifacts — estimator reports, cross-validation
+  reports, comparison reports, data and metric diagnostics — plus Skore Hub, a hosted collaboration platform where
+  teams push, compare and track those artifacts across workspaces and projects. Skore Hub exposes a public REST API
+  (Skore Hub, OpenAPI 3.1.0, 67 operations) covering identity/OAuth, workspaces, members and API keys, projects,
+  estimator/cross-validation/comparison reports, artifacts, project goals, and OpenAI/Anthropic-compatible agent
+  endpoints. Probabl also publishes a first-party Agent Skills package (probabl-skills, BSD-3-Clause) of 14 data-science
+  skills for coding agents such as Claude Code and Cursor, a `skore` CLI, training via Skolar, and the Scikit-learn
+  Central ecosystem explorer.
+image: https://avatars.githubusercontent.com/u/135336812?v=4
 url: https://raw.githubusercontent.com/api-evangelist/probabl/refs/heads/main/apis.yml
 x-type: company
 x-source: serena-portfolio
-x-tier: stub
-x-tier-reason: portfolio-lead
-specificationVersion: '0.20'
+specificationVersion: '0.21'
 created: '2026-08-17'
 modified: '2026-08-17'
 tags:
 - Company
 - Open Source
-apis: []
+- machine-learning
+- data-science
+- scikit-learn
+- mlops
+- model-evaluation
+- experiment-tracking
+- agent-skills
+- artificial-intelligence
+- python
+- france
+apis:
+- name: Skore Hub API
+  description: >-
+    Public REST API for Skore Hub, Probabl's hosted collaboration platform for machine-learning experiments. Covers
+    identity (OAuth authorization-code and device flows, token refresh, user profile, per-workspace API keys),
+    workspaces (creation, membership, roles, invitations), projects, and the report surface — estimator reports,
+    cross-validation reports, comparison reports, report groups, metrics, media, pickles and environments — plus
+    presigned artifact upload/read, project goals, LLM provider configuration, and OpenAI-/Anthropic-compatible agent
+    completion endpoints. OpenAPI 3.1.0 with 67 operations across 51 paths and 70 component schemas, served live at
+    https://api.skore.probabl.ai/openapi.json.
+  humanURL: https://docs.skore.probabl.ai/stable/
+  baseURL: https://api.skore.probabl.ai
+  tags:
+  - machine-learning
+  - data-science
+  - experiment-tracking
+  - model-evaluation
+  - mlops
+  properties:
+  - type: OpenAPI
+    url: openapi/probabl-skore-hub-openapi.json
+  - type: Documentation
+    url: https://docs.skore.probabl.ai/stable/
+  - type: APIReference
+    url: https://api.skore.probabl.ai/docs
+  - type: Console
+    url: https://api.skore.probabl.ai/redoc
+  - type: Authentication
+    url: authentication/probabl-authentication.yml
+  - type: OAuthScopes
+    url: scopes/probabl-scopes.yml
+  - type: Conventions
+    url: conventions/probabl-conventions.yml
+  - type: Idempotency
+    url: conventions/probabl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/probabl-problem-types.yml
+  - type: DataModel
+    url: data-model/probabl-data-model.yml
+  - type: Overlay
+    url: overlays/probabl-skore-hub-overlay.yaml
+  - type: Conformance
+    url: conformance/probabl-conformance.yml
+  - type: RateLimits
+    url: rate-limits/probabl-rate-limits.yml
+  - type: Plans
+    url: plans/probabl-plans-pricing.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -23,3 +87,43 @@ maintainers:
 common:
 - type: Website
   url: https://probabl.ai/
+- type: Documentation
+  url: https://docs.skore.probabl.ai/stable/
+- type: APIReference
+  url: https://api.skore.probabl.ai/docs
+- type: GettingStarted
+  url: https://docs.skore.probabl.ai/stable/install.html
+- type: Blog
+  url: https://blog.probabl.ai/
+- type: GitHubOrganization
+  url: https://github.com/probabl-ai
+- type: Support
+  url: https://discord.probabl.ai/
+- type: Contact
+  url: https://www.probabl.ai/contact/
+- type: TermsOfService
+  url: https://www.probabl.ai/legal/skore-eula/
+- type: PrivacyPolicy
+  url: https://www.probabl.ai/legal/privacy-policy/
+- type: StatusPage
+  url: https://status.probabl.ai/
+- type: Lifecycle
+  url: lifecycle/probabl-lifecycle.yml
+- type: ChangeLog
+  url: changelog/probabl-changelog.yml
+- type: Packages
+  url: packages/probabl-packages.yml
+- type: SDKs
+  url: packages/probabl-packages.yml
+- type: CLI
+  url: cli/probabl-cli.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: MCPServer
+  url: mcp/probabl-mcp.yml
+- type: LLMsTxt
+  url: llms/probabl-llms.txt
+- type: WellKnown
+  url: well-known/probabl-well-known.yml
+- type: DomainSecurity
+  url: security/probabl-domain-security.yml
