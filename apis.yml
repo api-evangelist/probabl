@@ -21,6 +21,19 @@ created: '2026-08-17'
 modified: '2026-08-17'
 tags:
 - Company
+- Open-Source
+- Machine-Learning
+- Data Science
+- scikit-learn
+- MLOps
+- Model Evaluation
+- Experiment Tracking
+- Agent Skills
+- Artificial Intelligence
+- Python
+- France
+tags_raw:
+- Company
 - Open Source
 - machine-learning
 - data-science
@@ -45,6 +58,12 @@ apis:
   humanURL: https://docs.skore.probabl.ai/stable/
   baseURL: https://api.skore.probabl.ai
   tags:
+  - Machine-Learning
+  - Data Science
+  - Experiment Tracking
+  - Model Evaluation
+  - MLOps
+  tags_raw:
   - machine-learning
   - data-science
   - experiment-tracking
