@@ -46,32 +46,17 @@ tags_raw:
 - python
 - france
 apis:
-- name: Skore Hub API
+- aid: probabl:probabl-anthropic-compatible-agent-api
+  name: Probabl Anthropic Compatible Agent API
   description: >-
-    Public REST API for Skore Hub, Probabl's hosted collaboration platform for machine-learning experiments. Covers
-    identity (OAuth authorization-code and device flows, token refresh, user profile, per-workspace API keys),
-    workspaces (creation, membership, roles, invitations), projects, and the report surface — estimator reports,
-    cross-validation reports, comparison reports, report groups, metrics, media, pickles and environments — plus
-    presigned artifact upload/read, project goals, LLM provider configuration, and OpenAI-/Anthropic-compatible agent
-    completion endpoints. OpenAPI 3.1.0 with 67 operations across 51 paths and 70 component schemas, served live at
-    https://api.skore.probabl.ai/openapi.json.
+    The Anthropic Compatible Agent API from Probabl — 1 operation(s) for anthropic compatible agent.
   humanURL: https://docs.skore.probabl.ai/stable/
   baseURL: https://api.skore.probabl.ai
   tags:
-  - Machine-Learning
-  - Data Science
-  - Experiment Tracking
-  - Model Evaluation
-  - MLOps
-  tags_raw:
-  - machine-learning
-  - data-science
-  - experiment-tracking
-  - model-evaluation
-  - mlops
+  - Anthropic Compatible Agent
   properties:
   - type: OpenAPI
-    url: openapi/probabl-skore-hub-openapi.json
+    url: openapi/probabl-anthropic-compatible-agent-api-openapi.yml
   - type: Documentation
     url: https://docs.skore.probabl.ai/stable/
   - type: APIReference
@@ -90,8 +75,245 @@ apis:
     url: errors/probabl-problem-types.yml
   - type: DataModel
     url: data-model/probabl-data-model.yml
-  - type: Overlay
-    url: overlays/probabl-skore-hub-overlay.yaml
+  - type: Conformance
+    url: conformance/probabl-conformance.yml
+  - type: RateLimits
+    url: rate-limits/probabl-rate-limits.yml
+  - type: Plans
+    url: plans/probabl-plans-pricing.yml
+- aid: probabl:probabl-health-api
+  name: Probabl Health API
+  description: The Health API from Probabl — 1 operation(s) for health.
+  humanURL: https://docs.skore.probabl.ai/stable/
+  baseURL: https://api.skore.probabl.ai
+  tags:
+  - Health
+  properties:
+  - type: OpenAPI
+    url: openapi/probabl-health-api-openapi.yml
+  - type: Documentation
+    url: https://docs.skore.probabl.ai/stable/
+  - type: APIReference
+    url: https://api.skore.probabl.ai/docs
+  - type: Console
+    url: https://api.skore.probabl.ai/redoc
+  - type: Authentication
+    url: authentication/probabl-authentication.yml
+  - type: OAuthScopes
+    url: scopes/probabl-scopes.yml
+  - type: Conventions
+    url: conventions/probabl-conventions.yml
+  - type: Idempotency
+    url: conventions/probabl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/probabl-problem-types.yml
+  - type: DataModel
+    url: data-model/probabl-data-model.yml
+  - type: Conformance
+    url: conformance/probabl-conformance.yml
+  - type: RateLimits
+    url: rate-limits/probabl-rate-limits.yml
+  - type: Plans
+    url: plans/probabl-plans-pricing.yml
+- aid: probabl:probabl-identity-api
+  name: Probabl Identity API
+  description: The identity API from Probabl — 22 operation(s) for identity.
+  humanURL: https://docs.skore.probabl.ai/stable/
+  baseURL: https://api.skore.probabl.ai
+  tags:
+  - identity
+  properties:
+  - type: OpenAPI
+    url: openapi/probabl-identity-api-openapi.yml
+  - type: Documentation
+    url: https://docs.skore.probabl.ai/stable/
+  - type: APIReference
+    url: https://api.skore.probabl.ai/docs
+  - type: Console
+    url: https://api.skore.probabl.ai/redoc
+  - type: Authentication
+    url: authentication/probabl-authentication.yml
+  - type: OAuthScopes
+    url: scopes/probabl-scopes.yml
+  - type: Conventions
+    url: conventions/probabl-conventions.yml
+  - type: Idempotency
+    url: conventions/probabl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/probabl-problem-types.yml
+  - type: DataModel
+    url: data-model/probabl-data-model.yml
+  - type: Conformance
+    url: conformance/probabl-conformance.yml
+  - type: RateLimits
+    url: rate-limits/probabl-rate-limits.yml
+  - type: Plans
+    url: plans/probabl-plans-pricing.yml
+- aid: probabl:probabl-liveness-api
+  name: Probabl Liveness API
+  description: The Liveness API from Probabl — 1 operation(s) for liveness.
+  humanURL: https://docs.skore.probabl.ai/stable/
+  baseURL: https://api.skore.probabl.ai
+  tags:
+  - Liveness
+  properties:
+  - type: OpenAPI
+    url: openapi/probabl-liveness-api-openapi.yml
+  - type: Documentation
+    url: https://docs.skore.probabl.ai/stable/
+  - type: APIReference
+    url: https://api.skore.probabl.ai/docs
+  - type: Console
+    url: https://api.skore.probabl.ai/redoc
+  - type: Authentication
+    url: authentication/probabl-authentication.yml
+  - type: OAuthScopes
+    url: scopes/probabl-scopes.yml
+  - type: Conventions
+    url: conventions/probabl-conventions.yml
+  - type: Idempotency
+    url: conventions/probabl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/probabl-problem-types.yml
+  - type: DataModel
+    url: data-model/probabl-data-model.yml
+  - type: Conformance
+    url: conformance/probabl-conformance.yml
+  - type: RateLimits
+    url: rate-limits/probabl-rate-limits.yml
+  - type: Plans
+    url: plans/probabl-plans-pricing.yml
+- aid: probabl:probabl-llm-provider-api
+  name: Probabl LLM Provider API
+  description: The LLM Provider API from Probabl — 3 operation(s) for llm provider.
+  humanURL: https://docs.skore.probabl.ai/stable/
+  baseURL: https://api.skore.probabl.ai
+  tags:
+  - LLM Provider
+  properties:
+  - type: OpenAPI
+    url: openapi/probabl-llm-provider-api-openapi.yml
+  - type: Documentation
+    url: https://docs.skore.probabl.ai/stable/
+  - type: APIReference
+    url: https://api.skore.probabl.ai/docs
+  - type: Console
+    url: https://api.skore.probabl.ai/redoc
+  - type: Authentication
+    url: authentication/probabl-authentication.yml
+  - type: OAuthScopes
+    url: scopes/probabl-scopes.yml
+  - type: Conventions
+    url: conventions/probabl-conventions.yml
+  - type: Idempotency
+    url: conventions/probabl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/probabl-problem-types.yml
+  - type: DataModel
+    url: data-model/probabl-data-model.yml
+  - type: Conformance
+    url: conformance/probabl-conformance.yml
+  - type: RateLimits
+    url: rate-limits/probabl-rate-limits.yml
+  - type: Plans
+    url: plans/probabl-plans-pricing.yml
+- aid: probabl:probabl-openai-compatible-agent-api
+  name: Probabl OpenAI Compatible Agent API
+  description: >-
+    The OpenAI Compatible Agent API from Probabl — 3 operation(s) for openai compatible agent.
+  humanURL: https://docs.skore.probabl.ai/stable/
+  baseURL: https://api.skore.probabl.ai
+  tags:
+  - OpenAI Compatible Agent
+  properties:
+  - type: OpenAPI
+    url: openapi/probabl-openai-compatible-agent-api-openapi.yml
+  - type: Documentation
+    url: https://docs.skore.probabl.ai/stable/
+  - type: APIReference
+    url: https://api.skore.probabl.ai/docs
+  - type: Console
+    url: https://api.skore.probabl.ai/redoc
+  - type: Authentication
+    url: authentication/probabl-authentication.yml
+  - type: OAuthScopes
+    url: scopes/probabl-scopes.yml
+  - type: Conventions
+    url: conventions/probabl-conventions.yml
+  - type: Idempotency
+    url: conventions/probabl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/probabl-problem-types.yml
+  - type: DataModel
+    url: data-model/probabl-data-model.yml
+  - type: Conformance
+    url: conformance/probabl-conformance.yml
+  - type: RateLimits
+    url: rate-limits/probabl-rate-limits.yml
+  - type: Plans
+    url: plans/probabl-plans-pricing.yml
+- aid: probabl:probabl-projects-api
+  name: Probabl Projects API
+  description: The projects API from Probabl — 19 operation(s) for projects.
+  humanURL: https://docs.skore.probabl.ai/stable/
+  baseURL: https://api.skore.probabl.ai
+  tags:
+  - projects
+  properties:
+  - type: OpenAPI
+    url: openapi/probabl-projects-api-openapi.yml
+  - type: Documentation
+    url: https://docs.skore.probabl.ai/stable/
+  - type: APIReference
+    url: https://api.skore.probabl.ai/docs
+  - type: Console
+    url: https://api.skore.probabl.ai/redoc
+  - type: Authentication
+    url: authentication/probabl-authentication.yml
+  - type: OAuthScopes
+    url: scopes/probabl-scopes.yml
+  - type: Conventions
+    url: conventions/probabl-conventions.yml
+  - type: Idempotency
+    url: conventions/probabl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/probabl-problem-types.yml
+  - type: DataModel
+    url: data-model/probabl-data-model.yml
+  - type: Conformance
+    url: conformance/probabl-conformance.yml
+  - type: RateLimits
+    url: rate-limits/probabl-rate-limits.yml
+  - type: Plans
+    url: plans/probabl-plans-pricing.yml
+- aid: probabl:probabl-readiness-api
+  name: Probabl Readiness API
+  description: The Readiness API from Probabl — 1 operation(s) for readiness.
+  humanURL: https://docs.skore.probabl.ai/stable/
+  baseURL: https://api.skore.probabl.ai
+  tags:
+  - Readiness
+  properties:
+  - type: OpenAPI
+    url: openapi/probabl-readiness-api-openapi.yml
+  - type: Documentation
+    url: https://docs.skore.probabl.ai/stable/
+  - type: APIReference
+    url: https://api.skore.probabl.ai/docs
+  - type: Console
+    url: https://api.skore.probabl.ai/redoc
+  - type: Authentication
+    url: authentication/probabl-authentication.yml
+  - type: OAuthScopes
+    url: scopes/probabl-scopes.yml
+  - type: Conventions
+    url: conventions/probabl-conventions.yml
+  - type: Idempotency
+    url: conventions/probabl-conventions.yml
+  - type: ErrorCatalog
+    url: errors/probabl-problem-types.yml
+  - type: DataModel
+    url: data-model/probabl-data-model.yml
   - type: Conformance
     url: conformance/probabl-conformance.yml
   - type: RateLimits
@@ -104,6 +326,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/probabl-skore-hub-overlay.yaml
 - type: Website
   url: https://probabl.ai/
 - type: Documentation
