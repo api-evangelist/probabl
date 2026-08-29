@@ -12,6 +12,17 @@ description: >-
   endpoints. Probabl also publishes a first-party Agent Skills package (probabl-skills, BSD-3-Clause) of 14 data-science
   skills for coding agents such as Claude Code and Cursor, a `skore` CLI, training via Skolar, and the Scikit-learn
   Central ecosystem explorer.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://avatars.githubusercontent.com/u/135336812?v=4
 url: https://raw.githubusercontent.com/api-evangelist/probabl/refs/heads/main/apis.yml
 x-type: company
