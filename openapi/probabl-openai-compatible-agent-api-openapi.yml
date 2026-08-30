@@ -1,0 +1,165 @@
+openapi: 3.2.0
+info:
+  title: Skore Hub OpenAI Compatible Agent API
+  description: "\nThis REST API is divided in small services.\nEach service has its own OpenAPI specification.\n- [identity](/identity/docs)\n- [projects](/projects/docs)\n    "
+  version: 0.1.0
+tags:
+- name: OpenAI Compatible Agent
+paths:
+  /v1/models:
+    get:
+      tags:
+      - OpenAI Compatible Agent
+      summary: List Models
+      description: Return the OpenAI-compatible model list exposed by the hub agent.
+      operationId: list_models_v1_models_get
+      parameters:
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      - name: x-skore-workspace
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Skore-Workspace
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/skills/{skill}/template:
+    get:
+      tags:
+      - OpenAI Compatible Agent
+      summary: Get Skill Template
+      description: Return a bundled skill file from the hub skills checkout.
+      operationId: get_skill_template_v1_skills__skill__template_get
+      parameters:
+      - name: skill
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Skill
+      - name: path
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Path
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      - name: x-skore-workspace
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Skore-Workspace
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/chat/completions:
+    post:
+      tags:
+      - OpenAI Compatible Agent
+      summary: Chat Completions
+      description: Run one OpenAI-compatible chat completion turn (optionally streamed).
+      operationId: chat_completions_v1_chat_completions_post
+      parameters:
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      - name: x-skore-workspace
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: X-Skore-Workspace
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError

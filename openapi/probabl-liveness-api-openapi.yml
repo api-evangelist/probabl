@@ -1,0 +1,24 @@
+openapi: 3.2.0
+info:
+  title: Skore Hub Liveness API
+  description: "\nThis REST API is divided in small services.\nEach service has its own OpenAPI specification.\n- [identity](/identity/docs)\n- [projects](/projects/docs)\n    "
+  version: 0.1.0
+tags:
+- name: Liveness
+paths:
+  /liveness:
+    get:
+      summary: Liveness
+      description: "Expose liveness probe.\n\nThis endpoint checks the liveness of the application and returns version\ninformation.\n\nReturns\n-------\n    dict: A dictionary containing version information."
+      operationId: liveness_liveness_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                type: object
+                title: Response Liveness Liveness Get
+      tags:
+      - Liveness

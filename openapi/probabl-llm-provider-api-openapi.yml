@@ -1,0 +1,366 @@
+openapi: 3.2.0
+info:
+  title: Skore Hub LLM Provider API
+  description: "\nThis REST API is divided in small services.\nEach service has its own OpenAPI specification.\n- [identity](/identity/docs)\n- [projects](/projects/docs)\n    "
+  version: 0.1.0
+tags:
+- name: LLM Provider
+paths:
+  /agent/workspaces/{workspace_id}/providers:
+    get:
+      tags:
+      - LLM Provider
+      summary: List Providers
+      description: "Return the (masked) agent providers registered for a workspace.\n\n**Parameters**\n- `workspace_id`: The workspace whose providers are requested.\n\n**Responses**\n- `200`: The registered providers (secrets reported as booleans).\n- `403`: Caller is not a member of the workspace.\n- `503`: Stored credentials cannot be read (encryption key missing or\n  changed)."
+      operationId: list_providers_agent_workspaces__workspace_id__providers_get
+      parameters:
+      - name: workspace_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Workspace Id
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentProvidersResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - LLM Provider
+      summary: Create Provider
+      description: "Register a new agent provider for a workspace.\n\nThe first provider registered (when none is active yet) becomes active\nautomatically; otherwise the new provider starts inactive and must be\nactivated explicitly.\n\n**Parameters**\n- `workspace_id`: The workspace to configure.\n- `form`: The provider to register.\n\n**Responses**\n- `201`: The created provider (masked).\n- `400`: Encryption is not configured, the selected model is invalid, or a\n  required provider credential is missing.\n- `403`: Caller is not a workspace owner or admin.\n- `409`: Another provider was activated concurrently; retry.\n- `503`: Stored credentials cannot be read (encryption key missing or\n  changed)."
+      operationId: create_provider_agent_workspaces__workspace_id__providers_post
+      parameters:
+      - name: workspace_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Workspace Id
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentProviderConfigCreate'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentProviderEntryResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /agent/workspaces/{workspace_id}/providers/{config_id}/activate:
+    post:
+      tags:
+      - LLM Provider
+      summary: Activate Provider
+      description: "Make a registered provider the active one for a workspace.\n\nActivating a provider deactivates whichever provider was active before.\n\n**Responses**\n- `204`: No content. The provider is now active.\n- `403`: Caller is not a workspace owner or admin.\n- `404`: The provider does not exist in this workspace.\n- `409`: Another provider was activated concurrently; retry.\n- `503`: Stored credentials cannot be read (encryption key missing or\n  changed)."
+      operationId: activate_provider_agent_workspaces__workspace_id__providers__config_id__activate_post
+      parameters:
+      - name: workspace_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Workspace Id
+      - name: config_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Config Id
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /agent/workspaces/{workspace_id}/providers/{config_id}:
+    delete:
+      tags:
+      - LLM Provider
+      summary: Delete Provider
+      description: 'Remove a registered provider from a workspace.
+
+
+        Removing the active provider leaves the workspace with no active provider
+
+        (the agent is then disabled until another provider is activated).
+
+
+        **Responses**
+
+        - `204`: No content. The provider has been removed.
+
+        - `403`: Caller is not a workspace owner or admin.
+
+        - `404`: The provider does not exist in this workspace.'
+      operationId: delete_provider_agent_workspaces__workspace_id__providers__config_id__delete
+      parameters:
+      - name: workspace_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Workspace Id
+      - name: config_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Config Id
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    AgentProviderEntryResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+        name:
+          type: string
+          title: Name
+        is_active:
+          type: boolean
+          title: Is Active
+        provider:
+          type: string
+          enum:
+          - skore
+          - anthropic
+          - bedrock
+          title: Provider
+        selected_model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Selected Model
+        aws_region:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Aws Region
+        bedrock_role_arn:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Bedrock Role Arn
+        anthropic_api_key_set:
+          type: boolean
+          title: Anthropic Api Key Set
+        bedrock_external_id_set:
+          type: boolean
+          title: Bedrock External Id Set
+        aws_access_key_id_set:
+          type: boolean
+          title: Aws Access Key Id Set
+        aws_secret_access_key_set:
+          type: boolean
+          title: Aws Secret Access Key Set
+      type: object
+      required:
+      - id
+      - name
+      - is_active
+      - provider
+      - selected_model
+      - aws_region
+      - bedrock_role_arn
+      - anthropic_api_key_set
+      - bedrock_external_id_set
+      - aws_access_key_id_set
+      - aws_secret_access_key_set
+      title: AgentProviderEntryResponse
+      description: 'Masked view of a single registered provider.
+
+
+        Secret values are never returned; ``*_set`` booleans report whether a secret
+
+        is stored so the UI can show a "configured" state without echoing it.
+
+        ``selected_model`` is ``None`` for the Skore-managed "auto" routing.'
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    AgentProvidersResponse:
+      properties:
+        providers:
+          items:
+            $ref: '#/components/schemas/AgentProviderEntryResponse'
+          type: array
+          title: Providers
+        available_models:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          type: object
+          title: Available Models
+        encryption_configured:
+          type: boolean
+          title: Encryption Configured
+      type: object
+      required:
+      - providers
+      - available_models
+      - encryption_configured
+      title: AgentProvidersResponse
+      description: 'The workspace''s registered providers plus UI helper metadata.
+
+
+        ``available_models`` carries the per-provider selectable lists so the UI can
+
+        populate the dropdown without an extra request, and ``encryption_configured``
+
+        tells the UI whether secret storage (and thus adding providers) is possible.'
+    AgentProviderConfigCreate:
+      properties:
+        name:
+          type: string
+          maxLength: 150
+          minLength: 1
+          title: Name
+        provider:
+          type: string
+          enum:
+          - skore
+          - anthropic
+          - bedrock
+          title: Provider
+        selected_model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Selected Model
+        anthropic_api_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Anthropic Api Key
+        aws_region:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Aws Region
+        bedrock_role_arn:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Bedrock Role Arn
+        bedrock_external_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Bedrock External Id
+        aws_access_key_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Aws Access Key Id
+        aws_secret_access_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Aws Secret Access Key
+      type: object
+      required:
+      - name
+      - provider
+      title: AgentProviderConfigCreate
+      description: 'Payload to register a new provider for a workspace.
+
+
+        Providers are add/remove only (no edit), so secrets are supplied in full at
+
+        creation time; an empty/omitted secret simply means "not set".'

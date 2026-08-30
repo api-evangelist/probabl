@@ -1,0 +1,1953 @@
+openapi: 3.2.0
+info:
+  title: Skore Hub Identity API
+  description: "\nThis REST API is divided in small services.\nEach service has its own OpenAPI specification.\n- [identity](/identity/docs)\n- [projects](/projects/docs)\n    "
+  version: 0.1.0
+tags:
+- name: identity
+paths:
+  /identity/admin/invitations/{email}:
+    get:
+      tags:
+      - identity
+      summary: List Invitations By Email
+      description: List all invitations for a given email.
+      operationId: list_invitations_by_email_identity_admin_invitations__email__get
+      parameters:
+      - name: email
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Email
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Invitation'
+                title: Response List Invitations By Email Identity Admin Invitations  Email  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /identity/oauth/login:
+    get:
+      tags:
+      - identity
+      summary: Oauth Login
+      description: 'Initiate OAuth login flow.
+
+
+        Starts the authorization code flow by redirecting the user to the authorization
+
+        server''s login page.
+
+
+        **Parameters**
+
+        - `success_uri`: The URI to redirect the user in case of successful login flow.
+
+
+        **Responses**:
+
+        - `200`: Returns a response containing the IDP authorization url'
+      operationId: oauth_login_identity_oauth_login_get
+      parameters:
+      - name: success_uri
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Success Uri
+      - name: display_registration
+        in: query
+        required: false
+        schema:
+          type: boolean
+          default: false
+          title: Display Registration
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /identity/oauth/accept-invitation:
+    get:
+      tags:
+      - identity
+      summary: Accept Invitation
+      description: 'Initiate OAuth login flow.
+
+
+        Starts the authorization code flow by redirecting the user to the authorization
+
+        server''s login page.
+
+
+        **Parameters**
+
+        - `success_uri`: The URI to redirect the user in case of successful login flow.
+
+
+        **Responses**:
+
+        - `200`: Returns a response containing the IDP authorization url'
+      operationId: accept_invitation_identity_oauth_accept_invitation_get
+      parameters:
+      - name: success_uri
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Success Uri
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /identity/oauth/device/login:
+    get:
+      tags:
+      - identity
+      summary: Oauth Device
+      description: 'Initiate device OAuth flow.
+
+
+        Initiates the OAuth device flow.
+
+        Provides the user with a URL and a OTP code to authenticate the device.
+
+
+        **Parameters**:
+
+        - `success_uri`: The URI to redirect the user in case of successful login flow.
+
+
+        **Responses**:
+
+        - `200`: Returns a response containing the IDP authorization url and a device code.'
+      operationId: oauth_device_identity_oauth_device_login_get
+      parameters:
+      - name: success_uri
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Success Uri
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InitiateDeviceAuthResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /identity/oauth/callback:
+    get:
+      tags:
+      - identity
+      summary: Oauth Callback
+      description: 'Handle the OAuth callback with the authorization code.
+
+
+        This endpoint processes the callback from the authorization server,
+
+        exchanges the authorization code for an access token, and returns the token.
+
+
+        **Parameters**:
+
+        - `code`: The authorization code returned by the authorization server.
+
+        - `state`: A unique value to prevent CSRF attacks.
+
+
+        **Responses**:
+
+        - `200`: Returns the access token on successful exchange.
+
+        - `400`: Returns an error if the state or code is invalid.
+
+        - `422`: Returns an error if the state or code format is invalid.'
+      operationId: oauth_callback_identity_oauth_callback_get
+      parameters:
+      - name: code
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Code
+      - name: state
+        in: query
+        required: true
+        schema:
+          type: string
+          title: State
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Oauth Callback Identity Oauth Callback Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /identity/oauth/device/callback:
+    get:
+      tags:
+      - identity
+      summary: Oauth Device Callback
+      description: 'Handle the device authorization callback.
+
+
+        This endpoint processes the callback from the authorization server.
+
+        It stores the device authorization code for later use.
+
+
+        **Parameters**:
+
+        - `code`: The authorization code provided by the user.
+
+        - `state`: A unique value to identify the device flow.
+
+
+        **Responses**:
+
+        - `200`: Renders a template prompting the user to enter a code.
+
+        - `422`: Returns an error if the state or code format is invalid.'
+      operationId: oauth_device_callback_identity_oauth_device_callback_get
+      parameters:
+      - name: code
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Code
+      - name: state
+        in: query
+        required: true
+        schema:
+          type: string
+          title: State
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Oauth Device Callback Identity Oauth Device Callback Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    post:
+      tags:
+      - identity
+      summary: Oauth Device Callback Validation
+      description: 'Validate the user-provided device code.
+
+
+        This endpoint verifies the code entered by the user during the device auth flow.
+
+
+        **Parameters**:
+
+        - `state`: The unique value identifying the device flow.
+
+        - `user_code`: The code entered by the user.
+
+
+        **Responses**:
+
+        - `201`: The device is successfully authenticated.
+
+        - `422`: Returns an error if the state or user_code format is invalid.'
+      operationId: oauth_device_callback_validation_identity_oauth_device_callback_post
+      parameters:
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Body_oauth_device_callback_validation_identity_oauth_device_callback_post'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Oauth Device Callback Validation Identity Oauth Device Callback Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /identity/oauth/device/code-probe:
+    get:
+      tags:
+      - identity
+      summary: Oauth Token Code Is Accessible
+      description: 'Get the device access code status.
+
+
+        Allow a device to know if the awaited `access_code` has been received by the hub
+
+        and is ready for an exchange with the `access_token`.
+
+
+        **Responses**:
+
+        - `204`: The authorization code has been received and is ready for exchange.
+
+        - `400`: The authorization code has not been received yet.
+
+        - `404`: The authentication flow for this `device_code` has not been found.'
+      operationId: oauth_token_code_is_accessible_identity_oauth_device_code_probe_get
+      parameters:
+      - name: device_code
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Device Code
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /identity/oauth/device/token:
+    get:
+      tags:
+      - identity
+      summary: Oauth Device Token
+      description: 'Exchanges the device code for an access token.
+
+
+        This endpoint completes the device authorization flow by exchanging the
+
+        validated device code for an access token.
+
+
+        **Parameters**:
+
+        - `device_code`: The code provided at authentication flow initiation.
+
+
+        **Responses**:
+
+        - `200`: Returns the access token on successful exchange.
+
+        - `422`: Returns an error if the device_code format is invalid.'
+      operationId: oauth_device_token_identity_oauth_device_token_get
+      parameters:
+      - name: device_code
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Device Code
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExchangeCodeResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /identity/oauth/token/refresh:
+    post:
+      tags:
+      - identity
+      summary: Refresh Token
+      description: 'Refresh an access token using a provided refresh token.
+
+
+        This endpoint allows a client to obtain a new access token by providing a valid
+
+        refresh token.
+
+        If a `success_uri` is specified in the request, the user will be redirected to that
+
+        URI with the new access and refresh tokens as query parameters.
+
+
+        **Parameters**:
+
+        - `request`: The request body containing the refresh token and optional success URI.
+
+
+        **Responses**:
+
+        - `200`: Returns a new access token if successful.
+
+        - `307`: Redirects to the specified success URI with new token parameters.
+
+        - `400`: Returns an error if the refresh process fails.'
+      operationId: refresh_token_identity_oauth_token_refresh_post
+      parameters:
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshTokenRequest'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                title: Response Refresh Token Identity Oauth Token Refresh Post
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /identity/oauth/logout:
+    post:
+      tags:
+      - identity
+      summary: Logout
+      description: 'Log out the user (standard OIDC).
+
+
+        Revokes the access and refresh tokens on the OAuth2 provider (when a
+
+        revocation endpoint is advertised) and clears authentication cookies.
+
+
+        **Responses**:
+
+        - `204`: The user has been logged out.'
+      operationId: logout_identity_oauth_logout_post
+      parameters:
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /identity/workspaces:
+    post:
+      tags:
+      - identity
+      summary: Create Workspace
+      description: 'Create and persist a new workspace.
+
+
+        **Parameters**
+
+        - `form`: The workspace creation form filled with the `public_id` to use.
+
+
+        **Responses**:
+
+        - `201`: Returns the unique identifier of the newly created workspace.'
+      operationId: create_workspace_identity_workspaces_post
+      parameters:
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWorkspaceRequest'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateWorkspaceResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - identity
+      summary: List Workspaces
+      description: 'Return a filtered list of workspaces.
+
+
+        **Parameters**
+
+        - `filters`: List of filters to limit the workspace listing query.
+
+
+        **Responses**
+
+        - `200`: A filtered list of workspaces.'
+      operationId: list_workspaces_identity_workspaces_get
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 10
+          title: Limit
+      - name: cursor
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Cursor
+      - name: sort
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/SortOrder'
+          default: ASC
+      - name: sort_by
+        in: query
+        required: false
+        schema:
+          enum:
+          - id
+          - created_at
+          type: string
+          default: id
+          title: Sort By
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListWorkspaceResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /identity/workspaces/{workspace_id}:
+    delete:
+      tags:
+      - identity
+      summary: Delete Workspace
+      description: 'Delete an existing workspace.
+
+
+        Do nothing if the workspace do not exists.
+
+
+        **Parameters**
+
+        - `workspace_id`: Unique identifier of the workspace to delete.
+
+
+        **Responses**:
+
+        - `204`: No content.'
+      operationId: delete_workspace_identity_workspaces__workspace_id__delete
+      parameters:
+      - name: workspace_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Workspace Id
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - identity
+      summary: Get Workspace
+      description: 'Retrieve a workspace from its unique identifier (ID).
+
+
+        **Parameters**
+
+        - `workspace_id`: The workspace''s unique identifier.
+
+
+        **Responses**
+
+        - `200`: The requested workspace.'
+      operationId: get_workspace_identity_workspaces__workspace_id__get
+      parameters:
+      - name: workspace_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Workspace Id
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workspace'
+        '404':
+          description: Not Found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+      - identity
+      summary: Update Workspace
+      description: 'Update a workspace.
+
+
+        **Parameters**
+
+        - `workspace_id`: The workspace to update.
+
+
+        **Responses**
+
+        - `204`: No content. The workspace has been updated.'
+      operationId: update_workspace_identity_workspaces__workspace_id__put
+      parameters:
+      - name: workspace_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Workspace Id
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWorkspaceRequest'
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /identity/workspaces/public-id-availability:
+    get:
+      tags:
+      - identity
+      summary: Check Workspace Public Id Available
+      description: 'Check if a workspace public id is available and get a suggestion.
+
+
+        **Parameters**
+
+        - `public_id`: The workspace public id to check.
+
+
+        **Responses**
+
+        - `200`: Returns whether the slug is available and a suggested unique slug.'
+      operationId: check_workspace_public_id_available_identity_workspaces_public_id_availability_get
+      parameters:
+      - name: public_id
+        in: query
+        required: true
+        schema:
+          type: string
+          minLength: 1
+          maxLength: 64
+          title: Public Id
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  anyOf:
+                  - type: boolean
+                  - type: string
+                  - type: 'null'
+                title: Response Check Workspace Public Id Available Identity Workspaces Public Id Availability Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /identity/workspaces/{workspace_id}/invitations:
+    post:
+      tags:
+      - identity
+      summary: Create Workspace Invitation
+      description: 'Create a workspace invitation and send an invitation email.
+
+
+        Only workspace owners can invite. The invited user receives an email with a
+
+        link to accept; on acceptance they join the workspace with the given role
+
+        and the permissions defined for that role in code.
+
+
+        **Parameters**
+
+        - `workspace_id`: The workspace to invite into.
+
+        - `email`: Invitee email.
+
+        - `role`: owner, contributor, or reader.
+
+
+        **Responses**
+
+        - `201`: The created invitation (without the secret key).
+
+        - `403`: Caller is not a workspace owner.
+
+        - `404`: Workspace does not exist.'
+      operationId: create_workspace_invitation_identity_workspaces__workspace_id__invitations_post
+      parameters:
+      - name: workspace_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Workspace Id
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Body_create_workspace_invitation_identity_workspaces__workspace_id__invitations_post'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invitation'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /identity/workspaces/{workspace_id}/invitation-link:
+    post:
+      tags:
+      - identity
+      summary: Create Workspace Invitation Link
+      description: 'Create a shareable invitation URL for this workspace.
+
+
+        The returned URL uses the same acceptance flow as email invitations.
+
+
+        **Parameters**
+
+        - ``workspace_id``: Target workspace.
+
+        - ``body.role``: Role granted when the invite is accepted.
+
+
+        **Responses**
+
+        - ``201``: Invitation URL.
+
+        - ``403``: Caller is not a workspace owner.'
+      operationId: create_workspace_invitation_link_identity_workspaces__workspace_id__invitation_link_post
+      parameters:
+      - name: workspace_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Workspace Id
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWorkspaceInvitationLinkRequest'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WorkspaceInvitationLinkResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /identity/workspaces/{workspace_id}/members/{user_id}:
+    delete:
+      tags:
+      - identity
+      summary: Remove Member From Workspace
+      description: 'Remove a member from a workspace.
+
+
+        **Parameters**
+
+        - `workspace_id`: The workspace to remove the member from.
+
+        - `user_id`: The user to remove from the workspace.
+
+
+        **Responses**
+
+        - `204`: No content.'
+      operationId: remove_member_from_workspace_identity_workspaces__workspace_id__members__user_id__delete
+      parameters:
+      - name: workspace_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Workspace Id
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: User Id
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /identity/workspaces/{workspace_id}/members/{user_id}/role:
+    put:
+      tags:
+      - identity
+      summary: Set Member Role
+      description: 'Set a workspace member''s role and replace their permissions from the static map.
+
+
+        **Parameters**
+
+        - `workspace_id`: The workspace.
+
+        - `user_id`: The member whose role is updated.
+
+        - `form.role`: owner, contributor, or reader.
+
+
+        **Responses**
+
+        - `204`: Role and permissions updated.
+
+        - `403`: Caller lacks permission, or the target is the last workspace owner.
+
+        - `404`: Target user is not a member of the workspace.'
+      operationId: set_member_role_identity_workspaces__workspace_id__members__user_id__role_put
+      parameters:
+      - name: workspace_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Workspace Id
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: User Id
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SetMemberRoleRequest'
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /identity/users/me:
+    get:
+      tags:
+      - identity
+      summary: Me
+      description: Get the current user profile.
+      operationId: me_identity_users_me_get
+      parameters:
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfileDto'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /identity/users/{user_id}:
+    get:
+      tags:
+      - identity
+      summary: Get User
+      description: Get a user profile by ID.
+      operationId: get_user_identity_users__user_id__get
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: User Id
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserProfileDto'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /identity/users/{user_id}/api-keys:
+    post:
+      tags:
+      - identity
+      summary: Create Api Key
+      description: Create a new API key for the current user.
+      operationId: create_api_key_identity_users__user_id__api_keys_post
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: User Id
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateAPIKeyPayload'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateAPIKeyResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    get:
+      tags:
+      - identity
+      summary: List Api Keys
+      description: List all API keys of the authenticated user.
+      operationId: list_api_keys_identity_users__user_id__api_keys_get
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: User Id
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserAPIKey'
+                title: Response List Api Keys Identity Users  User Id  Api Keys Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /identity/users/{user_id}/api-keys/{api_key_id}:
+    delete:
+      tags:
+      - identity
+      summary: Delete Api Key
+      description: Delete an existing API key for the current user.
+      operationId: delete_api_key_identity_users__user_id__api_keys__api_key_id__delete
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: User Id
+      - name: api_key_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Api Key Id
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      responses:
+        '204':
+          description: Successful Response
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - identity
+      summary: Patch Api Key
+      description: Update an existing API key for the current user.
+      operationId: patch_api_key_identity_users__user_id__api_keys__api_key_id__patch
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: User Id
+      - name: api_key_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Api Key Id
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAPIKeyPayload'
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  anyOf:
+                  - type: integer
+                  - type: string
+                  - type: 'null'
+                title: Response Patch Api Key Identity Users  User Id  Api Keys  Api Key Id  Patch
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /identity/invitations/{key}:
+    get:
+      tags:
+      - identity
+      summary: Get Invitation
+      description: 'Check if the given invitation exists if true redirect the user to the IdP.
+
+
+        The route has probably been invoked by an invitation link.'
+      operationId: get_invitation_identity_invitations__key__get
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Key
+      - name: success_uri
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Success Uri
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    CreateWorkspaceInvitationLinkRequest:
+      properties:
+        role:
+          $ref: '#/components/schemas/WorkspaceRole'
+      type: object
+      required:
+      - role
+      title: CreateWorkspaceInvitationLinkRequest
+      description: Create a shareable workspace invitation URL.
+    InitiateDeviceAuthResponse:
+      properties:
+        authorization_url:
+          type: string
+          title: Authorization Url
+        device_code:
+          type: string
+          title: Device Code
+        user_code:
+          type: string
+          title: User Code
+      type: object
+      required:
+      - authorization_url
+      - device_code
+      - user_code
+      title: InitiateDeviceAuthResponse
+      description: Response with device authentication details.
+    UpdateWorkspaceRequest:
+      properties:
+        public_id:
+          type: string
+          maxLength: 64
+          minLength: 1
+          title: Public Id
+      type: object
+      required:
+      - public_id
+      title: UpdateWorkspaceRequest
+      description: Workspace update request.
+    Body_create_workspace_invitation_identity_workspaces__workspace_id__invitations_post:
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email
+        role:
+          $ref: '#/components/schemas/WorkspaceRole'
+      type: object
+      required:
+      - email
+      - role
+      title: Body_create_workspace_invitation_identity_workspaces__workspace_id__invitations_post
+    CreateWorkspaceResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - id
+      title: CreateWorkspaceResponse
+      description: Workspace creation response.
+    UpdateAPIKeyPayload:
+      properties:
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+        regenerate_api_key:
+          type: boolean
+          title: Regenerate Api Key
+          default: false
+      type: object
+      title: UpdateAPIKeyPayload
+      description: API key update payload.
+    SetMemberRoleRequest:
+      properties:
+        role:
+          $ref: '#/components/schemas/WorkspaceRole'
+      type: object
+      required:
+      - role
+      title: SetMemberRoleRequest
+      description: Set a member's role; permissions are replaced from the static role map.
+    RefreshTokenRequest:
+      properties:
+        refresh_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Refresh Token
+        success_uri:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Success Uri
+      type: object
+      title: RefreshTokenRequest
+      description: "Represents a request to refresh an access token.\n\nThe access token is refreshed using the refresh token provided during login.\nOnce a new access token is issued, the previous one becomes invalid immediately.\n\nAttributes\n----------\nrefresh_token : str\n    The refresh token obtained from the most recent authorization code exchange\n    with the IDP.\nsuccess_uri : str | None, optional\n    The URI to redirect the user to after a successful token refresh."
+    ListWorkspaceResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/Workspace'
+          type: array
+          title: Items
+        next_cursor:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - items
+      title: ListWorkspaceResponse
+      description: List workspaces request.
+    Workspace:
+      properties:
+        id:
+          type: integer
+          title: Id
+        public_id:
+          type: string
+          maxLength: 64
+          minLength: 1
+          title: Public Id
+        is_public:
+          type: boolean
+          title: Is Public
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        members:
+          anyOf:
+          - items:
+              $ref: '#/components/schemas/WorkspaceMember'
+            type: array
+          - type: 'null'
+          title: Members
+      type: object
+      required:
+      - id
+      - public_id
+      - is_public
+      - created_at
+      - updated_at
+      title: Workspace
+      description: 'A workspace represents an isolated entity managing users, projects, and resources.
+
+
+        A workspace can be a company, organization, or team that operates independently
+
+        within the system.
+
+
+        Attributes
+
+        ----------
+
+        `id` (`int`): Internal unique identifier for the workspace.
+
+        `public_id` (`str`): Publicly exposed unique identifier.
+
+        `created_at` (`datetime`): Timestamp when the workspace was created.
+
+        `updated_at` (`datetime`): Timestamp of the last update to the workspace.
+
+        `deleted_at` (`datetime`): Timestamp when the workspace was deleted (if applicable).'
+    UserAPIKey:
+      properties:
+        id:
+          type: integer
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        workspace_id:
+          type: integer
+          title: Workspace Id
+        name:
+          anyOf:
+          - type: string
+            maxLength: 150
+          - type: 'null'
+          title: Name
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        expires_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Expires At
+      type: object
+      required:
+      - id
+      - user_id
+      - workspace_id
+      - created_at
+      - updated_at
+      title: UserAPIKey
+      description: 'User API key.
+
+
+        Allows users to access the Skore Hub API without an IDP bearer token.
+
+
+        The API key itself (hashed version) is not accessible; users must copy
+
+        and save it upon generation.
+
+
+        If the key is lost, the user must generate a new key hash.'
+    Permission:
+      type: string
+      enum:
+      - create:project
+      - read:project
+      - update:project
+      - delete:project
+      - create:invitation
+      - read:invitation
+      - delete:invitation
+      title: Permission
+      description: 'A permission.
+
+
+        The actual ground-truth permissions are the ones stored in the
+
+        database; this type is used to avoid typos in permissions.'
+    WorkspaceInvitationLinkResponse:
+      properties:
+        url:
+          type: string
+          title: Url
+      type: object
+      required:
+      - url
+      title: WorkspaceInvitationLinkResponse
+      description: Shareable invitation URL (same acceptance path as email invitations).
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    WorkspaceMembershipInfo:
+      properties:
+        workspace_id:
+          type: integer
+          title: Workspace Id
+        public_id:
+          type: string
+          maxLength: 64
+          title: Public Id
+        role:
+          $ref: '#/components/schemas/WorkspaceRole'
+        permissions:
+          items:
+            type: string
+          type: array
+          title: Permissions
+      type: object
+      required:
+      - workspace_id
+      - public_id
+      - role
+      - permissions
+      title: WorkspaceMembershipInfo
+      description: One workspace membership with role and effective permission names.
+    CreateAPIKeyResponse:
+      properties:
+        api_key_id:
+          type: integer
+          title: Api Key Id
+        api_key:
+          type: string
+          title: Api Key
+      type: object
+      required:
+      - api_key_id
+      - api_key
+      title: CreateAPIKeyResponse
+      description: Response of "create API key" endpoint.
+    Token:
+      properties:
+        access_token:
+          type: string
+          title: Access Token
+        expires_in:
+          type: integer
+          title: Expires In
+        id_token:
+          type: string
+          title: Id Token
+        token_type:
+          type: string
+          title: Token Type
+        scope:
+          type: string
+          title: Scope
+        expires_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Expires At
+        refresh_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Refresh Token
+      type: object
+      required:
+      - access_token
+      - expires_in
+      - id_token
+      - token_type
+      - scope
+      title: Token
+      description: "Represents an access token and related details obtained during authentication.\n\nAttributes\n----------\naccess_token : str\n    The token used to access protected resources.\nexpires_in : int\n    The duration (in seconds) until the token expires.\nid_token : str\n    The token containing identity claims for the authenticated user.\ntoken_type : str\n    The type of token (e.g., \"Bearer\").\nscope : str\n    The scope of permissions granted by the token.\nrefresh_token : str | None, optional\n    The token used to obtain a new access token without re-authenticating.\nexpires_at: datetime | None, optional\n    The access_token expiration timestamp."
+    WorkspaceMember:
+      properties:
+        workspace_id:
+          type: integer
+          title: Workspace Id
+        user_id:
+          type: string
+          title: User Id
+        role:
+          $ref: '#/components/schemas/WorkspaceRole'
+        invited_by:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Invited By
+      type: object
+      required:
+      - workspace_id
+      - user_id
+      - role
+      title: WorkspaceMember
+      description: Workspace member.
+    Body_oauth_device_callback_validation_identity_oauth_device_callback_post:
+      properties:
+        state:
+          type: string
+          title: State
+        user_code:
+          type: string
+          title: User Code
+      type: object
+      required:
+      - state
+      - user_code
+      title: Body_oauth_device_callback_validation_identity_oauth_device_callback_post
+    ExchangeCodeResponse:
+      properties:
+        token:
+          $ref: '#/components/schemas/Token'
+        success_uri:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Success Uri
+      type: object
+      required:
+      - token
+      title: ExchangeCodeResponse
+      description: "Response containing the exchanged token.\n\nAttributes\n----------\ntoken : Token\n    The token obtained from the authorization code exchange with IDP.\nsuccess_uri : str | None\n    The URI to redirect the user at in case of successful login flow."
+    LoginResponse:
+      properties:
+        authorization_url:
+          type: string
+          title: Authorization Url
+      type: object
+      required:
+      - authorization_url
+      title: LoginResponse
+      description: "Represents a response containing the authorization URL.\n\nAttributes\n----------\nauthorization_url : str\n    The URL where the user should be redirected to complete the login."
+    WorkspaceRole:
+      type: string
+      enum:
+      - owner
+      - contributor
+      - reader
+      title: WorkspaceRole
+      description: Role of a user within a workspace.
+    CreateWorkspaceRequest:
+      properties:
+        public_id:
+          type: string
+          maxLength: 64
+          minLength: 1
+          title: Public Id
+      type: object
+      required:
+      - public_id
+      title: CreateWorkspaceRequest
+      description: Workspace creation request.
+    CreateAPIKeyPayload:
+      properties:
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+        permissions:
+          items:
+            $ref: '#/components/schemas/Permission'
+          type: array
+          title: Permissions
+        workspace_id:
+          type: integer
+          title: Workspace Id
+        expires_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Expires At
+      type: object
+      required:
+      - permissions
+      - workspace_id
+      title: CreateAPIKeyPayload
+      description: API key creation payload.
+    SortOrder:
+      type: string
+      enum:
+      - ASC
+      - DESC
+      title: SortOrder
+      description: Sort order.
+    UserProfileDto:
+      properties:
+        id:
+          type: string
+          title: Id
+        email_verified:
+          type: boolean
+          title: Email Verified
+        can_use_managed_inference:
+          type: boolean
+          title: Can Use Managed Inference
+        email:
+          type: string
+          maxLength: 255
+          format: email
+          title: Email
+        first_name:
+          anyOf:
+          - type: string
+            maxLength: 150
+          - type: 'null'
+          title: First Name
+        last_name:
+          anyOf:
+          - type: string
+            maxLength: 150
+          - type: 'null'
+          title: Last Name
+        company:
+          anyOf:
+          - type: string
+            maxLength: 150
+          - type: 'null'
+          title: Company
+        workspace_memberships:
+          items:
+            $ref: '#/components/schemas/WorkspaceMembershipInfo'
+          type: array
+          title: Workspace Memberships
+      type: object
+      required:
+      - id
+      - email_verified
+      - can_use_managed_inference
+      - email
+      - workspace_memberships
+      title: UserProfileDto
+      description: 'Public user profile: identity fields and per-workspace role and permissions.'
+    Invitation:
+      properties:
+        id:
+          type: integer
+          title: Id
+        invitation_email:
+          anyOf:
+          - type: string
+            format: email
+          - type: 'null'
+          title: Invitation Email
+        workspace_id:
+          type: integer
+          title: Workspace Id
+        role:
+          $ref: '#/components/schemas/WorkspaceRole'
+        invited_by:
+          type: string
+          title: Invited By
+        used_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Used At
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - id
+      - workspace_id
+      - role
+      - invited_by
+      - created_at
+      - updated_at
+      title: Invitation
+      description: Represents a user invitation to join a Workspace.

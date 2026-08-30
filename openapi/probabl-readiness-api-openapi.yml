@@ -1,0 +1,73 @@
+openapi: 3.2.0
+info:
+  title: Skore Hub Readiness API
+  description: "\nThis REST API is divided in small services.\nEach service has its own OpenAPI specification.\n- [identity](/identity/docs)\n- [projects](/projects/docs)\n    "
+  version: 0.1.0
+tags:
+- name: Readiness
+paths:
+  /readiness:
+    get:
+      summary: Readiness
+      description: "Expose readiness probe.\n\nThis endpoint checks the readiness of the application by probing various\nservices and returns the readiness status along with version information.\n\nReturns\n-------\n    JSONResponse: A JSON response containing the readiness status and\n                  version information. The status code is 200 if all\n                  services are ready, otherwise 503."
+      operationId: readiness_readiness_get
+      parameters:
+      - name: config_file
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Config File
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema: {}
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      tags:
+      - Readiness
+components:
+  schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
