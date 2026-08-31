@@ -33,16 +33,16 @@ modified: '2026-08-17'
 tags:
 - Company
 - Open-Source
-- Machine-Learning
-- Data Science
+- machine-learning
+- data-science
 - scikit-learn
-- MLOps
-- Model Evaluation
-- Experiment Tracking
-- Agent Skills
-- Artificial Intelligence
-- Python
-- France
+- mlops
+- model-evaluation
+- experiment-tracking
+- agent-skills
+- artificial-intelligence
+- python
+- france
 tags_raw:
 - Company
 - Open Source
@@ -132,6 +132,8 @@ apis:
   humanURL: https://docs.skore.probabl.ai/stable/
   baseURL: https://api.skore.probabl.ai
   tags:
+  - Identity
+  tags_raw:
   - identity
   properties:
   - type: OpenAPI
@@ -269,6 +271,8 @@ apis:
   humanURL: https://docs.skore.probabl.ai/stable/
   baseURL: https://api.skore.probabl.ai
   tags:
+  - Project
+  tags_raw:
   - projects
   properties:
   - type: OpenAPI
