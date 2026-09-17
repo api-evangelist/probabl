@@ -41,7 +41,7 @@ x-type: company
 x-source: serena-portfolio
 specificationVersion: '0.23'
 created: '2026-08-17'
-modified: '2026-08-17'
+modified: '2026-09-16'
 tags:
 - Company
 - Open-Source
@@ -88,8 +88,6 @@ apis:
     url: https://api.skore.probabl.ai/redoc
   - type: Authentication
     url: authentication/probabl-authentication.yml
-  - type: OAuthScopes
-    url: scopes/probabl-scopes.yml
   - type: Conventions
     url: conventions/probabl-conventions.yml
   - type: Idempotency
@@ -122,8 +120,6 @@ apis:
     url: https://api.skore.probabl.ai/redoc
   - type: Authentication
     url: authentication/probabl-authentication.yml
-  - type: OAuthScopes
-    url: scopes/probabl-scopes.yml
   - type: Conventions
     url: conventions/probabl-conventions.yml
   - type: Idempotency
@@ -158,8 +154,6 @@ apis:
     url: https://api.skore.probabl.ai/redoc
   - type: Authentication
     url: authentication/probabl-authentication.yml
-  - type: OAuthScopes
-    url: scopes/probabl-scopes.yml
   - type: Conventions
     url: conventions/probabl-conventions.yml
   - type: Idempotency
@@ -192,8 +186,6 @@ apis:
     url: https://api.skore.probabl.ai/redoc
   - type: Authentication
     url: authentication/probabl-authentication.yml
-  - type: OAuthScopes
-    url: scopes/probabl-scopes.yml
   - type: Conventions
     url: conventions/probabl-conventions.yml
   - type: Idempotency
@@ -226,8 +218,6 @@ apis:
     url: https://api.skore.probabl.ai/redoc
   - type: Authentication
     url: authentication/probabl-authentication.yml
-  - type: OAuthScopes
-    url: scopes/probabl-scopes.yml
   - type: Conventions
     url: conventions/probabl-conventions.yml
   - type: Idempotency
@@ -261,8 +251,6 @@ apis:
     url: https://api.skore.probabl.ai/redoc
   - type: Authentication
     url: authentication/probabl-authentication.yml
-  - type: OAuthScopes
-    url: scopes/probabl-scopes.yml
   - type: Conventions
     url: conventions/probabl-conventions.yml
   - type: Idempotency
@@ -297,8 +285,6 @@ apis:
     url: https://api.skore.probabl.ai/redoc
   - type: Authentication
     url: authentication/probabl-authentication.yml
-  - type: OAuthScopes
-    url: scopes/probabl-scopes.yml
   - type: Conventions
     url: conventions/probabl-conventions.yml
   - type: Idempotency
@@ -331,8 +317,6 @@ apis:
     url: https://api.skore.probabl.ai/redoc
   - type: Authentication
     url: authentication/probabl-authentication.yml
-  - type: OAuthScopes
-    url: scopes/probabl-scopes.yml
   - type: Conventions
     url: conventions/probabl-conventions.yml
   - type: Idempotency
@@ -393,7 +377,14 @@ common:
   url: mcp/probabl-mcp.yml
 - type: LLMsTxt
   url: llms/probabl-llms.txt
-- type: WellKnown
-  url: well-known/probabl-well-known.yml
 - type: DomainSecurity
   url: security/probabl-domain-security.yml
+- type: ToolCrosswalk
+  url: mcp/probabl-tool-crosswalk.yml
+- type: Login
+  url: https://skore.probabl.ai/
+x-enrichment:
+  date: 2026-09-16
+  status: enriched
+  artifacts_added: 19
+  pass: local-v3
