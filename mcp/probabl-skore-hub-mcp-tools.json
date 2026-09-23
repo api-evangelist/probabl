@@ -1,0 +1,129 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "result": {
+    "tools": [
+      {
+        "name": "skore_agent",
+        "description": "Run one turn of the Skore ML methodology and return the next actions.\n\nCall this for anything ML experimentation related, then act as its hands: it\ndecides what to do, you carry it out in the user's workspace.\n\nStart a turn with `prompt` (the user's request, verbatim). On the first call\nin a conversation, omit `session_id` -- do not invent one and do not reuse an\nid from another chat. If the result has `status=\"action_required\"`, perform\nevery action in `actions` locally with your own file, shell, and question\ntools, then call this tool again with the same `session_id` from the previous\nresult and one `results` entry per action -- including for actions that\nfailed, with the error as the output. Repeat until `status=\"done\"`. After\n`done`, call again only when the user has a new request, with that same\n`session_id` and a new `prompt`.\n\nDo not restate the actions to the user as advice, and do not substitute your\nown plan: the methodology, including when to ask the user for a decision, is\ndecided here.",
+        "inputSchema": {
+          "additionalProperties": false,
+          "properties": {
+            "prompt": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "session_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "results": {
+              "anyOf": [
+                {
+                  "items": {
+                    "description": "The outcome of one action the client executed locally.",
+                    "properties": {
+                      "id": {
+                        "description": "The `id` of the action this result answers.",
+                        "type": "string"
+                      },
+                      "output": {
+                        "description": "What the action produced: file content, command output, the user's answers, or an error message if it failed.",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "output"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            }
+          },
+          "type": "object"
+        },
+        "outputSchema": {
+          "description": "The result of one ``skore_agent`` call.",
+          "properties": {
+            "session_id": {
+              "description": "Pass this back on every follow-up call in this conversation. Do not invent a new id and do not reuse an id from another chat.",
+              "type": "string"
+            },
+            "status": {
+              "enum": [
+                "action_required",
+                "done"
+              ],
+              "type": "string"
+            },
+            "message": {
+              "description": "What to relay to the user, possibly empty.",
+              "type": "string"
+            },
+            "actions": {
+              "items": {
+                "description": "One step the client must perform in the user's workspace.",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "tool": {
+                    "description": "Canonical name of the action: read_file, write_file, edit_file, run_shell or ask_user. Perform it with your own equivalent local tool, whatever it is called.",
+                    "type": "string"
+                  },
+                  "arguments": {
+                    "additionalProperties": true,
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "id",
+                  "tool"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "next_step": {
+              "description": "What you must do now.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "session_id",
+            "status",
+            "message",
+            "next_step"
+          ],
+          "type": "object"
+        },
+        "_meta": {
+          "fastmcp": {
+            "tags": []
+          }
+        }
+      }
+    ]
+  }
+}

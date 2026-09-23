@@ -1,0 +1,85 @@
+generated: '2026-09-16'
+method: derived
+source: openapi/*.yml (refined from https://api.skore.probabl.ai/openapi.json) + skore / skore-cli source
+framework: 'FastAPI (server: uvicorn; FastAPI 422 HTTPValidationError envelope)'
+authentication:
+  style: 'X-API-Key header or Authorization: Bearer'
+  see: authentication/probabl-authentication.yml
+addressing:
+  style: path-scoped by workspace public id and project name
+  example: /projects/{workspace_public_id}/{project_name}/estimator-reports
+idempotency:
+  coverage: partial
+  mechanism: natural (resource-name keyed) — no Idempotency-Key header
+  scope:
+  - create_project_projects__workspace_public_id___project_name__post
+  - delete_workspace_identity_workspaces__workspace_id__delete
+  - upsert_projects__workspace_public_id___project_name__reports__id___kind__put
+  - generate_upload_url_projects__workspace_public_id___project_name__artifacts_post
+  evidence:
+  - 'create_project: "Create a project; idempotent (201 created, 208 already exists)."'
+  - 'delete_workspace: "Do nothing if the workspace do not exists."'
+  - upsert (PUT /projects/{ws}/{project}/reports/{id}/{kind}) — present in the live spec only, not yet in the refined
+    openapi/ files
+  - 'generate_upload_url: "If an artifact with the given checksum already exists and is fully uploaded, no" upload
+    url is issued (checksum de-duplication)'
+  write_operations_total: 29
+  note: Four of the write operations document replay-safe behaviour; the rest (report creation, invitations, API
+    keys, agent turns) carry no replay protection.
+pagination:
+  style: none documented
+  note: List operations (reports, projects, workspaces) declare no cursor/offset parameters in the spec.
+filtering:
+  note: estimator/cross-validation/comparison report "filter" GET operations accept query filters; goals use ComparisonOperator
+    enum.
+artifact_upload:
+  style: presigned URLs
+  flow:
+  - generate_upload_url (POST .../artifacts)
+  - PUT bytes to presigned URL
+  - complete_upload (POST .../artifacts/complete)
+  read: get_read_presigned_urls (GET .../artifacts/read)
+versioning:
+  scheme: unversioned REST paths; /v1 prefix only on the OpenAI/Anthropic-compatible agent surface
+  spec_version: 0.1.0
+  server_version_endpoint: 'GET /health returns {"version": "prod", "hash_commit": ...}'
+agent_compatibility:
+  openai:
+  - /v1/models
+  - /v1/chat/completions
+  - /v1/responses
+  anthropic:
+  - /v1/messages
+  note: skore-cli sets ANTHROPIC_BASE_URL to the hub URL so harnesses talk to the hub directly.
+errors:
+  envelope: 'FastAPI {"detail": ...}; 422 => {"detail": [ValidationError{loc,msg,type,input,ctx}]}'
+  problem_json: false
+  see: errors/probabl-problem-types.yml
+request_tracing:
+  header: null
+  note: No request-id header observed on live responses (2026-09-16).
+rate_limit_signaling:
+  headers: []
+  see: rate-limits/probabl-rate-limits.yml
+health:
+  health: /health
+  readiness: /readiness
+  liveness: /liveness
+reversibility:
+  status: none-documented
+  grade: absent
+  note: No reversal operation (undo/restore/rollback) and no reversal window is documented. Deletes of projects,
+    comparison reports, goals, members, API keys and agent providers are exposed with 204 responses and no soft-delete
+    or restore path in the spec. Logout revokes tokens (not a reversal). No window is asserted because none is stated.
+  write_surfaces:
+  - surface: agent provider activation
+    reversal: activate_provider_agent_workspaces__workspace_id__providers__config_id__activate_post (re-activate
+      the previous provider)
+    window: null
+    grade: documented
+    evidence: '"Activating a provider deactivates whichever provider was active before." (OpenAPI)'
+related:
+  errors: errors/probabl-problem-types.yml
+  lifecycle: lifecycle/probabl-lifecycle.yml
+  authentication: authentication/probabl-authentication.yml
+  rate_limits: rate-limits/probabl-rate-limits.yml

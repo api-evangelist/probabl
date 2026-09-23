@@ -1,0 +1,73 @@
+generated: '2026-09-16'
+method: searched
+source: https://pypi.org/pypi/<pkg>/json (queried 2026-09-16) + https://github.com/probabl-ai
+packages:
+- language: python
+  registry: pypi
+  name: skore
+  url: https://pypi.org/project/skore/
+  install: pip install skore
+  official: true
+  version: 0.26.0
+  published: '2026-09-16'
+  repository: https://github.com/probabl-ai/skore
+  note: Python library and Skore Hub client (skore.login(), Project mode="hub"); default hub URI https://api.skore.probabl.ai
+- language: python
+  registry: pypi
+  name: skore-hub-project
+  url: https://pypi.org/project/skore-hub-project/
+  install: pip install skore-hub-project
+  official: true
+  version: 0.0.23
+  published: '2026-05-06'
+  repository: https://github.com/probabl-ai/skore
+  note: Skore Hub project plugin, maintained by "skore developers <skore@signal.probabl.ai>" in the skore monorepo
+- language: python
+  registry: pypi
+  name: skore-local-project
+  url: https://pypi.org/project/skore-local-project/
+  install: pip install skore-local-project
+  official: true
+  version: 0.0.8
+  published: '2026-04-30'
+  repository: https://github.com/probabl-ai/skore
+  note: Local storage plugin (skore monorepo)
+- language: python
+  registry: pypi
+  name: skore-mlflow-project
+  url: https://pypi.org/project/skore-mlflow-project/
+  install: pip install skore-mlflow-project
+  official: true
+  version: 0.0.5
+  published: '2026-04-20'
+  repository: https://github.com/probabl-ai/skore
+  note: MLflow storage plugin (skore monorepo)
+- language: python
+  registry: pypi
+  name: skore-cli
+  url: https://pypi.org/project/skore-cli/
+  install: pip install skore-cli
+  official: true
+  version: 0.4.0
+  published: '2026-09-11'
+  repository: https://github.com/probabl-ai/skore-cli
+  note: Installs the `skore` command (skills / agent / sync); see cli/probabl-cli.yml
+- language: python
+  registry: pypi
+  name: skrub
+  url: https://pypi.org/project/skrub/
+  install: pip install skrub
+  official: false
+  version: 0.10.1
+  published: '2026-09-01'
+  repository: https://github.com/skrub-data/skrub
+  note: Open-source dataframe ML library co-developed by Probabl staff under the independent skrub-data org; not
+    a Skore Hub client.
+helm_charts:
+  repository: https://github.com/probabl-ai/charts
+  charts:
+  - skore-hub-backend
+  note: Self-hosted Skore Hub deployment; SKH__AGENT__MCP_ENABLED toggles the MCP endpoint.
+absent_registries:
+  npm: no first-party package found
+  note: Probabl ships Python only.

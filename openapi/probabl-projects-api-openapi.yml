@@ -1,15 +1,21 @@
 openapi: 3.2.0
 info:
   title: Skore Hub Projects API
-  description: "\nThis REST API is divided in small services.\nEach service has its own OpenAPI specification.\n- [identity](/identity/docs)\n- [projects](/projects/docs)\n    "
+  description: 'This REST API is divided in small services.
+
+    Each service has its own OpenAPI specification.
+
+    - identity
+
+    - projects'
   version: 0.1.0
 tags:
-- name: projects
+- name: Projects
 paths:
   /projects/{workspace_public_id}/{project_name}:
     post:
       tags:
-      - projects
+      - Projects
       summary: Create Project
       description: Create a project; idempotent (201 created, 208 already exists).
       operationId: create_project_projects__workspace_public_id___project_name__post
@@ -60,7 +66,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     get:
       tags:
-      - projects
+      - Projects
       summary: Get Project
       description: Endpoint to read a project from its ID.
       operationId: get_project_projects__workspace_public_id___project_name__get
@@ -104,7 +110,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     delete:
       tags:
-      - projects
+      - Projects
       summary: Delete Project
       description: Endpoint to delete a project.
       operationId: delete_project_projects__workspace_public_id___project_name__delete
@@ -145,7 +151,7 @@ paths:
   /projects/{workspace_public_id}:
     get:
       tags:
-      - projects
+      - Projects
       summary: List Workspace Projects
       description: Endpoint to list projects.
       operationId: list_workspace_projects_projects__workspace_public_id__get
@@ -185,7 +191,7 @@ paths:
   /projects/admin:
     get:
       tags:
-      - projects
+      - Projects
       summary: List All Projects
       description: Endpoint to list all projects.
       operationId: list_all_projects_projects_admin_get
@@ -217,9 +223,48 @@ paths:
   /projects/{workspace_public_id}/{project_name}/reports:
     get:
       tags:
-      - projects
+      - Projects
       summary: List Reports
-      description: "List estimator and cross-validation report summaries for a project.\n\nSupports equality filters, metric range filters, sorting by one column, and\ncursor pagination. Report kind is encoded in each item's ``urn``.\n\n**Metric filters and ``sort_by``**\n\nAlways use the *base* metric name — never a ``_mean`` suffix — even when the\nproject only contains cross-validation reports.\n\n- Example: ``accuracy__gte=0.8`` and ``sort_by=accuracy`` match estimator\n  metrics named ``accuracy`` and CV aggregates named ``accuracy_mean``.\n- Do **not** use ``accuracy_mean__gte`` / ``sort_by=accuracy_mean``.\n- Std aggregates keep their suffix: ``accuracy_std__gte`` /\n  ``sort_by=accuracy_std``.\n\nOptional variant constraints disambiguate multiclass / multioutput metrics:\n\n- ``precision__label=1``\n- ``r2__output=0``\n- ``recall__average=macro``\n\nMetric values in the response follow the same rule: CV ``*_mean`` metrics are\nexposed under the base name (e.g. ``accuracy_mean`` → ``accuracy``)."
+      description: 'List estimator and cross-validation report summaries for a project.
+
+
+        Supports equality filters, metric range filters, sorting by one column, and
+
+        cursor pagination. Report kind is encoded in each item''s ``urn``.
+
+
+        **Metric filters and ``sort_by``**
+
+
+        Always use the *base* metric name — never a ``_mean`` suffix — even when the
+
+        project only contains cross-validation reports.
+
+
+        - Example: ``accuracy__gte=0.8`` and ``sort_by=accuracy`` match estimator
+
+        metrics named ``accuracy`` and CV aggregates named ``accuracy_mean``.
+
+        - Do **not** use ``accuracy_mean__gte`` / ``sort_by=accuracy_mean``.
+
+        - Std aggregates keep their suffix: ``accuracy_std__gte`` /
+
+        ``sort_by=accuracy_std``.
+
+
+        Optional variant constraints disambiguate multiclass / multioutput metrics:
+
+
+        - ``precision__label=1``
+
+        - ``r2__output=0``
+
+        - ``recall__average=macro``
+
+
+        Metric values in the response follow the same rule: CV ``*_mean`` metrics are
+
+        exposed under the base name (e.g. ``accuracy_mean`` → ``accuracy``).'
       operationId: list_reports_projects__workspace_public_id___project_name__reports_get
       parameters:
       - name: workspace_public_id
@@ -357,7 +402,7 @@ paths:
   /projects/{workspace_public_id}/{project_name}/estimator-reports:
     get:
       tags:
-      - projects
+      - Projects
       summary: Filter
       description: Endpoint to list every project's estimator reports.
       operationId: filter_projects__workspace_public_id___project_name__estimator_reports_get
@@ -460,7 +505,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     post:
       tags:
-      - projects
+      - Projects
       summary: Create
       description: 'Create a new estimator report.
 
@@ -522,7 +567,7 @@ paths:
   /projects/{workspace_public_id}/{project_name}/estimator-reports/groups:
     get:
       tags:
-      - projects
+      - Projects
       summary: List Groups
       description: 'List all estimator reports stored in a project.
 
@@ -589,7 +634,7 @@ paths:
   /projects/{workspace_public_id}/{project_name}/estimator-reports/{report_id}:
     get:
       tags:
-      - projects
+      - Projects
       summary: Get
       description: 'Get a specific estimator report by its ID.
 
@@ -652,7 +697,7 @@ paths:
   /projects/{workspace_public_id}/{project_name}/cross-validation-reports:
     post:
       tags:
-      - projects
+      - Projects
       summary: Create
       description: Create a new cross validation report.
       operationId: create_projects__workspace_public_id___project_name__cross_validation_reports_post
@@ -697,7 +742,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     get:
       tags:
-      - projects
+      - Projects
       summary: Filter
       description: List all cross-validation reports for a given dataset.
       operationId: filter_projects__workspace_public_id___project_name__cross_validation_reports_get
@@ -774,7 +819,7 @@ paths:
   /projects/{workspace_public_id}/{project_name}/cross-validation-reports/groups:
     get:
       tags:
-      - projects
+      - Projects
       summary: List Groups
       description: 'List all cross validation reports stored in a project.
 
@@ -843,7 +888,7 @@ paths:
   /projects/{workspace_public_id}/{project_name}/cross-validation-reports/{report_id}:
     get:
       tags:
-      - projects
+      - Projects
       summary: Get Cross Validation Report
       description: 'Return details about a given cross validation report.
 
@@ -903,7 +948,7 @@ paths:
   /projects/{workspace_public_id}/{project_name}/comparison-reports:
     get:
       tags:
-      - projects
+      - Projects
       summary: Filter
       description: List all comparisons of a given project.
       operationId: filter_projects__workspace_public_id___project_name__comparison_reports_get
@@ -946,7 +991,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     post:
       tags:
-      - projects
+      - Projects
       summary: Create
       description: Create a comparison report.
       operationId: create_projects__workspace_public_id___project_name__comparison_reports_post
@@ -992,7 +1037,7 @@ paths:
   /projects/{workspace_public_id}/{project_name}/comparison-reports/{report_id}:
     get:
       tags:
-      - projects
+      - Projects
       summary: Get
       description: Get a comparison of a given project.
       operationId: get_projects__workspace_public_id___project_name__comparison_reports__report_id__get
@@ -1038,7 +1083,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     delete:
       tags:
-      - projects
+      - Projects
       summary: Delete
       description: Get a comparison of a given project.
       operationId: delete_projects__workspace_public_id___project_name__comparison_reports__report_id__delete
@@ -1081,7 +1126,7 @@ paths:
   /projects/{workspace_public_id}/{project_name}/artifacts:
     post:
       tags:
-      - projects
+      - Projects
       summary: Generate Upload Url
       description: 'Generate a list of upload urls to add artifacts into a given project.
 
@@ -1138,7 +1183,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     get:
       tags:
-      - projects
+      - Projects
       summary: Filter
       description: Return a list of stored artifacts for a given set of project, item/report.
       operationId: filter_projects__workspace_public_id___project_name__artifacts_get
@@ -1201,7 +1246,7 @@ paths:
   /projects/{workspace_public_id}/{project_name}/artifacts/complete:
     post:
       tags:
-      - projects
+      - Projects
       summary: Complete Upload
       description: Complete an artifact pending upload.
       operationId: complete_upload_projects__workspace_public_id___project_name__artifacts_complete_post
@@ -1250,7 +1295,7 @@ paths:
   /projects/{workspace_public_id}/{project_name}/artifacts/read:
     get:
       tags:
-      - projects
+      - Projects
       summary: Get Read Presigned Urls
       description: Return a list of temporary read-access urls to the requested artifacts.
       operationId: get_read_presigned_urls_projects__workspace_public_id___project_name__artifacts_read_get
@@ -1302,7 +1347,7 @@ paths:
   /projects/{workspace_public_id}/{project_name}/goals/meeting-reports/count:
     get:
       tags:
-      - projects
+      - Projects
       summary: Count Reports Meeting Goals
       description: Count all project reports that meet every project goal.
       operationId: count_reports_meeting_goals_projects__workspace_public_id___project_name__goals_meeting_reports_count_get
@@ -1343,7 +1388,7 @@ paths:
   /projects/{workspace_public_id}/{project_name}/goals:
     get:
       tags:
-      - projects
+      - Projects
       summary: List Goals
       description: List all goals for a project.
       operationId: list_goals_projects__workspace_public_id___project_name__goals_get
@@ -1383,7 +1428,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     post:
       tags:
-      - projects
+      - Projects
       summary: Create Goal
       description: Create a project goal.
       operationId: create_goal_projects__workspace_public_id___project_name__goals_post
@@ -1433,7 +1478,7 @@ paths:
   /projects/{workspace_public_id}/{project_name}/goals/{goal_id}:
     put:
       tags:
-      - projects
+      - Projects
       summary: Update Goal
       description: Update a project goal constraint.
       operationId: update_goal_projects__workspace_public_id___project_name__goals__goal_id__put
@@ -1481,7 +1526,7 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     delete:
       tags:
-      - projects
+      - Projects
       summary: Delete Goal
       description: Delete a project goal.
       operationId: delete_goal_projects__workspace_public_id___project_name__goals__goal_id__delete
@@ -1524,7 +1569,7 @@ paths:
   /projects/{workspace_public_id}/{project_name}/potential-goals:
     get:
       tags:
-      - projects
+      - Projects
       summary: List Potential Goals
       description: List metric variants eligible as goals for a project.
       operationId: list_potential_goals_projects__workspace_public_id___project_name__potential_goals_get
@@ -1567,44 +1612,375 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    CreateReportMediaParameters:
+    SortOrder:
+      type: string
+      enum:
+      - ASC
+      - DESC
+      title: SortOrder
+      description: Sort order.
+    CreateComparisonReportParameters:
       properties:
         name:
           type: string
           title: Name
-        content_type:
+        compared_reports:
+          items:
+            type: integer
+          type: array
+          title: Compared Reports
+        best_trade_offs:
+          items:
+            type: integer
+          type: array
+          title: Best Trade Offs
+        explanations:
+          additionalProperties:
+            type: string
+          type: object
+          title: Explanations
+      type: object
+      required:
+      - name
+      - compared_reports
+      - best_trade_offs
+      - explanations
+      title: CreateComparisonReportParameters
+      description: "Parameters to create a comparison report.\n\nAttributes\n----------\nname : str\n    The name of the comparison report.\ncompared_reports : list[EstimatorReportId]\n    List of estimator report IDs that were compared in this comparison report.\nbest_trade_offs : list[EstimatorReportId]\n    List of estimator report IDs that represent the best trade-offs identified\n    in the comparison.\nexplanations : dict[EstimatorReportId, str]\n    A dictionary mapping each estimator report ID in `best_trade_offs` to an\n    explanation provided by the user."
+    ReportGroupEntry:
+      properties:
+        report_id:
+          type: integer
+          title: Report Id
+        report_key:
           type: string
-          title: Content Type
-        data_source:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Data Source
-        parameters:
-          anyOf:
-          - additionalProperties: true
-            type: object
-          - type: 'null'
-          title: Parameters
+          title: Report Key
+        ml_task:
+          type: string
+          title: Ml Task
+        estimator_class_name:
+          type: string
+          title: Estimator Class Name
+      type: object
+      required:
+      - report_id
+      - report_key
+      - ml_task
+      - estimator_class_name
+      title: ReportGroupEntry
+      description: "An entry in a report group.\n\nAttributes\n----------\nreport_id : str\n    The unique identifier of the report.\nreport_key : str\n    The key of the report, provided by the user to identify the report.\nml_task : str\n    The machine learning task associated with the report (e.g., \"classification\").\nestimator_class_name : str\n    The class name of the estimator (e.g., \"RandomForestClassifier\")."
+    CreateReportPickleParameters:
+      properties:
         checksum:
           type: string
           title: Checksum
       type: object
       required:
-      - name
-      - content_type
       - checksum
-      title: CreateReportMediaParameters
-      description: "Parameter object to create a `ReportMediaModel`.\n\nAttributes\n----------\nname : str\n    The name of the media (e.g., \"confusion_matrix\").\ncontent_type : str\n    The type of media (e.g., \"image/png\", \"text/csv\").\ndata_source : str | None\n    Optional source of the media data (e.g., \"validation\", \"test\").\nparameters : dict | None\n    Optional parameters identifying the media type variant.\nchecksum : str\n    The checksum of the media file for integrity verification."
+      title: CreateReportPickleParameters
+      description: "Parameter object to create a `ReportPickleModel`.\n\nAttributes\n----------\nchecksum : str\n    The checksum of the media file for integrity verification."
+    SplitterInfo:
+      properties:
+        type:
+          type: string
+          title: Type
+        n_splits:
+          type: integer
+          title: N Splits
+        n_repeats:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: N Repeats
+        shuffle:
+          type: boolean
+          title: Shuffle
+        random_state:
+          anyOf:
+          - type: string
+            maxLength: 64
+          - type: 'null'
+          title: Random State
+      type: object
+      required:
+      - type
+      - n_splits
+      - n_repeats
+      - shuffle
+      title: SplitterInfo
+      description: "Information about a splitter.\n\nAttributes\n----------\ntype : str\n    The type of the splitter.\nn_splits : int\n    The number of splits.\nn_repeats : int | None\n    The number of repeats. None for no repeats.\nshuffle : bool\n    Whether to shuffle the data.\nrandom_state : str | None\n    Optional random state string (numeric seed or other serialized form)."
+    ProjectGoalMeetingReportsCount:
+      properties:
+        meeting_count:
+          type: integer
+          title: Meeting Count
+        total_count:
+          type: integer
+          title: Total Count
+      type: object
+      required:
+      - meeting_count
+      - total_count
+      title: ProjectGoalMeetingReportsCount
+      description: Count of reports on a dataset that meet all goals.
+    ArtifactStatus:
+      type: string
+      enum:
+      - pending
+      - uploaded
+      title: ArtifactStatus
+      description: Upload status of an artifact in the object storage.
+    MainScopeBucket:
+      type: string
+      enum:
+      - global
+      - label
+      - output
+      - average
+      title: MainScopeBucket
+      description: Independent main-metric bucket for project goals.
+    EstimatorReport:
+      properties:
+        id:
+          type: integer
+          title: Id
+        project_id:
+          type: integer
+          title: Project Id
+        creator_id:
+          type: string
+          title: Creator Id
+        key:
+          type: string
+          title: Key
+        ml_task:
+          type: string
+          enum:
+          - regression
+          - multioutput-regression
+          - binary-classification
+          - multiclass-classification
+          - multiclass-multioutput
+          - multioutput-multiclass-classification
+          - multioutput-binary-classification
+          - unknown
+          title: Ml Task
+        estimator_class_name:
+          type: string
+          title: Estimator Class Name
+        dataset_fingerprint:
+          type: string
+          title: Dataset Fingerprint
+        dataset_verbose_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dataset Verbose Name
+        metrics:
+          items:
+            $ref: '#/components/schemas/ReportMetric'
+          type: array
+          title: Metrics
+        canonical_report_id:
+          anyOf:
+          - type: string
+            format: uuid4
+          - type: string
+            format: uuid7
+          - type: 'null'
+          title: Canonical Report Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        medias:
+          items:
+            $ref: '#/components/schemas/ReportMedia'
+          type: array
+          title: Medias
+        pickle:
+          $ref: '#/components/schemas/ReportPickle'
+        environment:
+          anyOf:
+          - $ref: '#/components/schemas/ReportEnvironment'
+          - type: 'null'
+        parents_urns:
+          items:
+            type: string
+          type: array
+          title: Parents Urns
+        urn:
+          type: string
+          title: Urn
+          description: "URN identifying the EstimatorReport.\n\nReturns\n-------\nUrn\n    The URN of the estimator report."
+          readOnly: true
+      type: object
+      required:
+      - id
+      - project_id
+      - creator_id
+      - key
+      - ml_task
+      - estimator_class_name
+      - dataset_fingerprint
+      - metrics
+      - created_at
+      - updated_at
+      - medias
+      - pickle
+      - parents_urns
+      - urn
+      title: EstimatorReport
+      description: "A full estimator report.\n\nAttributes\n----------\nmedias : list[ReportMedia]\n    List of media associated with the estimator report.\npickle : ReportPickle\n    The pickle associated with the estimator report.\nparents_urns: list[Urn]\n    The URNs of the parent reports if applicable."
+    SplittingStrategy:
+      properties:
+        splitter:
+          $ref: '#/components/schemas/SplitterInfo'
+        splits:
+          items:
+            anyOf:
+            - items:
+                type: integer
+              type: array
+            - type: 'null'
+          type: array
+          title: Splits
+        train_target_distributions:
+          items:
+            items:
+              type: number
+            type: array
+          type: array
+          title: Train Target Distributions
+        test_target_distributions:
+          items:
+            items:
+              type: number
+            type: array
+          type: array
+          title: Test Target Distributions
+        train_target_distributions_sample_counts:
+          items:
+            type: integer
+          type: array
+          title: Train Target Distributions Sample Counts
+        test_target_distributions_sample_counts:
+          items:
+            type: integer
+          type: array
+          title: Test Target Distributions Sample Counts
+      type: object
+      required:
+      - splitter
+      - splits
+      - train_target_distributions
+      - test_target_distributions
+      - train_target_distributions_sample_counts
+      - test_target_distributions_sample_counts
+      title: SplittingStrategy
+      description: "Information about the splitting strategy used.\n\nAttributes\n----------\nsplitter: SplitterInfo\n    Information about the splitter used.\nsplits: list[list[int] | None]\n    The list of splits. Either every entry is ``None`` (assignments\n    unavailable) or every entry is a list of int:\n    - 0 if the sample is in the train set,\n    - 1 if it is in the test set,\n    - -1 if it is in neither set.\nsplits_train_target_distributions: list[list[float]]\n    The list of train target distributions for each split.\nsplits_test_target_distributions: list[list[float]]\n    The list of test target distributions for each split.\nsplits_train_target_distributions_sample_counts: list[int]\n    The list of train target distributions sample counts for each split.\nsplits_test_target_distributions_sample_counts: list[int]\n    The list of test target distributions sample counts for each split."
+    ReportPickle:
+      properties:
+        checksum:
+          type: string
+          maxLength: 255
+          title: Checksum
+        presigned_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Presigned Url
+      type: object
+      required:
+      - checksum
+      title: ReportPickle
+      description: "Represent the pickle associated with a report.\n\nAttributes\n----------\nchecksum : str\n    The checksum of the pickle file.\npresigned_url : str | None\n    A presigned URL to download the artifact or `None`."
+    CrossValidationReportSummary:
+      properties:
+        id:
+          type: integer
+          title: Id
+        project_id:
+          type: integer
+          title: Project Id
+        creator_id:
+          type: string
+          title: Creator Id
+        key:
+          type: string
+          title: Key
+        ml_task:
+          type: string
+          enum:
+          - regression
+          - multioutput-regression
+          - binary-classification
+          - multiclass-classification
+          - multiclass-multioutput
+          - multioutput-multiclass-classification
+          - multioutput-binary-classification
+          - unknown
+          title: Ml Task
+        estimator_class_name:
+          type: string
+          title: Estimator Class Name
+        dataset_fingerprint:
+          type: string
+          title: Dataset Fingerprint
+        dataset_verbose_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dataset Verbose Name
+        metrics:
+          items:
+            $ref: '#/components/schemas/ReportMetric'
+          type: array
+          title: Metrics
+        canonical_report_id:
+          anyOf:
+          - type: string
+            format: uuid4
+          - type: string
+            format: uuid7
+          - type: 'null'
+          title: Canonical Report Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        splitter_type:
+          type: string
+          title: Splitter Type
+        urn:
+          type: string
+          title: Urn
+          description: URN identifying the CrossValidationReport.
+          readOnly: true
+      type: object
+      required:
+      - id
+      - project_id
+      - creator_id
+      - key
+      - ml_task
+      - estimator_class_name
+      - dataset_fingerprint
+      - metrics
+      - created_at
+      - updated_at
+      - splitter_type
+      - urn
+      title: CrossValidationReportSummary
+      description: "Summary of cross validation report.\n\nAttributes\n----------\nsplitter_type: str\n    The type of the splitter used."
     PotentialGoalMetric:
       properties:
         id:
@@ -1646,20 +2022,384 @@ components:
       - greater_is_better
       title: PotentialGoalMetric
       description: A metric variant eligible as a project goal.
-    ProjectGoalMeetingReportsCount:
+    EstimatorReportSummary:
       properties:
-        meeting_count:
+        id:
           type: integer
-          title: Meeting Count
-        total_count:
+          title: Id
+        project_id:
           type: integer
-          title: Total Count
+          title: Project Id
+        creator_id:
+          type: string
+          title: Creator Id
+        key:
+          type: string
+          title: Key
+        ml_task:
+          type: string
+          enum:
+          - regression
+          - multioutput-regression
+          - binary-classification
+          - multiclass-classification
+          - multiclass-multioutput
+          - multioutput-multiclass-classification
+          - multioutput-binary-classification
+          - unknown
+          title: Ml Task
+        estimator_class_name:
+          type: string
+          title: Estimator Class Name
+        dataset_fingerprint:
+          type: string
+          title: Dataset Fingerprint
+        dataset_verbose_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dataset Verbose Name
+        metrics:
+          items:
+            $ref: '#/components/schemas/ReportMetric'
+          type: array
+          title: Metrics
+        canonical_report_id:
+          anyOf:
+          - type: string
+            format: uuid4
+          - type: string
+            format: uuid7
+          - type: 'null'
+          title: Canonical Report Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        urn:
+          type: string
+          title: Urn
+          description: "URN identifying the EstimatorReport.\n\nReturns\n-------\nUrn\n    The URN of the estimator report."
+          readOnly: true
       type: object
       required:
-      - meeting_count
-      - total_count
-      title: ProjectGoalMeetingReportsCount
-      description: Count of reports on a dataset that meet all goals.
+      - id
+      - project_id
+      - creator_id
+      - key
+      - ml_task
+      - estimator_class_name
+      - dataset_fingerprint
+      - metrics
+      - created_at
+      - updated_at
+      - urn
+      title: EstimatorReportSummary
+      description: "A summary of a report.\n\nAttributes\n----------\nid : EstimatorReportId\n    The unique identifier of the estimator report in the skore hub database.\nproject_id : ProjectId\n    Identifier for the project associated with the estimator report.\ncreator_id : str\n    Identifier for the user who created the estimator report.\nkey : str\n    The key of the estimator report, provided by the user to identify the report.\nml_task : MLTask\n    The machine learning task associated with the estimator (e.g., classification,\n    regression).\nestimator_class_name : str\n    The class name of the estimator (e.g., RandomForestClassifier).\ndataset_fingerprint : str\n    A unique fingerprint representing the dataset used for training and evaluation.\ndataset_verbose_name : str | None\n    Human-readable dataset name inferred asynchronously (e.g. via Prefect).\nmetrics : list[ReportMetric]\n    List of metrics associated with the estimator report.\ncanonical_report_id : UUID | None\n    Canonical report identifier; ``None`` for legacy reports.\ncreated_at : datetime\n    The date and time when the estimator report was created.\nupdated_at : datetime\n    The date and time when the estimator report was last updated."
+    ComparisonOperator:
+      type: string
+      enum:
+      - lt
+      - gt
+      - lte
+      - gte
+      title: ComparisonOperator
+      description: Comparison operator for project goal constraints.
+    CompleteArtifactUpload:
+      properties:
+        checksum:
+          type: string
+          title: Checksum
+        etags:
+          additionalProperties:
+            type: string
+          type: object
+          title: Etags
+      type: object
+      required:
+      - checksum
+      - etags
+      title: CompleteArtifactUpload
+      description: "Artifact completion request.\n\nAttributes\n----------\nchecksum : ArtifactChecksum\n    The checksum of the artifact.\netags : dict[ChunkId, str]\n    A mapping of chunk IDs to their corresponding ETags."
+    CreateReportMediaParameters:
+      properties:
+        name:
+          type: string
+          title: Name
+        content_type:
+          type: string
+          title: Content Type
+        data_source:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Data Source
+        parameters:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Parameters
+        checksum:
+          type: string
+          title: Checksum
+      type: object
+      required:
+      - name
+      - content_type
+      - checksum
+      title: CreateReportMediaParameters
+      description: "Parameter object to create a `ReportMediaModel`.\n\nAttributes\n----------\nname : str\n    The name of the media (e.g., \"confusion_matrix\").\ncontent_type : str\n    The type of media (e.g., \"image/png\", \"text/csv\").\ndata_source : str | None\n    Optional source of the media data (e.g., \"validation\", \"test\").\nparameters : dict | None\n    Optional parameters identifying the media type variant.\nchecksum : str\n    The checksum of the media file for integrity verification."
+    ComparisonReport:
+      properties:
+        id:
+          type: integer
+          title: Id
+        project_id:
+          type: integer
+          title: Project Id
+        creator_id:
+          type: string
+          title: Creator Id
+        name:
+          type: string
+          title: Name
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        compared_reports:
+          items:
+            type: integer
+          type: array
+          title: Compared Reports
+        best_trade_offs:
+          items:
+            type: integer
+          type: array
+          title: Best Trade Offs
+        best_trade_offs_explanations:
+          additionalProperties:
+            anyOf:
+            - type: string
+            - type: 'null'
+          type: object
+          title: Best Trade Offs Explanations
+        urn:
+          type: string
+          title: Urn
+          description: "URN identifying the EstimatorReport.\n\nReturns\n-------\nUrn\n    The URN of the estimator report."
+          readOnly: true
+      type: object
+      required:
+      - id
+      - project_id
+      - creator_id
+      - name
+      - created_at
+      - updated_at
+      - compared_reports
+      - best_trade_offs
+      - best_trade_offs_explanations
+      - urn
+      title: ComparisonReport
+      description: "The result of a set of reports comparison.\n\nA comparison report is created when a user compares multiple estimator reports\nand selects the best trade-offs among them.\n\nAttributes\n----------\nid : ComparisonReportId\n    The unique identifier of the comparison report in the skore hub database.\nproject_id : ProjectId\n    Identifier for the project associated with the comparison report.\ncreator_id : str\n    Identifier for the user who created the comparison report.\nname : str\n    The name of the comparison report.\ncreated_at : datetime\n    The date and time when the comparison report was created.\nupdated_at : datetime\n    The date and time when the comparison report was last updated.\ncompared_reports : list[int]\n    List of estimator report IDs that were compared in this comparison report.\nbest_trade_offs : list[int]\n    List of estimator report IDs that represent the best trade-offs identified\n    in the comparison.\nbest_trade_offs_explanations : dict[int, str | None]\n    A dictionary mapping each estimator report ID in `best_trade_offs` to an\n    optional explanation provided by the user."
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    GenerateUploadUrlResponse:
+      properties:
+        checksum:
+          type: string
+          title: Checksum
+        upload_url:
+          type: string
+          title: Upload Url
+        upload_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Upload Id
+        chunk_id:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Chunk Id
+      type: object
+      required:
+      - checksum
+      - upload_url
+      title: GenerateUploadUrlResponse
+      description: 'Represent an upload URL to store an artifact in the object storage.
+
+
+        If the `upload_id` and `chunk_id` fields are Nonne, it''s a stream upload URL.
+
+        If the `upload_id` and `chunk_id` fields are valued, it''s a multipart upload URL.'
+    ReportMetric:
+      properties:
+        id:
+          type: integer
+          title: Id
+        name:
+          type: string
+          maxLength: 64
+          title: Name
+        verbose_name:
+          type: string
+          maxLength: 150
+          title: Verbose Name
+        greater_is_better:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Greater Is Better
+        data_source:
+          anyOf:
+          - type: string
+            maxLength: 255
+          - type: 'null'
+          title: Data Source
+        value:
+          type: number
+          title: Value
+        label:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Label
+        output:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Output
+        average:
+          anyOf:
+          - type: string
+            maxLength: 64
+          - type: 'null'
+          title: Average
+      type: object
+      required:
+      - id
+      - name
+      - verbose_name
+      - greater_is_better
+      - value
+      title: ReportMetric
+      description: "Represent a metric with a `float` value.\n\nAttributes\n----------\ndata_source : str | None\n    Optional source of the metric data (e.g., \"validation\", \"test\").\nvalue : float\n    The value of the metric.\nlabel : str | None\n    Class label for per-class classification metrics. Always a string (or\n    ``None``); boolean class labels are ``\\\"True\\\"`` / ``\\\"False\\\"``.\noutput : int | None\n    Output index for multioutput regression metrics.\naverage : str | None\n    Averaging mode for metrics aggregated across labels or outputs."
+    CreateReportEnvironmentParameters:
+      properties:
+        python_version:
+          type: string
+          title: Python Version
+        checksum:
+          type: string
+          title: Checksum
+      type: object
+      required:
+      - python_version
+      - checksum
+      title: CreateReportEnvironmentParameters
+      description: "Parameter object to create a `ReportEnvironmentModel`.\n\nThe environment artifact is a ``requirements.txt`` lockfile.\n\nAttributes\n----------\npython_version : str\n    The Python version of the environment used to create the report.\nchecksum : str\n    The checksum of the ``requirements.txt`` lockfile."
+    CreateEstimatorReportParameters:
+      properties:
+        key:
+          type: string
+          title: Key
+        canonical_report_id:
+          anyOf:
+          - type: string
+            format: uuid4
+          - type: string
+            format: uuid7
+          - type: 'null'
+          title: Canonical Report Id
+        estimator_class_name:
+          type: string
+          title: Estimator Class Name
+        ml_task:
+          type: string
+          enum:
+          - regression
+          - multioutput-regression
+          - binary-classification
+          - multiclass-classification
+          - multiclass-multioutput
+          - multioutput-multiclass-classification
+          - multioutput-binary-classification
+          - unknown
+          title: Ml Task
+        dataset_fingerprint:
+          type: string
+          title: Dataset Fingerprint
+        metrics:
+          items:
+            $ref: '#/components/schemas/CreateReportMetricParameters'
+          type: array
+          title: Metrics
+        medias:
+          items:
+            $ref: '#/components/schemas/CreateReportMediaParameters'
+          type: array
+          title: Medias
+        pickle:
+          $ref: '#/components/schemas/CreateReportPickleParameters'
+        environment:
+          anyOf:
+          - $ref: '#/components/schemas/CreateReportEnvironmentParameters'
+          - type: 'null'
+      type: object
+      required:
+      - key
+      - estimator_class_name
+      - ml_task
+      - dataset_fingerprint
+      - metrics
+      - medias
+      - pickle
+      title: CreateEstimatorReportParameters
+      description: "Parameter object to create a new `Item` that is an EstimatorReport.\n\nAttributes\n----------\nkey : str\n    The key of the estimator report, provided by the user to identify the report.\ncanonical_report_id : UUID | None\n    Canonical report identifier. Optional for older clients.\nestimator_class_name : str\n    The class name of the estimator (e.g., RandomForestClassifier).\nml_task : MLTask\n    The machine learning task associated with the estimator (e.g., classification,\n    regression).\ndataset_fingerprint : str\n    A unique fingerprint representing the dataset used for training and evaluation.\nmetrics : list[CreateReportMetricParameters]\n    List of metrics associated with the estimator report.\nmedias : list[CreateReportMediaParameters]\n    List of media associated with the estimator report."
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     GenerateUploadUrlRequest:
       properties:
         checksum:
@@ -1695,6 +2435,572 @@ components:
         If `chunk_number` is less than `2`, a single upload URL will be generated without
 
         using multipart.'
+    UpdateProjectGoalParameters:
+      properties:
+        constraint_operator:
+          $ref: '#/components/schemas/ComparisonOperator'
+        constraint_threshold:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Constraint Threshold
+        constraint_threshold_source:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Constraint Threshold Source
+        is_main:
+          type: boolean
+          title: Is Main
+        main_scope:
+          anyOf:
+          - $ref: '#/components/schemas/ProjectGoalMainScopeDimensions'
+          - type: 'null'
+      type: object
+      required:
+      - constraint_operator
+      - is_main
+      title: UpdateProjectGoalParameters
+      description: Parameters to update a project goal constraint.
+    ArtifactReadUrl:
+      properties:
+        checksum:
+          type: string
+          maxLength: 255
+          title: Checksum
+        size_bytes:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Size Bytes
+        status:
+          $ref: '#/components/schemas/ArtifactStatus'
+        url:
+          type: string
+          title: Url
+      type: object
+      required:
+      - checksum
+      - size_bytes
+      - status
+      - url
+      title: ArtifactReadUrl
+      description: "Represents a read-access to an artifact.\n\nAttributes\n----------\nurl : str\n    A pre-signed URL that provides temporary access to the artifact in the object\n    storage."
+    CreateProjectGoalParameters:
+      properties:
+        label:
+          anyOf:
+          - type: string
+            maxLength: 255
+          - type: 'null'
+          title: Label
+        output:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Output
+        average:
+          anyOf:
+          - type: string
+            maxLength: 64
+          - type: 'null'
+          title: Average
+        constraint_operator:
+          $ref: '#/components/schemas/ComparisonOperator'
+        constraint_threshold:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Constraint Threshold
+        constraint_threshold_source:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Constraint Threshold Source
+        metric_type_id:
+          type: integer
+          title: Metric Type Id
+        is_main:
+          type: boolean
+          title: Is Main
+          default: false
+        main_scope:
+          anyOf:
+          - $ref: '#/components/schemas/ProjectGoalMainScopeDimensions'
+          - type: 'null'
+      type: object
+      required:
+      - constraint_operator
+      - metric_type_id
+      title: CreateProjectGoalParameters
+      description: Parameters to create a project goal.
+    ProjectGoal:
+      properties:
+        label:
+          anyOf:
+          - type: string
+            maxLength: 255
+          - type: 'null'
+          title: Label
+        output:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Output
+        average:
+          anyOf:
+          - type: string
+            maxLength: 64
+          - type: 'null'
+          title: Average
+        id:
+          type: integer
+          title: Id
+        metric_type_id:
+          type: integer
+          title: Metric Type Id
+        metric_name:
+          type: string
+          title: Metric Name
+        metric_verbose_name:
+          type: string
+          title: Metric Verbose Name
+        constraint_operator:
+          $ref: '#/components/schemas/ComparisonOperator'
+        constraint_threshold:
+          type: number
+          title: Constraint Threshold
+        constraint_threshold_source:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Constraint Threshold Source
+        is_main:
+          type: boolean
+          title: Is Main
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - id
+      - metric_type_id
+      - metric_name
+      - metric_verbose_name
+      - constraint_operator
+      - constraint_threshold
+      - is_main
+      - created_at
+      - updated_at
+      title: ProjectGoal
+      description: A metric constraint goal for a project.
+    Project:
+      properties:
+        id:
+          type: integer
+          title: Id
+        public_id:
+          type: string
+          maxLength: 64
+          minLength: 1
+          title: Public Id
+        name:
+          type: string
+          maxLength: 150
+          minLength: 1
+          title: Name
+        workspace_id:
+          type: integer
+          title: Workspace Id
+        creator_id:
+          type: string
+          title: Creator Id
+        estimator_report_count:
+          type: integer
+          title: Estimator Report Count
+        cross_validation_report_count:
+          type: integer
+          title: Cross Validation Report Count
+        comparison_count:
+          type: integer
+          title: Comparison Count
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - id
+      - public_id
+      - name
+      - workspace_id
+      - creator_id
+      - estimator_report_count
+      - cross_validation_report_count
+      - comparison_count
+      - created_at
+      - updated_at
+      title: Project
+      description: "Represents a Skore-hub Project.\n\nA Project is linked to a Workspace and a Owner.\nA Project is the\n\nAttributes\n----------\nid : ProjectId\n    The unique project ID, for internal usage only.\npublic_id: ProjectPublicId\n    The unique public project ID.\nname : str\n    The project name. Not unique.\nworkspace_id : int\n    The workspace ID, owner of the Project.\ncreator_id: str\n    The user id whom created this project\nestimator_report_count: number\n    The number of estimator reports in this project\ncross_validation_report_count: number\n    The number of cross validation reports in this project\ncomparison_count: number\n    The number of comparisons in this project"
+    ArtifactMetadata:
+      properties:
+        checksum:
+          type: string
+          maxLength: 255
+          title: Checksum
+        size_bytes:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Size Bytes
+        status:
+          $ref: '#/components/schemas/ArtifactStatus'
+      type: object
+      required:
+      - checksum
+      - size_bytes
+      - status
+      title: ArtifactMetadata
+      description: "The minimal set of information about an artifact.\n\nNotes\n-----\nUser can ask only for artifact metadata, independently of its content.\n\nAttributes\n----------\nchecksum : ArtifactChecksum\n    The unique checksum identifier of the artifact, used for communication\n    with skore (lib).\nsize_bytes : SizeBytes | None\n    The size of the artifact in bytes.\n    This size is determined after the artifact has been uploaded to ensure it\n    accurately represents the actual size of the stored data.\nstatus : ArtifactStatus\n    Indicates the upload status of the artifact (pending, uploaded)."
+    ReportGroup:
+      properties:
+        dataset:
+          type: string
+          title: Dataset
+        dataset_verbose_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Dataset Verbose Name
+        reports:
+          items:
+            $ref: '#/components/schemas/ReportGroupEntry'
+          type: array
+          title: Reports
+      type: object
+      required:
+      - dataset
+      - reports
+      title: ReportGroup
+      description: "A group of reports.\n\nAttributes\n----------\ndataset : str\n    The dataset fingerprint associated with the report group.\ndataset_verbose_name : str | None\n    Human-readable dataset name when inferred; otherwise unset.\nreports : list[ReportGroupEntry]\n    The list of report entries in the group."
+    ProjectGoalMainScopeDimensions:
+      properties:
+        label:
+          anyOf:
+          - type: string
+            maxLength: 255
+          - type: 'null'
+          title: Label
+        output:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Output
+        average:
+          anyOf:
+          - type: string
+            maxLength: 64
+          - type: 'null'
+          title: Average
+        bucket:
+          anyOf:
+          - $ref: '#/components/schemas/MainScopeBucket'
+          - type: 'null'
+      type: object
+      title: ProjectGoalMainScopeDimensions
+      description: 'Dimensions identifying a main-metric bucket to set or clear.
+
+
+        ``bucket`` may be omitted; the server then derives it from the goal''s own
+
+        variant (scalar → global, label → label, …). Providing a bucket that does
+
+        not match the goal is rejected.'
+    ReportMedia:
+      properties:
+        checksum:
+          type: string
+          maxLength: 255
+          title: Checksum
+        data_source:
+          anyOf:
+          - type: string
+            maxLength: 255
+          - type: 'null'
+          title: Data Source
+        size_bytes:
+          type: integer
+          title: Size Bytes
+        name:
+          type: string
+          title: Name
+        verbose_name:
+          type: string
+          title: Verbose Name
+        category:
+          type: string
+          title: Category
+        method:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Method
+        content_type:
+          type: string
+          title: Content Type
+        parameters:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Parameters
+        presigned_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Presigned Url
+      type: object
+      required:
+      - checksum
+      - size_bytes
+      - name
+      - verbose_name
+      - category
+      - method
+      - content_type
+      title: ReportMedia
+      description: "Represent a media file associated with a report.\n\nAttributes\n----------\nchecksum : str\n    The checksum of the media file for integrity verification.\ndata_source : str | None\n    Optional source of the media data (e.g., \"validation\", \"test\").\nsize_bytes : SizeBytes\n    The size of the media file in bytes.\nname : str\n    The name of the media (e.g., \"confusion_matrix\").\nverbose_name : str\n    The verbose name of the media type.\ncategory : str\n    The category of the media type.\nmethod : str | None\n    The method used to generate the media type.\ncontent_type : str\n    The content type (MIME type) string.\nparameters : dict | None\n    Optional parameters identifying the media type variant.\npresigned_url : str | None\n    A presigned URL to download the artifact or `None`."
+    CreateReportMetricParameters:
+      properties:
+        name:
+          type: string
+          title: Name
+        value:
+          type: number
+          title: Value
+        data_source:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Data Source
+        verbose_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Verbose Name
+        greater_is_better:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Greater Is Better
+        label:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Label
+        output:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Output
+        average:
+          anyOf:
+          - type: string
+            maxLength: 64
+          - type: 'null'
+          title: Average
+      type: object
+      required:
+      - name
+      - value
+      title: CreateReportMetricParameters
+      description: "Parameter object to create a `ReportMetricModel`.\n\nAttributes\n----------\nname : str\n    The name of the metric (e.g., accuracy, precision).\nvalue : float\n    The value of the metric.\ndata_source : str | None\n    Optional source of the metric data (e.g., \"train\", \"test\").\nverbose_name : str | None\n    The verbose name of the metric (how it will be displayed).\ngreater_is_better : bool | None\n    Whether the metric is of type \"greater is better\" or \"lower is better\".\nlabel : str | None\n    Class label for per-class classification metrics. Legacy typed scalars\n    (``bool`` / ``int`` / ``float``) are coerced to strings on ingest.\noutput : int | None\n    Output index for multioutput regression metrics.\naverage : str | None\n    Averaging mode for metrics aggregated across labels or outputs."
+    ProjectGoalsList:
+      properties:
+        goals:
+          items:
+            $ref: '#/components/schemas/ProjectGoal'
+          type: array
+          title: Goals
+        main_scopes:
+          items:
+            $ref: '#/components/schemas/ProjectGoalMainScope'
+          type: array
+          title: Main Scopes
+      type: object
+      required:
+      - goals
+      - main_scopes
+      title: ProjectGoalsList
+      description: Goals for a project plus independent main-scope pointers.
+    ProjectGoalMainScope:
+      properties:
+        label:
+          anyOf:
+          - type: string
+            maxLength: 255
+          - type: 'null'
+          title: Label
+        output:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Output
+        average:
+          anyOf:
+          - type: string
+            maxLength: 64
+          - type: 'null'
+          title: Average
+        goal_id:
+          type: integer
+          title: Goal Id
+        bucket:
+          $ref: '#/components/schemas/MainScopeBucket'
+      type: object
+      required:
+      - goal_id
+      - bucket
+      title: ProjectGoalMainScope
+      description: Independent main-metric pointer for a bucket.
+    ListReportsResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/ReportSummary'
+          type: array
+          title: Items
+        next_cursor:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Next Cursor
+      type: object
+      title: ListReportsResponse
+      description: Paginated list of merged report summaries.
+    CreateCrossValidationReportParameters:
+      properties:
+        key:
+          type: string
+          title: Key
+        canonical_report_id:
+          anyOf:
+          - type: string
+            format: uuid4
+          - type: string
+            format: uuid7
+          - type: 'null'
+          title: Canonical Report Id
+        estimator_class_name:
+          type: string
+          title: Estimator Class Name
+        ml_task:
+          type: string
+          enum:
+          - regression
+          - multioutput-regression
+          - binary-classification
+          - multiclass-classification
+          - multiclass-multioutput
+          - multioutput-multiclass-classification
+          - multioutput-binary-classification
+          - unknown
+          title: Ml Task
+        dataset_fingerprint:
+          type: string
+          title: Dataset Fingerprint
+        metrics:
+          items:
+            $ref: '#/components/schemas/CreateReportMetricParameters'
+          type: array
+          title: Metrics
+        medias:
+          items:
+            $ref: '#/components/schemas/CreateReportMediaParameters'
+          type: array
+          title: Medias
+        pickle:
+          $ref: '#/components/schemas/CreateReportPickleParameters'
+        environment:
+          anyOf:
+          - $ref: '#/components/schemas/CreateReportEnvironmentParameters'
+          - type: 'null'
+        splitting_strategy:
+          $ref: '#/components/schemas/SplittingStrategy'
+        groups:
+          anyOf:
+          - items:
+              type: integer
+            type: array
+          - type: 'null'
+          title: Groups
+        class_names:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Class Names
+        dataset_size:
+          type: integer
+          title: Dataset Size
+        target_range:
+          anyOf:
+          - items:
+              type: number
+            type: array
+          - type: 'null'
+          title: Target Range
+        target_ranges:
+          anyOf:
+          - items:
+              items:
+                type: number
+              type: array
+            type: array
+          - type: 'null'
+          title: Target Ranges
+        target_names:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Target Names
+        estimators:
+          items:
+            $ref: '#/components/schemas/CreateEstimatorReportParameters'
+          type: array
+          title: Estimators
+      type: object
+      required:
+      - key
+      - estimator_class_name
+      - ml_task
+      - dataset_fingerprint
+      - metrics
+      - medias
+      - pickle
+      - splitting_strategy
+      - groups
+      - class_names
+      - dataset_size
+      - estimators
+      title: CreateCrossValidationReportParameters
+      description: "Parameters to create a cross validation report.\n\nAttributes\n----------\nsplits : Splits\n    Information about the splits of the dataset.\ngroups : list[int] | None\n    Index of the group for each sample in the dataset.\nclass_names : list[str] | None\n    All class names of the dataset.\nclasses : list[int] | None\n    Class name index for each sample in the dataset.\ndataset_size : int\n    The size of the dataset.\nestimators : list[CreateEstimatorReportParameters]\n    List of estimators evaluated in the cross-validation."
     CrossValidationReport:
       properties:
         id:
@@ -1832,1199 +3138,6 @@ components:
       - urn
       title: CrossValidationReport
       description: "Across validation report.\n\nAttributes\n----------\nsplitting_strategy : SplittingStrategy\n    Information about the splitting strategy used.\ngroups : list[int] | None\n    Index of the group for each sample in the dataset.\nclass_names : list[str] | None\n    All class names of the dataset.\ntarget_ranges_normalized : list[list[float]] | None\n    The range of the target values, one [min, max] pair per output.\ntarget_names: list[str] | None\n    The name of the targets.\ndataset_size : int\n    The size of the dataset.\nestimators : list[EstimatorReportId]\n    List of estimator report IDs evaluated in the cross-validation.\nmedias : list[ReportMedia]\n    List of media associated with the cross-validation report.\npickle : ReportPickle\n    The pickle associated with the estimator report."
-    ProjectGoalMainScopeDimensions:
-      properties:
-        label:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Label
-        output:
-          anyOf:
-          - type: integer
-            minimum: 0.0
-          - type: 'null'
-          title: Output
-        average:
-          anyOf:
-          - type: string
-            maxLength: 64
-          - type: 'null'
-          title: Average
-        bucket:
-          anyOf:
-          - $ref: '#/components/schemas/MainScopeBucket'
-          - type: 'null'
-      type: object
-      title: ProjectGoalMainScopeDimensions
-      description: 'Dimensions identifying a main-metric bucket to set or clear.
-
-
-        ``bucket`` may be omitted; the server then derives it from the goal''s own
-
-        variant (scalar → global, label → label, …). Providing a bucket that does
-
-        not match the goal is rejected.'
-    CreateReportEnvironmentParameters:
-      properties:
-        python_version:
-          type: string
-          title: Python Version
-        checksum:
-          type: string
-          title: Checksum
-      type: object
-      required:
-      - python_version
-      - checksum
-      title: CreateReportEnvironmentParameters
-      description: "Parameter object to create a `ReportEnvironmentModel`.\n\nThe environment artifact is a ``requirements.txt`` lockfile.\n\nAttributes\n----------\npython_version : str\n    The Python version of the environment used to create the report.\nchecksum : str\n    The checksum of the ``requirements.txt`` lockfile."
-    CompleteArtifactUpload:
-      properties:
-        checksum:
-          type: string
-          title: Checksum
-        etags:
-          additionalProperties:
-            type: string
-          type: object
-          title: Etags
-      type: object
-      required:
-      - checksum
-      - etags
-      title: CompleteArtifactUpload
-      description: "Artifact completion request.\n\nAttributes\n----------\nchecksum : ArtifactChecksum\n    The checksum of the artifact.\netags : dict[ChunkId, str]\n    A mapping of chunk IDs to their corresponding ETags."
-    ProjectGoal:
-      properties:
-        label:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Label
-        output:
-          anyOf:
-          - type: integer
-            minimum: 0.0
-          - type: 'null'
-          title: Output
-        average:
-          anyOf:
-          - type: string
-            maxLength: 64
-          - type: 'null'
-          title: Average
-        id:
-          type: integer
-          title: Id
-        metric_type_id:
-          type: integer
-          title: Metric Type Id
-        metric_name:
-          type: string
-          title: Metric Name
-        metric_verbose_name:
-          type: string
-          title: Metric Verbose Name
-        constraint_operator:
-          $ref: '#/components/schemas/ComparisonOperator'
-        constraint_threshold:
-          type: number
-          title: Constraint Threshold
-        constraint_threshold_source:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Constraint Threshold Source
-        is_main:
-          type: boolean
-          title: Is Main
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-        updated_at:
-          type: string
-          format: date-time
-          title: Updated At
-      type: object
-      required:
-      - id
-      - metric_type_id
-      - metric_name
-      - metric_verbose_name
-      - constraint_operator
-      - constraint_threshold
-      - is_main
-      - created_at
-      - updated_at
-      title: ProjectGoal
-      description: A metric constraint goal for a project.
-    CrossValidationReportSummary:
-      properties:
-        id:
-          type: integer
-          title: Id
-        project_id:
-          type: integer
-          title: Project Id
-        creator_id:
-          type: string
-          title: Creator Id
-        key:
-          type: string
-          title: Key
-        ml_task:
-          type: string
-          enum:
-          - regression
-          - multioutput-regression
-          - binary-classification
-          - multiclass-classification
-          - multiclass-multioutput
-          - multioutput-multiclass-classification
-          - multioutput-binary-classification
-          - unknown
-          title: Ml Task
-        estimator_class_name:
-          type: string
-          title: Estimator Class Name
-        dataset_fingerprint:
-          type: string
-          title: Dataset Fingerprint
-        dataset_verbose_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Dataset Verbose Name
-        metrics:
-          items:
-            $ref: '#/components/schemas/ReportMetric'
-          type: array
-          title: Metrics
-        canonical_report_id:
-          anyOf:
-          - type: string
-            format: uuid4
-          - type: string
-            format: uuid7
-          - type: 'null'
-          title: Canonical Report Id
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-        updated_at:
-          type: string
-          format: date-time
-          title: Updated At
-        splitter_type:
-          type: string
-          title: Splitter Type
-        urn:
-          type: string
-          title: Urn
-          description: URN identifying the CrossValidationReport.
-          readOnly: true
-      type: object
-      required:
-      - id
-      - project_id
-      - creator_id
-      - key
-      - ml_task
-      - estimator_class_name
-      - dataset_fingerprint
-      - metrics
-      - created_at
-      - updated_at
-      - splitter_type
-      - urn
-      title: CrossValidationReportSummary
-      description: "Summary of cross validation report.\n\nAttributes\n----------\nsplitter_type: str\n    The type of the splitter used."
-    ProjectGoalMainScope:
-      properties:
-        label:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Label
-        output:
-          anyOf:
-          - type: integer
-            minimum: 0.0
-          - type: 'null'
-          title: Output
-        average:
-          anyOf:
-          - type: string
-            maxLength: 64
-          - type: 'null'
-          title: Average
-        goal_id:
-          type: integer
-          title: Goal Id
-        bucket:
-          $ref: '#/components/schemas/MainScopeBucket'
-      type: object
-      required:
-      - goal_id
-      - bucket
-      title: ProjectGoalMainScope
-      description: Independent main-metric pointer for a bucket.
-    ArtifactStatus:
-      type: string
-      enum:
-      - pending
-      - uploaded
-      title: ArtifactStatus
-      description: Upload status of an artifact in the object storage.
-    CreateEstimatorReportParameters:
-      properties:
-        key:
-          type: string
-          title: Key
-        canonical_report_id:
-          anyOf:
-          - type: string
-            format: uuid4
-          - type: string
-            format: uuid7
-          - type: 'null'
-          title: Canonical Report Id
-        estimator_class_name:
-          type: string
-          title: Estimator Class Name
-        ml_task:
-          type: string
-          enum:
-          - regression
-          - multioutput-regression
-          - binary-classification
-          - multiclass-classification
-          - multiclass-multioutput
-          - multioutput-multiclass-classification
-          - multioutput-binary-classification
-          - unknown
-          title: Ml Task
-        dataset_fingerprint:
-          type: string
-          title: Dataset Fingerprint
-        metrics:
-          items:
-            $ref: '#/components/schemas/CreateReportMetricParameters'
-          type: array
-          title: Metrics
-        medias:
-          items:
-            $ref: '#/components/schemas/CreateReportMediaParameters'
-          type: array
-          title: Medias
-        pickle:
-          $ref: '#/components/schemas/CreateReportPickleParameters'
-        environment:
-          anyOf:
-          - $ref: '#/components/schemas/CreateReportEnvironmentParameters'
-          - type: 'null'
-      type: object
-      required:
-      - key
-      - estimator_class_name
-      - ml_task
-      - dataset_fingerprint
-      - metrics
-      - medias
-      - pickle
-      title: CreateEstimatorReportParameters
-      description: "Parameter object to create a new `Item` that is an EstimatorReport.\n\nAttributes\n----------\nkey : str\n    The key of the estimator report, provided by the user to identify the report.\ncanonical_report_id : UUID | None\n    Canonical report identifier. Optional for older clients.\nestimator_class_name : str\n    The class name of the estimator (e.g., RandomForestClassifier).\nml_task : MLTask\n    The machine learning task associated with the estimator (e.g., classification,\n    regression).\ndataset_fingerprint : str\n    A unique fingerprint representing the dataset used for training and evaluation.\nmetrics : list[CreateReportMetricParameters]\n    List of metrics associated with the estimator report.\nmedias : list[CreateReportMediaParameters]\n    List of media associated with the estimator report."
-    SplitterInfo:
-      properties:
-        type:
-          type: string
-          title: Type
-        n_splits:
-          type: integer
-          title: N Splits
-        n_repeats:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: N Repeats
-        shuffle:
-          type: boolean
-          title: Shuffle
-        random_state:
-          anyOf:
-          - type: string
-            maxLength: 64
-          - type: 'null'
-          title: Random State
-      type: object
-      required:
-      - type
-      - n_splits
-      - n_repeats
-      - shuffle
-      title: SplitterInfo
-      description: "Information about a splitter.\n\nAttributes\n----------\ntype : str\n    The type of the splitter.\nn_splits : int\n    The number of splits.\nn_repeats : int | None\n    The number of repeats. None for no repeats.\nshuffle : bool\n    Whether to shuffle the data.\nrandom_state : str | None\n    Optional random state string (numeric seed or other serialized form)."
-    CreateProjectGoalParameters:
-      properties:
-        label:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Label
-        output:
-          anyOf:
-          - type: integer
-            minimum: 0.0
-          - type: 'null'
-          title: Output
-        average:
-          anyOf:
-          - type: string
-            maxLength: 64
-          - type: 'null'
-          title: Average
-        constraint_operator:
-          $ref: '#/components/schemas/ComparisonOperator'
-        constraint_threshold:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Constraint Threshold
-        constraint_threshold_source:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Constraint Threshold Source
-        metric_type_id:
-          type: integer
-          title: Metric Type Id
-        is_main:
-          type: boolean
-          title: Is Main
-          default: false
-        main_scope:
-          anyOf:
-          - $ref: '#/components/schemas/ProjectGoalMainScopeDimensions'
-          - type: 'null'
-      type: object
-      required:
-      - constraint_operator
-      - metric_type_id
-      title: CreateProjectGoalParameters
-      description: Parameters to create a project goal.
-    ArtifactMetadata:
-      properties:
-        checksum:
-          type: string
-          maxLength: 255
-          title: Checksum
-        size_bytes:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Size Bytes
-        status:
-          $ref: '#/components/schemas/ArtifactStatus'
-      type: object
-      required:
-      - checksum
-      - size_bytes
-      - status
-      title: ArtifactMetadata
-      description: "The minimal set of information about an artifact.\n\nNotes\n-----\nUser can ask only for artifact metadata, independently of its content.\n\nAttributes\n----------\nchecksum : ArtifactChecksum\n    The unique checksum identifier of the artifact, used for communication\n    with skore (lib).\nsize_bytes : SizeBytes | None\n    The size of the artifact in bytes.\n    This size is determined after the artifact has been uploaded to ensure it\n    accurately represents the actual size of the stored data.\nstatus : ArtifactStatus\n    Indicates the upload status of the artifact (pending, uploaded)."
-    ReportEnvironment:
-      properties:
-        checksum:
-          type: string
-          maxLength: 255
-          title: Checksum
-        python_version:
-          type: string
-          maxLength: 16
-          title: Python Version
-        presigned_url:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Presigned Url
-      type: object
-      required:
-      - checksum
-      - python_version
-      title: ReportEnvironment
-      description: "Python environment associated with a report.\n\nThe artifact is a ``requirements.txt`` lockfile capturing the packages\ninstalled when the report was created.\n\nAttributes\n----------\nchecksum : str\n    The checksum of the ``requirements.txt`` lockfile.\npython_version : str\n    The Python version of the environment used to create the report.\npresigned_url : str | None\n    A presigned URL to download the artifact or ``None``."
-    CreateCrossValidationReportParameters:
-      properties:
-        key:
-          type: string
-          title: Key
-        canonical_report_id:
-          anyOf:
-          - type: string
-            format: uuid4
-          - type: string
-            format: uuid7
-          - type: 'null'
-          title: Canonical Report Id
-        estimator_class_name:
-          type: string
-          title: Estimator Class Name
-        ml_task:
-          type: string
-          enum:
-          - regression
-          - multioutput-regression
-          - binary-classification
-          - multiclass-classification
-          - multiclass-multioutput
-          - multioutput-multiclass-classification
-          - multioutput-binary-classification
-          - unknown
-          title: Ml Task
-        dataset_fingerprint:
-          type: string
-          title: Dataset Fingerprint
-        metrics:
-          items:
-            $ref: '#/components/schemas/CreateReportMetricParameters'
-          type: array
-          title: Metrics
-        medias:
-          items:
-            $ref: '#/components/schemas/CreateReportMediaParameters'
-          type: array
-          title: Medias
-        pickle:
-          $ref: '#/components/schemas/CreateReportPickleParameters'
-        environment:
-          anyOf:
-          - $ref: '#/components/schemas/CreateReportEnvironmentParameters'
-          - type: 'null'
-        splitting_strategy:
-          $ref: '#/components/schemas/SplittingStrategy'
-        groups:
-          anyOf:
-          - items:
-              type: integer
-            type: array
-          - type: 'null'
-          title: Groups
-        class_names:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Class Names
-        dataset_size:
-          type: integer
-          title: Dataset Size
-        target_range:
-          anyOf:
-          - items:
-              type: number
-            type: array
-          - type: 'null'
-          title: Target Range
-        target_ranges:
-          anyOf:
-          - items:
-              items:
-                type: number
-              type: array
-            type: array
-          - type: 'null'
-          title: Target Ranges
-        target_names:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Target Names
-        estimators:
-          items:
-            $ref: '#/components/schemas/CreateEstimatorReportParameters'
-          type: array
-          title: Estimators
-      type: object
-      required:
-      - key
-      - estimator_class_name
-      - ml_task
-      - dataset_fingerprint
-      - metrics
-      - medias
-      - pickle
-      - splitting_strategy
-      - groups
-      - class_names
-      - dataset_size
-      - estimators
-      title: CreateCrossValidationReportParameters
-      description: "Parameters to create a cross validation report.\n\nAttributes\n----------\nsplits : Splits\n    Information about the splits of the dataset.\ngroups : list[int] | None\n    Index of the group for each sample in the dataset.\nclass_names : list[str] | None\n    All class names of the dataset.\nclasses : list[int] | None\n    Class name index for each sample in the dataset.\ndataset_size : int\n    The size of the dataset.\nestimators : list[CreateEstimatorReportParameters]\n    List of estimators evaluated in the cross-validation."
-    ListReportsResponse:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/ReportSummary'
-          type: array
-          title: Items
-        next_cursor:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Next Cursor
-      type: object
-      title: ListReportsResponse
-      description: Paginated list of merged report summaries.
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    CreateReportMetricParameters:
-      properties:
-        name:
-          type: string
-          title: Name
-        value:
-          type: number
-          title: Value
-        data_source:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Data Source
-        verbose_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Verbose Name
-        greater_is_better:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Greater Is Better
-        label:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Label
-        output:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Output
-        average:
-          anyOf:
-          - type: string
-            maxLength: 64
-          - type: 'null'
-          title: Average
-      type: object
-      required:
-      - name
-      - value
-      title: CreateReportMetricParameters
-      description: "Parameter object to create a `ReportMetricModel`.\n\nAttributes\n----------\nname : str\n    The name of the metric (e.g., accuracy, precision).\nvalue : float\n    The value of the metric.\ndata_source : str | None\n    Optional source of the metric data (e.g., \"train\", \"test\").\nverbose_name : str | None\n    The verbose name of the metric (how it will be displayed).\ngreater_is_better : bool | None\n    Whether the metric is of type \"greater is better\" or \"lower is better\".\nlabel : str | None\n    Class label for per-class classification metrics. Legacy typed scalars\n    (``bool`` / ``int`` / ``float``) are coerced to strings on ingest.\noutput : int | None\n    Output index for multioutput regression metrics.\naverage : str | None\n    Averaging mode for metrics aggregated across labels or outputs."
-    EstimatorReportSummary:
-      properties:
-        id:
-          type: integer
-          title: Id
-        project_id:
-          type: integer
-          title: Project Id
-        creator_id:
-          type: string
-          title: Creator Id
-        key:
-          type: string
-          title: Key
-        ml_task:
-          type: string
-          enum:
-          - regression
-          - multioutput-regression
-          - binary-classification
-          - multiclass-classification
-          - multiclass-multioutput
-          - multioutput-multiclass-classification
-          - multioutput-binary-classification
-          - unknown
-          title: Ml Task
-        estimator_class_name:
-          type: string
-          title: Estimator Class Name
-        dataset_fingerprint:
-          type: string
-          title: Dataset Fingerprint
-        dataset_verbose_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Dataset Verbose Name
-        metrics:
-          items:
-            $ref: '#/components/schemas/ReportMetric'
-          type: array
-          title: Metrics
-        canonical_report_id:
-          anyOf:
-          - type: string
-            format: uuid4
-          - type: string
-            format: uuid7
-          - type: 'null'
-          title: Canonical Report Id
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-        updated_at:
-          type: string
-          format: date-time
-          title: Updated At
-        urn:
-          type: string
-          title: Urn
-          description: "URN identifying the EstimatorReport.\n\nReturns\n-------\nUrn\n    The URN of the estimator report."
-          readOnly: true
-      type: object
-      required:
-      - id
-      - project_id
-      - creator_id
-      - key
-      - ml_task
-      - estimator_class_name
-      - dataset_fingerprint
-      - metrics
-      - created_at
-      - updated_at
-      - urn
-      title: EstimatorReportSummary
-      description: "A summary of a report.\n\nAttributes\n----------\nid : EstimatorReportId\n    The unique identifier of the estimator report in the skore hub database.\nproject_id : ProjectId\n    Identifier for the project associated with the estimator report.\ncreator_id : str\n    Identifier for the user who created the estimator report.\nkey : str\n    The key of the estimator report, provided by the user to identify the report.\nml_task : MLTask\n    The machine learning task associated with the estimator (e.g., classification,\n    regression).\nestimator_class_name : str\n    The class name of the estimator (e.g., RandomForestClassifier).\ndataset_fingerprint : str\n    A unique fingerprint representing the dataset used for training and evaluation.\ndataset_verbose_name : str | None\n    Human-readable dataset name inferred asynchronously (e.g. via Prefect).\nmetrics : list[ReportMetric]\n    List of metrics associated with the estimator report.\ncanonical_report_id : UUID | None\n    Canonical report identifier; ``None`` for legacy reports.\ncreated_at : datetime\n    The date and time when the estimator report was created.\nupdated_at : datetime\n    The date and time when the estimator report was last updated."
-    MainScopeBucket:
-      type: string
-      enum:
-      - global
-      - label
-      - output
-      - average
-      title: MainScopeBucket
-      description: Independent main-metric bucket for project goals.
-    ComparisonReport:
-      properties:
-        id:
-          type: integer
-          title: Id
-        project_id:
-          type: integer
-          title: Project Id
-        creator_id:
-          type: string
-          title: Creator Id
-        name:
-          type: string
-          title: Name
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-        updated_at:
-          type: string
-          format: date-time
-          title: Updated At
-        compared_reports:
-          items:
-            type: integer
-          type: array
-          title: Compared Reports
-        best_trade_offs:
-          items:
-            type: integer
-          type: array
-          title: Best Trade Offs
-        best_trade_offs_explanations:
-          additionalProperties:
-            anyOf:
-            - type: string
-            - type: 'null'
-          type: object
-          title: Best Trade Offs Explanations
-        urn:
-          type: string
-          title: Urn
-          description: "URN identifying the EstimatorReport.\n\nReturns\n-------\nUrn\n    The URN of the estimator report."
-          readOnly: true
-      type: object
-      required:
-      - id
-      - project_id
-      - creator_id
-      - name
-      - created_at
-      - updated_at
-      - compared_reports
-      - best_trade_offs
-      - best_trade_offs_explanations
-      - urn
-      title: ComparisonReport
-      description: "The result of a set of reports comparison.\n\nA comparison report is created when a user compares multiple estimator reports\nand selects the best trade-offs among them.\n\nAttributes\n----------\nid : ComparisonReportId\n    The unique identifier of the comparison report in the skore hub database.\nproject_id : ProjectId\n    Identifier for the project associated with the comparison report.\ncreator_id : str\n    Identifier for the user who created the comparison report.\nname : str\n    The name of the comparison report.\ncreated_at : datetime\n    The date and time when the comparison report was created.\nupdated_at : datetime\n    The date and time when the comparison report was last updated.\ncompared_reports : list[int]\n    List of estimator report IDs that were compared in this comparison report.\nbest_trade_offs : list[int]\n    List of estimator report IDs that represent the best trade-offs identified\n    in the comparison.\nbest_trade_offs_explanations : dict[int, str | None]\n    A dictionary mapping each estimator report ID in `best_trade_offs` to an\n    optional explanation provided by the user."
-    GenerateUploadUrlResponse:
-      properties:
-        checksum:
-          type: string
-          title: Checksum
-        upload_url:
-          type: string
-          title: Upload Url
-        upload_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Upload Id
-        chunk_id:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Chunk Id
-      type: object
-      required:
-      - checksum
-      - upload_url
-      title: GenerateUploadUrlResponse
-      description: 'Represent an upload URL to store an artifact in the object storage.
-
-
-        If the `upload_id` and `chunk_id` fields are Nonne, it''s a stream upload URL.
-
-        If the `upload_id` and `chunk_id` fields are valued, it''s a multipart upload URL.'
-    UpdateProjectGoalParameters:
-      properties:
-        constraint_operator:
-          $ref: '#/components/schemas/ComparisonOperator'
-        constraint_threshold:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Constraint Threshold
-        constraint_threshold_source:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Constraint Threshold Source
-        is_main:
-          type: boolean
-          title: Is Main
-        main_scope:
-          anyOf:
-          - $ref: '#/components/schemas/ProjectGoalMainScopeDimensions'
-          - type: 'null'
-      type: object
-      required:
-      - constraint_operator
-      - is_main
-      title: UpdateProjectGoalParameters
-      description: Parameters to update a project goal constraint.
-    EstimatorReport:
-      properties:
-        id:
-          type: integer
-          title: Id
-        project_id:
-          type: integer
-          title: Project Id
-        creator_id:
-          type: string
-          title: Creator Id
-        key:
-          type: string
-          title: Key
-        ml_task:
-          type: string
-          enum:
-          - regression
-          - multioutput-regression
-          - binary-classification
-          - multiclass-classification
-          - multiclass-multioutput
-          - multioutput-multiclass-classification
-          - multioutput-binary-classification
-          - unknown
-          title: Ml Task
-        estimator_class_name:
-          type: string
-          title: Estimator Class Name
-        dataset_fingerprint:
-          type: string
-          title: Dataset Fingerprint
-        dataset_verbose_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Dataset Verbose Name
-        metrics:
-          items:
-            $ref: '#/components/schemas/ReportMetric'
-          type: array
-          title: Metrics
-        canonical_report_id:
-          anyOf:
-          - type: string
-            format: uuid4
-          - type: string
-            format: uuid7
-          - type: 'null'
-          title: Canonical Report Id
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-        updated_at:
-          type: string
-          format: date-time
-          title: Updated At
-        medias:
-          items:
-            $ref: '#/components/schemas/ReportMedia'
-          type: array
-          title: Medias
-        pickle:
-          $ref: '#/components/schemas/ReportPickle'
-        environment:
-          anyOf:
-          - $ref: '#/components/schemas/ReportEnvironment'
-          - type: 'null'
-        parents_urns:
-          items:
-            type: string
-          type: array
-          title: Parents Urns
-        urn:
-          type: string
-          title: Urn
-          description: "URN identifying the EstimatorReport.\n\nReturns\n-------\nUrn\n    The URN of the estimator report."
-          readOnly: true
-      type: object
-      required:
-      - id
-      - project_id
-      - creator_id
-      - key
-      - ml_task
-      - estimator_class_name
-      - dataset_fingerprint
-      - metrics
-      - created_at
-      - updated_at
-      - medias
-      - pickle
-      - parents_urns
-      - urn
-      title: EstimatorReport
-      description: "A full estimator report.\n\nAttributes\n----------\nmedias : list[ReportMedia]\n    List of media associated with the estimator report.\npickle : ReportPickle\n    The pickle associated with the estimator report.\nparents_urns: list[Urn]\n    The URNs of the parent reports if applicable."
-    Project:
-      properties:
-        id:
-          type: integer
-          title: Id
-        public_id:
-          type: string
-          maxLength: 64
-          minLength: 1
-          title: Public Id
-        name:
-          type: string
-          maxLength: 150
-          minLength: 1
-          title: Name
-        workspace_id:
-          type: integer
-          title: Workspace Id
-        creator_id:
-          type: string
-          title: Creator Id
-        estimator_report_count:
-          type: integer
-          title: Estimator Report Count
-        cross_validation_report_count:
-          type: integer
-          title: Cross Validation Report Count
-        comparison_count:
-          type: integer
-          title: Comparison Count
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-        updated_at:
-          type: string
-          format: date-time
-          title: Updated At
-      type: object
-      required:
-      - id
-      - public_id
-      - name
-      - workspace_id
-      - creator_id
-      - estimator_report_count
-      - cross_validation_report_count
-      - comparison_count
-      - created_at
-      - updated_at
-      title: Project
-      description: "Represents a Skore-hub Project.\n\nA Project is linked to a Workspace and a Owner.\nA Project is the\n\nAttributes\n----------\nid : ProjectId\n    The unique project ID, for internal usage only.\npublic_id: ProjectPublicId\n    The unique public project ID.\nname : str\n    The project name. Not unique.\nworkspace_id : int\n    The workspace ID, owner of the Project.\ncreator_id: str\n    The user id whom created this project\nestimator_report_count: number\n    The number of estimator reports in this project\ncross_validation_report_count: number\n    The number of cross validation reports in this project\ncomparison_count: number\n    The number of comparisons in this project"
-    ReportGroupEntry:
-      properties:
-        report_id:
-          type: integer
-          title: Report Id
-        report_key:
-          type: string
-          title: Report Key
-        ml_task:
-          type: string
-          title: Ml Task
-        estimator_class_name:
-          type: string
-          title: Estimator Class Name
-      type: object
-      required:
-      - report_id
-      - report_key
-      - ml_task
-      - estimator_class_name
-      title: ReportGroupEntry
-      description: "An entry in a report group.\n\nAttributes\n----------\nreport_id : str\n    The unique identifier of the report.\nreport_key : str\n    The key of the report, provided by the user to identify the report.\nml_task : str\n    The machine learning task associated with the report (e.g., \"classification\").\nestimator_class_name : str\n    The class name of the estimator (e.g., \"RandomForestClassifier\")."
-    ReportMedia:
-      properties:
-        checksum:
-          type: string
-          maxLength: 255
-          title: Checksum
-        data_source:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Data Source
-        size_bytes:
-          type: integer
-          title: Size Bytes
-        name:
-          type: string
-          title: Name
-        verbose_name:
-          type: string
-          title: Verbose Name
-        category:
-          type: string
-          title: Category
-        method:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Method
-        content_type:
-          type: string
-          title: Content Type
-        parameters:
-          anyOf:
-          - additionalProperties: true
-            type: object
-          - type: 'null'
-          title: Parameters
-        presigned_url:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Presigned Url
-      type: object
-      required:
-      - checksum
-      - size_bytes
-      - name
-      - verbose_name
-      - category
-      - method
-      - content_type
-      title: ReportMedia
-      description: "Represent a media file associated with a report.\n\nAttributes\n----------\nchecksum : str\n    The checksum of the media file for integrity verification.\ndata_source : str | None\n    Optional source of the media data (e.g., \"validation\", \"test\").\nsize_bytes : SizeBytes\n    The size of the media file in bytes.\nname : str\n    The name of the media (e.g., \"confusion_matrix\").\nverbose_name : str\n    The verbose name of the media type.\ncategory : str\n    The category of the media type.\nmethod : str | None\n    The method used to generate the media type.\ncontent_type : str\n    The content type (MIME type) string.\nparameters : dict | None\n    Optional parameters identifying the media type variant.\npresigned_url : str | None\n    A presigned URL to download the artifact or `None`."
-    ArtifactReadUrl:
-      properties:
-        checksum:
-          type: string
-          maxLength: 255
-          title: Checksum
-        size_bytes:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Size Bytes
-        status:
-          $ref: '#/components/schemas/ArtifactStatus'
-        url:
-          type: string
-          title: Url
-      type: object
-      required:
-      - checksum
-      - size_bytes
-      - status
-      - url
-      title: ArtifactReadUrl
-      description: "Represents a read-access to an artifact.\n\nAttributes\n----------\nurl : str\n    A pre-signed URL that provides temporary access to the artifact in the object\n    storage."
-    ReportGroup:
-      properties:
-        dataset:
-          type: string
-          title: Dataset
-        dataset_verbose_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Dataset Verbose Name
-        reports:
-          items:
-            $ref: '#/components/schemas/ReportGroupEntry'
-          type: array
-          title: Reports
-      type: object
-      required:
-      - dataset
-      - reports
-      title: ReportGroup
-      description: "A group of reports.\n\nAttributes\n----------\ndataset : str\n    The dataset fingerprint associated with the report group.\ndataset_verbose_name : str | None\n    Human-readable dataset name when inferred; otherwise unset.\nreports : list[ReportGroupEntry]\n    The list of report entries in the group."
-    CreateComparisonReportParameters:
-      properties:
-        name:
-          type: string
-          title: Name
-        compared_reports:
-          items:
-            type: integer
-          type: array
-          title: Compared Reports
-        best_trade_offs:
-          items:
-            type: integer
-          type: array
-          title: Best Trade Offs
-        explanations:
-          additionalProperties:
-            type: string
-          type: object
-          title: Explanations
-      type: object
-      required:
-      - name
-      - compared_reports
-      - best_trade_offs
-      - explanations
-      title: CreateComparisonReportParameters
-      description: "Parameters to create a comparison report.\n\nAttributes\n----------\nname : str\n    The name of the comparison report.\ncompared_reports : list[EstimatorReportId]\n    List of estimator report IDs that were compared in this comparison report.\nbest_trade_offs : list[EstimatorReportId]\n    List of estimator report IDs that represent the best trade-offs identified\n    in the comparison.\nexplanations : dict[EstimatorReportId, str]\n    A dictionary mapping each estimator report ID in `best_trade_offs` to an\n    explanation provided by the user."
-    SplittingStrategy:
-      properties:
-        splitter:
-          $ref: '#/components/schemas/SplitterInfo'
-        splits:
-          items:
-            anyOf:
-            - items:
-                type: integer
-              type: array
-            - type: 'null'
-          type: array
-          title: Splits
-        train_target_distributions:
-          items:
-            items:
-              type: number
-            type: array
-          type: array
-          title: Train Target Distributions
-        test_target_distributions:
-          items:
-            items:
-              type: number
-            type: array
-          type: array
-          title: Test Target Distributions
-        train_target_distributions_sample_counts:
-          items:
-            type: integer
-          type: array
-          title: Train Target Distributions Sample Counts
-        test_target_distributions_sample_counts:
-          items:
-            type: integer
-          type: array
-          title: Test Target Distributions Sample Counts
-      type: object
-      required:
-      - splitter
-      - splits
-      - train_target_distributions
-      - test_target_distributions
-      - train_target_distributions_sample_counts
-      - test_target_distributions_sample_counts
-      title: SplittingStrategy
-      description: "Information about the splitting strategy used.\n\nAttributes\n----------\nsplitter: SplitterInfo\n    Information about the splitter used.\nsplits: list[list[int] | None]\n    The list of splits. Either every entry is ``None`` (assignments\n    unavailable) or every entry is a list of int:\n    - 0 if the sample is in the train set,\n    - 1 if it is in the test set,\n    - -1 if it is in neither set.\nsplits_train_target_distributions: list[list[float]]\n    The list of train target distributions for each split.\nsplits_test_target_distributions: list[list[float]]\n    The list of test target distributions for each split.\nsplits_train_target_distributions_sample_counts: list[int]\n    The list of train target distributions sample counts for each split.\nsplits_test_target_distributions_sample_counts: list[int]\n    The list of test target distributions sample counts for each split."
-    SortOrder:
-      type: string
-      enum:
-      - ASC
-      - DESC
-      title: SortOrder
-      description: Sort order.
-    ReportPickle:
-      properties:
-        checksum:
-          type: string
-          maxLength: 255
-          title: Checksum
-        presigned_url:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Presigned Url
-      type: object
-      required:
-      - checksum
-      title: ReportPickle
-      description: "Represent the pickle associated with a report.\n\nAttributes\n----------\nchecksum : str\n    The checksum of the pickle file.\npresigned_url : str | None\n    A presigned URL to download the artifact or `None`."
     ReportSummary:
       properties:
         id:
@@ -3111,92 +3224,24 @@ components:
       - type
       title: ReportSummary
       description: Lightweight summary of an estimator or cross-validation report.
-    ComparisonOperator:
-      type: string
-      enum:
-      - lt
-      - gt
-      - lte
-      - gte
-      title: ComparisonOperator
-      description: Comparison operator for project goal constraints.
-    ProjectGoalsList:
-      properties:
-        goals:
-          items:
-            $ref: '#/components/schemas/ProjectGoal'
-          type: array
-          title: Goals
-        main_scopes:
-          items:
-            $ref: '#/components/schemas/ProjectGoalMainScope'
-          type: array
-          title: Main Scopes
-      type: object
-      required:
-      - goals
-      - main_scopes
-      title: ProjectGoalsList
-      description: Goals for a project plus independent main-scope pointers.
-    ReportMetric:
-      properties:
-        id:
-          type: integer
-          title: Id
-        name:
-          type: string
-          maxLength: 64
-          title: Name
-        verbose_name:
-          type: string
-          maxLength: 150
-          title: Verbose Name
-        greater_is_better:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Greater Is Better
-        data_source:
-          anyOf:
-          - type: string
-            maxLength: 255
-          - type: 'null'
-          title: Data Source
-        value:
-          type: number
-          title: Value
-        label:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Label
-        output:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Output
-        average:
-          anyOf:
-          - type: string
-            maxLength: 64
-          - type: 'null'
-          title: Average
-      type: object
-      required:
-      - id
-      - name
-      - verbose_name
-      - greater_is_better
-      - value
-      title: ReportMetric
-      description: "Represent a metric with a `float` value.\n\nAttributes\n----------\ndata_source : str | None\n    Optional source of the metric data (e.g., \"validation\", \"test\").\nvalue : float\n    The value of the metric.\nlabel : str | None\n    Class label for per-class classification metrics. Always a string (or\n    ``None``); boolean class labels are ``\\\"True\\\"`` / ``\\\"False\\\"``.\noutput : int | None\n    Output index for multioutput regression metrics.\naverage : str | None\n    Averaging mode for metrics aggregated across labels or outputs."
-    CreateReportPickleParameters:
+    ReportEnvironment:
       properties:
         checksum:
           type: string
+          maxLength: 255
           title: Checksum
+        python_version:
+          type: string
+          maxLength: 16
+          title: Python Version
+        presigned_url:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Presigned Url
       type: object
       required:
       - checksum
-      title: CreateReportPickleParameters
-      description: "Parameter object to create a `ReportPickleModel`.\n\nAttributes\n----------\nchecksum : str\n    The checksum of the media file for integrity verification."
+      - python_version
+      title: ReportEnvironment
+      description: "Python environment associated with a report.\n\nThe artifact is a ``requirements.txt`` lockfile capturing the packages\ninstalled when the report was created.\n\nAttributes\n----------\nchecksum : str\n    The checksum of the ``requirements.txt`` lockfile.\npython_version : str\n    The Python version of the environment used to create the report.\npresigned_url : str | None\n    A presigned URL to download the artifact or ``None``."

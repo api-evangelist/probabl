@@ -1,0 +1,44 @@
+generated: '2026-09-16'
+method: derived
+source: openapi + live probes + first-party client source
+standards:
+- id: openapi-3.1
+  conforms: true
+  evidence: 'https://api.skore.probabl.ai/openapi.json declares openapi: 3.1.0'
+- id: oauth2
+  conforms: true
+  evidence: identity/oauth authorization-code + refresh operations (not declared as securitySchemes)
+- id: oauth2-device-authorization (rfc8628)
+  conforms: true
+  evidence: /identity/oauth/device/login + /identity/oauth/device/token (device_code, user_code) — hub-proxied,
+    not the RFC endpoint shape
+- id: oidc
+  conforms: true
+  evidence: 'logout_identity_oauth_logout_post: "Log out the user (standard OIDC)"; Token carries id_token'
+- id: mcp
+  conforms: true
+  evidence: POST https://api.skore.probabl.ai/mcp initialize -> protocolVersion 2025-06-18 (200, 2026-09-16)
+- id: openai-chat-completions-compatible
+  conforms: true
+  evidence: POST /v1/chat/completions, POST /v1/responses, GET /v1/models
+- id: anthropic-messages-compatible
+  conforms: true
+  evidence: POST /v1/messages
+- id: agent-skills
+  conforms: true
+  evidence: https://github.com/probabl-ai/skills (SKILL.md per skill, agentskills.io)
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: 'FastAPI {"detail": ...} envelope'
+- id: pagination
+  conforms: false
+  evidence: no pagination parameters on list operations
+- id: idempotency-key
+  conforms: false
+  evidence: no Idempotency-Key header; natural idempotency on 4 operations
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: https://www.probabl.ai/.well-known/security.txt -> 404
+domain_standards:
+  note: Machine-learning experiment tracking has no market data standard declared in the contract; skore syncs with
+    MLflow via client plugin (skore-mlflow-project), not via an MLflow-compatible REST surface.

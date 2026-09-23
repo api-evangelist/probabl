@@ -1,0 +1,24 @@
+generated: '2026-09-16'
+method: searched
+versioning:
+  scheme: unversioned REST (spec info.version 0.1.0); /v1 prefix on agent-compatible endpoints
+  client: skore on PyPI, semver 0.x — latest 0.26.0 (2026-09-16)
+  docs: https://docs.skore.probabl.ai/stable/whatsnew/index.html
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No API deprecation policy published; no deprecated operations in the spec. Library release notes flag breaking
+    changes with "!" (e.g. feat(reports)!).
+sla: null
+status_page: https://status.probabl.ai/
+status_page_provider: Better Stack
+health_endpoints:
+- https://api.skore.probabl.ai/health
+- https://api.skore.probabl.ai/readiness
+- https://api.skore.probabl.ai/liveness
+deprecated_operations: []
+contract_drift:
+  observed: '2026-09-16'
+  note: 'Live https://api.skore.probabl.ai/openapi.json (52 paths / 68 operations) differs from the archived openapi/_original/probabl-skore-hub-openapi.json
+    (51 paths): added /v1/responses, /v1/materialize/{token}, /projects/.../estimator-reports/groups, /projects/.../cross-validation-reports/groups,
+    /projects/.../reports/{id}/{kind}. Re-harvest via refine-openapis.'

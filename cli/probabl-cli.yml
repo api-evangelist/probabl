@@ -1,0 +1,64 @@
+generated: '2026-09-16'
+method: searched
+source: https://github.com/probabl-ai/skore-cli
+name: skore-cli
+binary: skore
+license: MIT
+version: 0.4.0
+published: '2026-09-11'
+install:
+- method: pip
+  command: pip install skore-cli
+auth:
+  interactive: OAuth device login on first `skore agent` run
+  env:
+  - SKORE_HUB_API_KEY
+  - SKORE_HUB_URI
+  flag: --hub-url
+command_groups:
+- group: skills
+  purpose: discover, install and manage Agent Skills from probabl-ai/skills
+  commands:
+  - skore skills list
+  - skore skills install [ids|all] [--global] [--agent <name>] [--repo owner/name]
+  - skore skills update
+  - skore skills remove
+  agents:
+  - agents
+  - claude-code
+  - cursor
+  - codex
+  - gemini
+  - windsurf
+  - cline
+  - roo
+  - amp
+  - github-copilot
+  - bob
+  - bob-ide
+- group: agent
+  purpose: log in, pick a workspace + harness, mint a workspace API key, write harness config (MCP url {hub}/mcp
+    with X-API-Key) and launch the agent
+  commands:
+  - skore agent
+  - skore agent --harness claude
+  - skore agent --workspace ./myapp
+  harnesses:
+  - Bob Shell
+  - Bob IDE
+  - Claude
+  - Cursor
+  - OpenCode
+  - Pi
+  - GitHub Copilot
+  - Codex
+- group: sync
+  purpose: synchronize report projects across local storage, Skore Hub and MLflow
+  commands:
+  - skore sync <project> --to=hub --to-workspace=<ws> [--both|--dry-run]
+  - skore sync <project> --from=hub --from-workspace=<ws> --to-project=<name>
+  - skore sync <project> --to=mlflow --tracking-uri=<uri>
+key_flows:
+- Connect a coding agent to Skore Hub (skore agent)
+- Install data-science skills into an agent (skore skills install all)
+- Push local experiment reports to the hub (skore sync --to=hub); --dry-run available

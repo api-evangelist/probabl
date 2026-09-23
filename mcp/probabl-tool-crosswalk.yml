@@ -1,0 +1,123 @@
+generated: '2026-09-16'
+method: derived
+source: mcp/probabl-skore-hub-mcp-tools.json + mcp/probabl-sklearn-central-mcp-tools.json (live tools/list) aligned
+  with openapi/*.yml
+surfaces:
+  rest_openapi: openapi/ (split one-per-tag; source https://api.skore.probabl.ai/openapi.json, ungated)
+  graphql: null
+  mcp:
+  - https://api.skore.probabl.ai/mcp (tools/list ungated; calls use X-API-Key)
+  - https://sklearn-central-mcp.probabl.workers.dev/mcp (ungated)
+crosswalk: []
+mcp_only:
+- tool: skore_agent
+  server: skore
+  reason: 'Server-side composite: runs one turn of Probabl''s proprietary ML methodology and returns actions for
+    the client to execute locally. Closest REST analogues are the agent-compatible turns (chat_completions / create_response
+    / anthropic_messages), but the tool contract (session_id, results[], actions[]) is not exposed as a REST operation.'
+  related_rest:
+  - chat_completions_v1_chat_completions_post
+  - anthropic_messages_v1_messages_post
+- tool: search_use_cases
+  server: sklearn-central
+  reason: scikit-learn Central has no REST API; static site + MCP only.
+- tool: get_use_case
+  server: sklearn-central
+  reason: scikit-learn Central has no REST API.
+- tool: list_packages
+  server: sklearn-central
+  reason: scikit-learn Central has no REST API.
+- tool: list_taxonomy
+  server: sklearn-central
+  reason: scikit-learn Central has no REST API.
+rest_only:
+- api: anthropic-compatible-agent-api
+  operations:
+  - anthropic_messages_v1_messages_post
+- api: health-api
+  operations:
+  - health_health_get
+- api: identity-api
+  operations:
+  - list_invitations_by_email_identity_admin_invitations__email__get
+  - oauth_login_identity_oauth_login_get
+  - accept_invitation_identity_oauth_accept_invitation_get
+  - oauth_device_identity_oauth_device_login_get
+  - oauth_callback_identity_oauth_callback_get
+  - oauth_device_callback_identity_oauth_device_callback_get
+  - oauth_device_callback_validation_identity_oauth_device_callback_post
+  - oauth_token_code_is_accessible_identity_oauth_device_code_probe_get
+  - oauth_device_token_identity_oauth_device_token_get
+  - refresh_token_identity_oauth_token_refresh_post
+  - logout_identity_oauth_logout_post
+  - create_workspace_identity_workspaces_post
+  - list_workspaces_identity_workspaces_get
+  - delete_workspace_identity_workspaces__workspace_id__delete
+  - get_workspace_identity_workspaces__workspace_id__get
+  - update_workspace_identity_workspaces__workspace_id__put
+  - check_workspace_public_id_available_identity_workspaces_public_id_availability_get
+  - create_workspace_invitation_identity_workspaces__workspace_id__invitations_post
+  - create_workspace_invitation_link_identity_workspaces__workspace_id__invitation_link_post
+  - remove_member_from_workspace_identity_workspaces__workspace_id__members__user_id__delete
+  - set_member_role_identity_workspaces__workspace_id__members__user_id__role_put
+  - me_identity_users_me_get
+  - get_user_identity_users__user_id__get
+  - create_api_key_identity_users__user_id__api_keys_post
+  - list_api_keys_identity_users__user_id__api_keys_get
+  - delete_api_key_identity_users__user_id__api_keys__api_key_id__delete
+  - patch_api_key_identity_users__user_id__api_keys__api_key_id__patch
+  - get_invitation_identity_invitations__key__get
+- api: liveness-api
+  operations:
+  - liveness_liveness_get
+- api: llm-provider-api
+  operations:
+  - list_providers_agent_workspaces__workspace_id__providers_get
+  - create_provider_agent_workspaces__workspace_id__providers_post
+  - activate_provider_agent_workspaces__workspace_id__providers__config_id__activate_post
+  - delete_provider_agent_workspaces__workspace_id__providers__config_id__delete
+- api: openai-compatible-agent-api
+  operations:
+  - list_models_v1_models_get
+  - get_skill_template_v1_skills__skill__template_get
+  - chat_completions_v1_chat_completions_post
+- api: projects-api
+  operations:
+  - create_project_projects__workspace_public_id___project_name__post
+  - get_project_projects__workspace_public_id___project_name__get
+  - delete_project_projects__workspace_public_id___project_name__delete
+  - list_workspace_projects_projects__workspace_public_id__get
+  - list_all_projects_projects_admin_get
+  - list_reports_projects__workspace_public_id___project_name__reports_get
+  - filter_projects__workspace_public_id___project_name__estimator_reports_get
+  - create_projects__workspace_public_id___project_name__estimator_reports_post
+  - list_groups_projects__workspace_public_id___project_name__estimator_reports_groups_get
+  - get_projects__workspace_public_id___project_name__estimator_reports__report_id__get
+  - create_projects__workspace_public_id___project_name__cross_validation_reports_post
+  - filter_projects__workspace_public_id___project_name__cross_validation_reports_get
+  - list_groups_projects__workspace_public_id___project_name__cross_validation_reports_groups_get
+  - get_cross_validation_report_projects__workspace_public_id___project_name__cross_validation_reports__report_id__get
+  - filter_projects__workspace_public_id___project_name__comparison_reports_get
+  - create_projects__workspace_public_id___project_name__comparison_reports_post
+  - get_projects__workspace_public_id___project_name__comparison_reports__report_id__get
+  - delete_projects__workspace_public_id___project_name__comparison_reports__report_id__delete
+  - generate_upload_url_projects__workspace_public_id___project_name__artifacts_post
+  - filter_projects__workspace_public_id___project_name__artifacts_get
+  - complete_upload_projects__workspace_public_id___project_name__artifacts_complete_post
+  - get_read_presigned_urls_projects__workspace_public_id___project_name__artifacts_read_get
+  - count_reports_meeting_goals_projects__workspace_public_id___project_name__goals_meeting_reports_count_get
+  - list_goals_projects__workspace_public_id___project_name__goals_get
+  - create_goal_projects__workspace_public_id___project_name__goals_post
+  - update_goal_projects__workspace_public_id___project_name__goals__goal_id__put
+  - delete_goal_projects__workspace_public_id___project_name__goals__goal_id__delete
+  - list_potential_goals_projects__workspace_public_id___project_name__potential_goals_get
+- api: readiness-api
+  operations:
+  - readiness_readiness_get
+coverage:
+  tools_named: 5
+  tools_bound: 0
+  mcp_only: 5
+  rest_ops_total: 67
+  rest_ops_with_tool: 0
+note: The Skore Hub MCP surface is deliberately a single agent-orchestration tool; resource CRUD is REST-only.

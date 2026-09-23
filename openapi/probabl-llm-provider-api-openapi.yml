@@ -1,7 +1,13 @@
 openapi: 3.2.0
 info:
   title: Skore Hub LLM Provider API
-  description: "\nThis REST API is divided in small services.\nEach service has its own OpenAPI specification.\n- [identity](/identity/docs)\n- [projects](/projects/docs)\n    "
+  description: 'This REST API is divided in small services.
+
+    Each service has its own OpenAPI specification.
+
+    - identity
+
+    - projects'
   version: 0.1.0
 tags:
 - name: LLM Provider
@@ -11,7 +17,23 @@ paths:
       tags:
       - LLM Provider
       summary: List Providers
-      description: "Return the (masked) agent providers registered for a workspace.\n\n**Parameters**\n- `workspace_id`: The workspace whose providers are requested.\n\n**Responses**\n- `200`: The registered providers (secrets reported as booleans).\n- `403`: Caller is not a member of the workspace.\n- `503`: Stored credentials cannot be read (encryption key missing or\n  changed)."
+      description: 'Return the (masked) agent providers registered for a workspace.
+
+
+        **Parameters**
+
+        - `workspace_id`: The workspace whose providers are requested.
+
+
+        **Responses**
+
+        - `200`: The registered providers (secrets reported as booleans).
+
+        - `403`: Caller is not a member of the workspace.
+
+        - `503`: Stored credentials cannot be read (encryption key missing or
+
+        changed).'
       operationId: list_providers_agent_workspaces__workspace_id__providers_get
       parameters:
       - name: workspace_id
@@ -45,7 +67,38 @@ paths:
       tags:
       - LLM Provider
       summary: Create Provider
-      description: "Register a new agent provider for a workspace.\n\nThe first provider registered (when none is active yet) becomes active\nautomatically; otherwise the new provider starts inactive and must be\nactivated explicitly.\n\n**Parameters**\n- `workspace_id`: The workspace to configure.\n- `form`: The provider to register.\n\n**Responses**\n- `201`: The created provider (masked).\n- `400`: Encryption is not configured, the selected model is invalid, or a\n  required provider credential is missing.\n- `403`: Caller is not a workspace owner or admin.\n- `409`: Another provider was activated concurrently; retry.\n- `503`: Stored credentials cannot be read (encryption key missing or\n  changed)."
+      description: 'Register a new agent provider for a workspace.
+
+
+        The first provider registered (when none is active yet) becomes active
+
+        automatically; otherwise the new provider starts inactive and must be
+
+        activated explicitly.
+
+
+        **Parameters**
+
+        - `workspace_id`: The workspace to configure.
+
+        - `form`: The provider to register.
+
+
+        **Responses**
+
+        - `201`: The created provider (masked).
+
+        - `400`: Encryption is not configured, the selected model is invalid, or a
+
+        required provider credential is missing.
+
+        - `403`: Caller is not a workspace owner or admin.
+
+        - `409`: Another provider was activated concurrently; retry.
+
+        - `503`: Stored credentials cannot be read (encryption key missing or
+
+        changed).'
       operationId: create_provider_agent_workspaces__workspace_id__providers_post
       parameters:
       - name: workspace_id
@@ -86,7 +139,25 @@ paths:
       tags:
       - LLM Provider
       summary: Activate Provider
-      description: "Make a registered provider the active one for a workspace.\n\nActivating a provider deactivates whichever provider was active before.\n\n**Responses**\n- `204`: No content. The provider is now active.\n- `403`: Caller is not a workspace owner or admin.\n- `404`: The provider does not exist in this workspace.\n- `409`: Another provider was activated concurrently; retry.\n- `503`: Stored credentials cannot be read (encryption key missing or\n  changed)."
+      description: 'Make a registered provider the active one for a workspace.
+
+
+        Activating a provider deactivates whichever provider was active before.
+
+
+        **Responses**
+
+        - `204`: No content. The provider is now active.
+
+        - `403`: Caller is not a workspace owner or admin.
+
+        - `404`: The provider does not exist in this workspace.
+
+        - `409`: Another provider was activated concurrently; retry.
+
+        - `503`: Stored credentials cannot be read (encryption key missing or
+
+        changed).'
       operationId: activate_provider_agent_workspaces__workspace_id__providers__config_id__activate_post
       parameters:
       - name: workspace_id
@@ -238,15 +309,6 @@ components:
         is stored so the UI can show a "configured" state without echoing it.
 
         ``selected_model`` is ``None`` for the Skore-managed "auto" routing.'
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -304,6 +366,15 @@ components:
         populate the dropdown without an extra request, and ``encryption_configured``
 
         tells the UI whether secret storage (and thus adding providers) is possible.'
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     AgentProviderConfigCreate:
       properties:
         name:

@@ -1,0 +1,9 @@
+generated: '2026-09-16'
+method: searched
+source: https://docs.skore.probabl.ai/stable/ ; https://api.skore.probabl.ai/openapi.json ; live response headers
+limit_count: 0
+limits: []
+headers: []
+note: No rate limits are documented in the skore docs or the Skore Hub OpenAPI (no 429 response declared). Live
+  responses on 2026-09-16 (GET /health 200, GET /identity/users/me 401) carried no X-RateLimit-*, RateLimit-* or
+  Retry-After headers. Honest zero.

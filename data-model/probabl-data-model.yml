@@ -1,0 +1,119 @@
+generated: '2026-09-16'
+method: derived
+source: https://api.skore.probabl.ai/openapi.json components.schemas + path hierarchy
+entities:
+- name: User
+  schema: UserProfileDto
+  domain: identity
+- name: Workspace
+  schema: Workspace
+  domain: identity
+  id: workspace_id (integer) + public_id (string)
+- name: WorkspaceMember
+  schema: WorkspaceMember
+  domain: identity
+- name: Invitation
+  schema: Invitation
+  domain: identity
+- name: APIKey
+  schema: UserAPIKey
+  domain: identity
+- name: Project
+  schema: Project
+  domain: projects
+  id: project_name within workspace_public_id
+- name: EstimatorReport
+  schema: EstimatorReport
+  domain: projects
+- name: CrossValidationReport
+  schema: CrossValidationReport
+  domain: projects
+- name: ComparisonReport
+  schema: ComparisonReport
+  domain: projects
+- name: ReportMetric
+  schema: ReportMetric
+  domain: projects
+- name: ReportMedia
+  schema: ReportMedia
+  domain: projects
+- name: ReportPickle
+  schema: ReportPickle
+  domain: projects
+- name: ReportEnvironment
+  schema: ReportEnvironment
+  domain: projects
+- name: Artifact
+  schema: ArtifactMetadata
+  domain: projects
+- name: ProjectGoal
+  schema: ProjectGoal
+  domain: projects
+- name: AgentProviderConfig
+  schema: AgentProviderEntryResponse
+  domain: agent
+relationships:
+- from: Workspace
+  to: WorkspaceMember
+  type: has_many
+  via: workspace_id
+- from: WorkspaceMember
+  to: User
+  type: belongs_to
+  via: user_id
+- from: Workspace
+  to: Invitation
+  type: has_many
+  via: workspace_id
+- from: User
+  to: APIKey
+  type: has_many
+  via: user_id
+- from: APIKey
+  to: Workspace
+  type: belongs_to
+  via: workspace_id
+- from: Workspace
+  to: Project
+  type: has_many
+  via: workspace_public_id
+- from: Project
+  to: EstimatorReport
+  type: has_many
+  via: project_name
+- from: Project
+  to: CrossValidationReport
+  type: has_many
+  via: project_name
+- from: Project
+  to: ComparisonReport
+  type: has_many
+  via: project_name
+- from: Project
+  to: Artifact
+  type: has_many
+  via: project_name
+- from: Project
+  to: ProjectGoal
+  type: has_many
+  via: project_name
+- from: EstimatorReport
+  to: ReportMetric
+  type: has_many
+  via: report id
+- from: EstimatorReport
+  to: ReportMedia
+  type: has_many
+  via: report id
+- from: EstimatorReport
+  to: ReportPickle
+  type: has_one
+  via: report id
+- from: EstimatorReport
+  to: ReportEnvironment
+  type: has_one
+  via: report id
+- from: Workspace
+  to: AgentProviderConfig
+  type: has_many
+  via: workspace_id

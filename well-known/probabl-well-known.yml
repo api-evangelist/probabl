@@ -1,0 +1,490 @@
+generated: '2026-09-16'
+method: probed
+hit_count: 0
+note: No provider-served discovery document on any probed host. skore.probabl.ai (S3/CloudFront SPA), status.probabl.ai
+  (Better Stack), skolar.probabl.ai and sklearn-central-mcp.probabl.workers.dev answer 200 for every path including
+  a random negative control, so those 200s are catch-alls. api.skore.probabl.ai returns 404 JSON for every path
+  including oauth-protected-resource. No WellKnown pointer emitted.
+hosts:
+- host: https://probabl.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/mcp.json
+    status: 404
+  soft_404_control:
+    path: /.well-known/probabl-negative-control-da52219d.json
+    status: 404
+    bytes: 361
+- host: https://www.probabl.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/mcp.json
+    status: 404
+  soft_404_control:
+    path: /.well-known/probabl-negative-control-da52219d.json
+    status: 404
+    bytes: 361
+- host: https://api.skore.probabl.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/mcp.json
+    status: 404
+  soft_404_control:
+    path: /.well-known/probabl-negative-control-da52219d.json
+    status: 404
+    bytes: 22
+- host: https://docs.skore.probabl.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/mcp.json
+    status: 404
+  soft_404_control:
+    path: /.well-known/probabl-negative-control-da52219d.json
+    status: 404
+    bytes: 222
+- host: https://skore.probabl.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    note: catch-all text/html body (1666 bytes) — not a document
+  - path: /.well-known/openid-configuration
+    status: 200
+    note: catch-all text/html body (1666 bytes) — not a document
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    note: catch-all text/html body (1666 bytes) — not a document
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    note: catch-all text/html body (1666 bytes) — not a document
+  - path: /.well-known/api-catalog
+    status: 200
+    note: catch-all text/html body (1666 bytes) — not a document
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    note: catch-all text/html body (1666 bytes) — not a document
+  - path: /.well-known/ucp.json
+    status: 200
+    note: catch-all text/html body (1666 bytes) — not a document
+  - path: /.well-known/acp.json
+    status: 200
+    note: catch-all text/html body (1666 bytes) — not a document
+  - path: /.well-known/aauth-resource.json
+    status: 200
+    note: catch-all text/html body (1666 bytes) — not a document
+  - path: /.well-known/apis.json
+    status: 200
+    note: catch-all text/html body (1666 bytes) — not a document
+  - path: /apis.json
+    status: 200
+    note: catch-all text/html body (1666 bytes) — not a document
+  - path: /apis.yml
+    status: 200
+    note: catch-all text/html body (1666 bytes) — not a document
+  - path: /.well-known/agent-card.json
+    status: 200
+    note: catch-all text/html body (1666 bytes) — not a document
+  - path: /.well-known/agent.json
+    status: 200
+    note: catch-all text/html body (1666 bytes) — not a document
+  - path: /.well-known/mcp.json
+    status: 200
+    note: catch-all text/html body (1666 bytes) — not a document
+  soft_404_control:
+    path: /.well-known/probabl-negative-control-da52219d.json
+    status: 200
+    bytes: 1666
+  path_echo_control: failed
+  hit_count: 0
+- host: https://status.probabl.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    note: catch-all text/html body (480504 bytes) — not a document
+  - path: /.well-known/openid-configuration
+    status: 200
+    note: catch-all text/html body (480504 bytes) — not a document
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    note: catch-all text/html body (480504 bytes) — not a document
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    note: catch-all text/html body (480504 bytes) — not a document
+  - path: /.well-known/api-catalog
+    status: 200
+    note: catch-all text/html body (480504 bytes) — not a document
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    note: catch-all text/html body (480504 bytes) — not a document
+  - path: /.well-known/ucp.json
+    status: 200
+    note: catch-all text/html body (480504 bytes) — not a document
+  - path: /.well-known/acp.json
+    status: 200
+    note: catch-all text/html body (480504 bytes) — not a document
+  - path: /.well-known/aauth-resource.json
+    status: 200
+    note: catch-all text/html body (480504 bytes) — not a document
+  - path: /.well-known/apis.json
+    status: 200
+    note: catch-all text/html body (480504 bytes) — not a document
+  - path: /apis.json
+    status: 200
+    note: catch-all text/html body (480504 bytes) — not a document
+  - path: /apis.yml
+    status: 200
+    note: catch-all text/html body (480504 bytes) — not a document
+  - path: /.well-known/agent-card.json
+    status: 200
+    note: catch-all text/html body (480504 bytes) — not a document
+  - path: /.well-known/agent.json
+    status: 200
+    note: catch-all text/html body (480504 bytes) — not a document
+  - path: /.well-known/mcp.json
+    status: 200
+    note: catch-all text/html body (480504 bytes) — not a document
+  soft_404_control:
+    path: /.well-known/probabl-negative-control-da52219d.json
+    status: 200
+    bytes: 480504
+  path_echo_control: failed
+  hit_count: 0
+- host: https://blog.probabl.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/mcp.json
+    status: 404
+  soft_404_control:
+    path: /.well-known/probabl-negative-control-da52219d.json
+    status: 404
+    bytes: 39913
+- host: https://scikit-learn-central.probabl.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/mcp.json
+    status: 404
+  soft_404_control:
+    path: /.well-known/probabl-negative-control-da52219d.json
+    status: 404
+    bytes: 9379
+- host: https://sklearn-central-mcp.probabl.workers.dev
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    note: catch-all text/plain body (55 bytes) — not a document
+  - path: /.well-known/openid-configuration
+    status: 200
+    note: catch-all text/plain body (55 bytes) — not a document
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    note: catch-all text/plain body (55 bytes) — not a document
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    note: catch-all text/plain body (55 bytes) — not a document
+  - path: /.well-known/api-catalog
+    status: 200
+    note: catch-all text/plain body (55 bytes) — not a document
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    note: catch-all text/plain body (55 bytes) — not a document
+  - path: /.well-known/ucp.json
+    status: 200
+    note: catch-all text/plain body (55 bytes) — not a document
+  - path: /.well-known/acp.json
+    status: 200
+    note: catch-all text/plain body (55 bytes) — not a document
+  - path: /.well-known/aauth-resource.json
+    status: 200
+    note: catch-all text/plain body (55 bytes) — not a document
+  - path: /.well-known/apis.json
+    status: 200
+    note: catch-all text/plain body (55 bytes) — not a document
+  - path: /apis.json
+    status: 200
+    note: catch-all text/plain body (55 bytes) — not a document
+  - path: /apis.yml
+    status: 200
+    note: catch-all text/plain body (55 bytes) — not a document
+  - path: /.well-known/agent-card.json
+    status: 200
+    note: catch-all text/plain body (55 bytes) — not a document
+  - path: /.well-known/agent.json
+    status: 200
+    note: catch-all text/plain body (55 bytes) — not a document
+  - path: /.well-known/mcp.json
+    status: 200
+    note: catch-all text/plain body (55 bytes) — not a document
+  soft_404_control:
+    path: /.well-known/probabl-negative-control-da52219d.json
+    status: 200
+    bytes: 55
+  path_echo_control: failed
+  hit_count: 0
+- host: https://skolar.probabl.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    note: catch-all text/html body (4633 bytes) — not a document
+  - path: /.well-known/openid-configuration
+    status: 200
+    note: catch-all text/html body (4633 bytes) — not a document
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    note: catch-all text/html body (4633 bytes) — not a document
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    note: catch-all text/html body (4633 bytes) — not a document
+  - path: /.well-known/api-catalog
+    status: 200
+    note: catch-all text/html body (4633 bytes) — not a document
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    note: catch-all text/html body (4633 bytes) — not a document
+  - path: /.well-known/ucp.json
+    status: 200
+    note: catch-all text/html body (4633 bytes) — not a document
+  - path: /.well-known/acp.json
+    status: 200
+    note: catch-all text/html body (4633 bytes) — not a document
+  - path: /.well-known/aauth-resource.json
+    status: 200
+    note: catch-all text/html body (4633 bytes) — not a document
+  - path: /.well-known/apis.json
+    status: 200
+    note: catch-all text/html body (4633 bytes) — not a document
+  - path: /apis.json
+    status: 200
+    note: catch-all text/html body (4633 bytes) — not a document
+  - path: /apis.yml
+    status: 200
+    note: catch-all text/html body (4633 bytes) — not a document
+  - path: /.well-known/agent-card.json
+    status: 200
+    note: catch-all text/html body (4633 bytes) — not a document
+  - path: /.well-known/agent.json
+    status: 200
+    note: catch-all text/html body (4633 bytes) — not a document
+  - path: /.well-known/mcp.json
+    status: 200
+    note: catch-all text/html body (4633 bytes) — not a document
+  soft_404_control:
+    path: /.well-known/probabl-negative-control-da52219d.json
+    status: 200
+    bytes: 4633
+  path_echo_control: failed
+  hit_count: 0
+- host: https://join.probabl.ai
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 200
+    note: 'vendor surface: Teamtailor careers-site linkset (jobs.json feed) — see vendor_surfaces'
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/ucp.json
+    status: 404
+  - path: /.well-known/acp.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+  - path: /.well-known/apis.json
+    status: 404
+  - path: /apis.json
+    status: 404
+  - path: /apis.yml
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/mcp.json
+    status: 404
+  soft_404_control:
+    path: /.well-known/probabl-negative-control-da52219d.json
+    status: 404
+    bytes: 31576
+vendor_surfaces:
+- host: https://join.probabl.ai
+  operator: Teamtailor (CNAME ext.teamtailor.com)
+  path: /.well-known/api-catalog
+  status: 200
+  content_type: application/linkset+json
+  body:
+    linkset:
+    - anchor: https://join.probabl.ai/jobs
+      service-desc:
+      - href: https://join.probabl.ai/jobs.json
+        type: application/feed+json
+      - href: https://join.probabl.ai/jobs.md
+        type: text/markdown
+      service-doc:
+      - href: https://docs.teamtailor.com/
+  note: Platform-generated by the careers-site vendor for a jobs feed; not a Probabl API catalog, so not credited.

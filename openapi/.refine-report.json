@@ -1,0 +1,58 @@
+{
+  "provider": "probabl",
+  "sources": [
+    "_original/probabl-skore-hub-openapi.json"
+  ],
+  "outputs": [
+    "probabl-anthropic-compatible-agent-api-openapi.yml",
+    "probabl-health-api-openapi.yml",
+    "probabl-llm-provider-api-openapi.yml",
+    "probabl-liveness-api-openapi.yml",
+    "probabl-openai-compatible-agent-api-openapi.yml",
+    "probabl-readiness-api-openapi.yml",
+    "probabl-identity-api-openapi.yml",
+    "probabl-projects-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "probabl-skore-hub-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "probabl-skore-hub-openapi.json: tagged paths GET /health -> Health",
+    "probabl-skore-hub-openapi.json: tagged paths GET /readiness -> Readiness",
+    "probabl-skore-hub-openapi.json: tagged paths GET /liveness -> Liveness",
+    "probabl-skore-hub-openapi.json: declared missing tag: Admin",
+    "probabl-skore-hub-openapi.json: declared missing tag: Anthropic Compatible Agent",
+    "probabl-skore-hub-openapi.json: declared missing tag: Artifacts",
+    "probabl-skore-hub-openapi.json: declared missing tag: Comparisons",
+    "probabl-skore-hub-openapi.json: declared missing tag: CrossValidationReport",
+    "probabl-skore-hub-openapi.json: declared missing tag: EstimatorReport",
+    "probabl-skore-hub-openapi.json: declared missing tag: Health",
+    "probabl-skore-hub-openapi.json: declared missing tag: LLM Provider",
+    "probabl-skore-hub-openapi.json: declared missing tag: Liveness",
+    "probabl-skore-hub-openapi.json: declared missing tag: OAuth",
+    "probabl-skore-hub-openapi.json: declared missing tag: OAuth Device",
+    "probabl-skore-hub-openapi.json: declared missing tag: OpenAI Compatible Agent",
+    "probabl-skore-hub-openapi.json: declared missing tag: ProjectGoals",
+    "probabl-skore-hub-openapi.json: declared missing tag: Projects",
+    "probabl-skore-hub-openapi.json: declared missing tag: Readiness",
+    "probabl-skore-hub-openapi.json: declared missing tag: Report",
+    "probabl-skore-hub-openapi.json: declared missing tag: Workspace",
+    "probabl-skore-hub-openapi.json: declared missing tag: admin",
+    "probabl-skore-hub-openapi.json: declared missing tag: identity",
+    "probabl-skore-hub-openapi.json: declared missing tag: projects",
+    "probabl-skore-hub-openapi.json: multi-axis tagging (20 tags, 8 first tags, 1.76x duplication over 67 operations) \u2014 split on first tag, 49 operations narrowed",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "probabl-anthropic-compatible-agent-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "probabl-health-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "probabl-identity-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "probabl-liveness-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "probabl-llm-provider-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "probabl-openai-compatible-agent-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "probabl-projects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "probabl-readiness-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

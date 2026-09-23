@@ -1,0 +1,30 @@
+generated: '2026-09-16'
+method: derived
+source: openapi/*.yml responses + live probe of https://api.skore.probabl.ai
+format: fastapi-detail
+note: 'Responses are application/json {"detail": ...}, not RFC 9457 application/problem+json. No public error reference
+  page was found.'
+problems:
+- status: 401
+  title: Unauthorized
+  body: '{"detail":"Unauthorized"}'
+  evidence: 'observed: GET https://api.skore.probabl.ai/identity/users/me -> 401 (2026-09-16)'
+  remediation: 'Send X-API-Key (SKORE_HUB_API_KEY) or Authorization: Bearer <token>.'
+- status: 404
+  title: Not Found
+  source_operation: openapi/probabl-identity-api-openapi.yml#get_workspace_identity_workspaces__workspace_id__get
+  body: '{"detail":"Not Found"} (unknown routes)'
+- status: 405
+  title: Method Not Allowed
+  evidence: 'observed: GET https://api.skore.probabl.ai/mcp -> 405'
+- status: 422
+  title: Validation Error
+  schema: HTTPValidationError
+  shape:
+    detail:
+    - loc: array
+      msg: string
+      type: string
+      input: any
+      ctx: object
+  source_operation: 66 of 67 operations declare 422

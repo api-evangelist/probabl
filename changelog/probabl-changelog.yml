@@ -1,0 +1,75 @@
+generated: '2026-09-16'
+method: searched
+source:
+- https://github.com/probabl-ai/skore/releases
+- https://docs.skore.probabl.ai/stable/whatsnew/index.html
+- https://pypi.org/pypi/skore/json
+scheme: semver 0.x, tags skore/<version> and skore-hub-project/<version>; monthly "What's new" digest in docs
+current_version: 0.26.0
+note: skore 0.26.0 is on PyPI (2026-09-16) but its GitHub release was not yet published at probe time. The Hub REST
+  API itself carries no public changelog.
+entries:
+- version: 0.26.0
+  date: '2026-09-16'
+  source: pypi
+  breaking: null
+  highlights:
+  - Published to PyPI; release notes pending
+- version: 0.25.0
+  date: '2026-08-19'
+  breaking: false
+  highlights:
+  - 'plugins: module to infer requirements'
+  - 'hub report: new environment artifact'
+  - SKD008 correlated-features pitfall example
+- version: 0.24.1
+  date: '2026-08-12'
+  breaking: false
+  highlights:
+  - 'hub: send CheckSummaryDisplay info'
+  - 'hub: stop uploading metric position'
+  - regression multioutput average metric fix
+- version: 0.24.0
+  date: '2026-08-11'
+  breaking: true
+  highlights:
+  - remove deprecated _hash property
+  - report.id typed
+  - get_preprocessed_X preserves column names
+- version: What's new — August 2026
+  date: 2026-08
+  breaking: true
+  highlights:
+  - local project storage moved from diskcache/SQLite to human-readable files
+  - project synchronisation incl. local <-> Skore Hub
+  - baseline checks SKD009/SKD010 reworked
+- version: 0.23.1
+  date: '2026-07-10'
+  breaking: false
+  highlights:
+  - summarize gathers failed metrics instead of raising
+  - remove hub code for skore <= 0.14
+- version: 0.23.0
+  date: '2026-07-06'
+  breaking: true
+  highlights:
+  - 'reports: cache-related methods made private'
+  - summarize().frame() now long-format
+- version: 0.22.0
+  date: '2026-06-23'
+  breaking: true
+  highlights:
+  - 'checks: Not Applicable section added to checks summary'
+  - disambiguate metrics with same name
+- version: 0.21.0
+  date: '2026-06-18'
+  breaking: false
+  highlights:
+  - 'hub: send all metrics including custom'
+  - reprs for all Displays
+- version: 0.20.0
+  date: '2026-06-16'
+  breaking: false
+  highlights:
+  - MLflow backend data de-duplication
+  - checks summary in getting started

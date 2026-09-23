@@ -1,0 +1,35 @@
+# Front Door AI Index — probabl — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: probabl
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: probabl.ai
+  final_host: www.probabl.ai
+  ownership: own
+  owner: probabl
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 26
+  host_score: 26
+  density: 37.46
+  words: 694
+  tiers:
+    agentic: 3
+    core: 20
+    model: 3
+  ambiguous: 14
+  top_terms:
+    AI: 13
+    agent: 12
+    ML: 4
+    Claude: 2
+    agentic: 2
+    foundation model: 2
+    AI agent: 1
+    ChatGPT: 1
+    automation: 1
+    machine learning: 1
+    smart: 1

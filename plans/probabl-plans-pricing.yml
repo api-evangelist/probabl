@@ -1,0 +1,14 @@
+generated: '2026-09-16'
+method: searched
+source: https://www.probabl.ai/
+plan_count: 0
+plans: []
+evidence:
+- url: https://www.probabl.ai/pricing
+  status: 404
+- url: https://www.probabl.ai/pricing/
+  status: 404
+- url: https://www.probabl.ai/contact/
+  status: 200
+note: Probabl publishes no pricing or plan tiers for Skore Hub; the site links Contact only. Skore (the library)
+  is open source; Skore Hub use is governed by the Skore EULA (https://www.probabl.ai/legal/skore-eula/).

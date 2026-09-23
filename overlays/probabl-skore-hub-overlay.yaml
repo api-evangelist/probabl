@@ -1,0 +1,40 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Skore Hub
+  version: 1.0.0
+extends: openapi/_original/probabl-skore-hub-openapi.json
+actions:
+- target: $
+  update:
+    servers:
+    - url: https://api.skore.probabl.ai
+      description: Skore Hub production (default hub URI in skore)
+- target: $.components
+  update:
+    securitySchemes:
+      SkoreHubAPIKey:
+        type: apiKey
+        in: header
+        name: X-API-Key
+        description: Workspace API key (SKORE_HUB_API_KEY), as sent by the skore client.
+      SkoreHubBearer:
+        type: http
+        scheme: bearer
+        description: Access token from the /identity/oauth login or device flow.
+- target: $
+  update:
+    security:
+    - SkoreHubAPIKey: []
+    - SkoreHubBearer: []
+- target: $.info
+  update:
+    contact:
+      name: Probabl
+      url: https://www.probabl.ai/contact/
+    termsOfService: https://www.probabl.ai/legal/skore-eula/
+    x-apievangelist-provider: probabl
+    x-apievangelist-notes: securitySchemes and servers are absent from the published spec; added from skore/skore-cli
+      source.
+- target: $.paths['/health','/readiness','/liveness'].get
+  update:
+    security: []

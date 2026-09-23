@@ -1,0 +1,88 @@
+{
+  "jsonrpc": "2.0",
+  "id": 2,
+  "result": {
+    "tools": [
+      {
+        "name": "search_use_cases",
+        "description": "Search the scikit-learn Central use case library. Returns ranked matches with metadata. Use this when the user describes a machine learning problem, application field, problem type, or data type they want to implement in Python.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "Free-text description of the ML problem (e.g. 'fraud detection for banking', 'predict customer churn')"
+            },
+            "application_field": {
+              "type": "string",
+              "description": "Filter by application field. Valid values: e-commerce, insurance, real-estate"
+            },
+            "problem_type": {
+              "type": "string",
+              "description": "Filter by problem type. Valid values: classification, regression"
+            },
+            "data_type": {
+              "type": "string",
+              "description": "Filter by data type. Valid values: tabular, text"
+            },
+            "difficulty": {
+              "type": "string",
+              "enum": [
+                "beginner",
+                "intermediate",
+                "advanced"
+              ],
+              "description": "Filter by difficulty level"
+            },
+            "limit": {
+              "type": "integer",
+              "description": "Maximum results to return (default 3, max 10)",
+              "default": 3
+            }
+          }
+        }
+      },
+      {
+        "name": "get_use_case",
+        "description": "Get full details and the complete runnable Python source code for a specific use case. Call this after search_use_cases to retrieve the code example.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "UUID or slug of the use case (from search_use_cases results)"
+            }
+          },
+          "required": [
+            "id"
+          ]
+        }
+      },
+      {
+        "name": "list_packages",
+        "description": "List packages in the scikit-learn ecosystem catalog with descriptions and tags. Use when the user asks what libraries are available for a task, or what a specific package (e.g. skrub, skore) does.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "tag": {
+              "type": "string",
+              "description": "Filter by tag (e.g. 'time-series', 'explainability', 'categorical-encoding', 'evaluation')"
+            },
+            "query": {
+              "type": "string",
+              "description": "Free-text filter against package name and description"
+            }
+          }
+        }
+      },
+      {
+        "name": "list_taxonomy",
+        "description": "Returns all valid taxonomy values: application fields, problem types, data types, and package IDs. Call this first to discover what filter values are available before calling search_use_cases.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {}
+        }
+      }
+    ]
+  }
+}

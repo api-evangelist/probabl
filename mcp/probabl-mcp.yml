@@ -1,0 +1,91 @@
+generated: '2026-09-16'
+method: searched
+status: published
+deployment:
+  mode: remote
+  endpoint: https://api.skore.probabl.ai/mcp
+  auth: api-key
+  verified: probed
+servers:
+- name: skore
+  product: Skore Hub
+  transport: streamable-http
+  url: https://api.skore.probabl.ai/mcp
+  server_version: 3.4.6
+  protocol_version: '2025-06-18'
+  framework: FastMCP
+  deployment:
+    mode: remote
+    endpoint: https://api.skore.probabl.ai/mcp
+    auth: api-key
+    verified: probed
+  auth_detail: 'initialize and tools/list answered anonymously (200); skore-cli configures clients with requestHeaders
+    {"X-API-Key": <workspace key>} for tool calls. Tool calls were not exercised.'
+  self_hosted: https://github.com/probabl-ai/charts (SKH__AGENT__MCP_ENABLED); tenant hosts follow <tenant>.api.skore.probabl.ai
+  capabilities:
+  - tools (listChanged)
+  - prompts (empty)
+  - resources (empty)
+  - logging
+  - tasks
+  - extension io.modelcontextprotocol/ui
+  evidence:
+    url: https://api.skore.probabl.ai/mcp
+    method: POST initialize / tools/list
+    http_status: 200
+    content_type: application/json
+    fetched: '2026-09-16'
+    get_status: 405
+    config_source: https://github.com/probabl-ai/skore-cli/blob/main/src/skore_cli/_agents.py
+  tools_file: mcp/probabl-skore-hub-mcp-tools.json
+  tools:
+  - name: skore_agent
+    description: Run one turn of the Skore ML methodology and return the next actions.
+    input:
+    - prompt
+    - session_id
+    - results
+- name: sklearn-central
+  product: scikit-learn Central
+  status_label: EXPERIMENTAL
+  transport: streamable-http
+  url: https://sklearn-central-mcp.probabl.workers.dev/mcp
+  server_version: 1.0.0
+  protocol_version: '2024-11-05'
+  deployment:
+    mode: remote
+    endpoint: https://sklearn-central-mcp.probabl.workers.dev/mcp
+    auth: none
+    verified: probed
+  ownership: 'Different domain justified: the workers.dev subdomain "probabl" is Probabl''s Cloudflare account;
+    the server source and this URL are published in probabl-ai/scikit-learn-central/mcp/README.md.'
+  evidence:
+    url: https://sklearn-central-mcp.probabl.workers.dev/mcp
+    method: POST initialize / tools/list
+    http_status: 200
+    fetched: '2026-09-16'
+    docs: https://github.com/probabl-ai/scikit-learn-central/blob/main/mcp/README.md
+  tools_file: mcp/probabl-sklearn-central-mcp-tools.json
+  tools:
+  - name: search_use_cases
+    description: Search the scikit-learn Central use case library.
+    input:
+    - query
+    - application_field
+    - problem_type
+    - data_type
+    - difficulty
+    - limit
+  - name: get_use_case
+    description: Get full details and the complete runnable Python source code for a specific use case.
+    input:
+    - id
+  - name: list_packages
+    description: List packages in the scikit-learn ecosystem catalog with descriptions and tags.
+    input:
+    - tag
+    - query
+  - name: list_taxonomy
+    description: 'Returns all valid taxonomy values: application fields, problem types, data types, and package
+      IDs.'
+    input: []
