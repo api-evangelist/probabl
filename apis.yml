@@ -44,8 +44,8 @@ created: '2026-08-17'
 modified: '2026-09-16'
 tags:
 - Company
-- Open-Source
-- Machine-Learning
+- Open Source
+- Machine Learning
 - Data Science
 - scikit-learn
 - MLOps
@@ -68,6 +68,8 @@ tags_raw:
 - artificial-intelligence
 - python
 - france
+- Open-Source
+- Machine-Learning
 apis:
 - aid: probabl:probabl-anthropic-compatible-agent-api
   name: Probabl Anthropic Compatible Agent API
