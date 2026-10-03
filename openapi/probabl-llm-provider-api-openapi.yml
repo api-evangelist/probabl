@@ -299,66 +299,6 @@ components:
       - msg
       - type
       title: ValidationError
-    AgentProviderConfigCreate:
-      properties:
-        name:
-          type: string
-          maxLength: 150
-          minLength: 1
-          title: Name
-        provider:
-          type: string
-          enum:
-          - skore
-          - anthropic
-          - bedrock
-          title: Provider
-        selected_model:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Selected Model
-        anthropic_api_key:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Anthropic Api Key
-        aws_region:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Aws Region
-        bedrock_role_arn:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Bedrock Role Arn
-        bedrock_external_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Bedrock External Id
-        aws_access_key_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Aws Access Key Id
-        aws_secret_access_key:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Aws Secret Access Key
-      type: object
-      required:
-      - name
-      - provider
-      title: AgentProviderConfigCreate
-      description: 'Payload to register a new provider for a workspace.
-
-
-        Providers are add/remove only (no edit), so secrets are supplied in full at
-
-        creation time; an empty/omitted secret simply means "not set".'
     HTTPValidationError:
       properties:
         detail:
@@ -435,3 +375,63 @@ components:
         is stored so the UI can show a "configured" state without echoing it.
 
         ``selected_model`` is ``None`` for the Skore-managed "auto" routing.'
+    AgentProviderConfigCreate:
+      properties:
+        name:
+          type: string
+          maxLength: 150
+          minLength: 1
+          title: Name
+        provider:
+          type: string
+          enum:
+          - skore
+          - anthropic
+          - bedrock
+          title: Provider
+        selected_model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Selected Model
+        anthropic_api_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Anthropic Api Key
+        aws_region:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Aws Region
+        bedrock_role_arn:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Bedrock Role Arn
+        bedrock_external_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Bedrock External Id
+        aws_access_key_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Aws Access Key Id
+        aws_secret_access_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Aws Secret Access Key
+      type: object
+      required:
+      - name
+      - provider
+      title: AgentProviderConfigCreate
+      description: 'Payload to register a new provider for a workspace.
+
+
+        Providers are add/remove only (no edit), so secrets are supplied in full at
+
+        creation time; an empty/omitted secret simply means "not set".'
