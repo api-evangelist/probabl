@@ -242,72 +242,66 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    AgentProvidersResponse:
+    AgentProviderConfigCreate:
       properties:
-        providers:
-          items:
-            $ref: '#/components/schemas/AgentProviderEntryResponse'
-          type: array
-          title: Providers
-        available_models:
-          additionalProperties:
-            items:
-              type: string
-            type: array
-          type: object
-          title: Available Models
-        encryption_configured:
-          type: boolean
-          title: Encryption Configured
+        name:
+          type: string
+          maxLength: 150
+          minLength: 1
+          title: Name
+        provider:
+          type: string
+          enum:
+          - skore
+          - anthropic
+          - bedrock
+          title: Provider
+        selected_model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Selected Model
+        anthropic_api_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Anthropic Api Key
+        aws_region:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Aws Region
+        bedrock_role_arn:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Bedrock Role Arn
+        bedrock_external_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Bedrock External Id
+        aws_access_key_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Aws Access Key Id
+        aws_secret_access_key:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Aws Secret Access Key
       type: object
       required:
-      - providers
-      - available_models
-      - encryption_configured
-      title: AgentProvidersResponse
-      description: 'The workspace''s registered providers plus UI helper metadata.
+      - name
+      - provider
+      title: AgentProviderConfigCreate
+      description: 'Payload to register a new provider for a workspace.
 
 
-        ``available_models`` carries the per-provider selectable lists so the UI can
+        Providers are add/remove only (no edit), so secrets are supplied in full at
 
-        populate the dropdown without an extra request, and ``encryption_configured``
-
-        tells the UI whether secret storage (and thus adding providers) is possible.'
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
+        creation time; an empty/omitted secret simply means "not set".'
     AgentProviderEntryResponse:
       properties:
         id:
@@ -375,63 +369,69 @@ components:
         is stored so the UI can show a "configured" state without echoing it.
 
         ``selected_model`` is ``None`` for the Skore-managed "auto" routing.'
-    AgentProviderConfigCreate:
+    HTTPValidationError:
       properties:
-        name:
-          type: string
-          maxLength: 150
-          minLength: 1
-          title: Name
-        provider:
-          type: string
-          enum:
-          - skore
-          - anthropic
-          - bedrock
-          title: Provider
-        selected_model:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Selected Model
-        anthropic_api_key:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Anthropic Api Key
-        aws_region:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Aws Region
-        bedrock_role_arn:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Bedrock Role Arn
-        bedrock_external_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Bedrock External Id
-        aws_access_key_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Aws Access Key Id
-        aws_secret_access_key:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Aws Secret Access Key
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    AgentProvidersResponse:
+      properties:
+        providers:
+          items:
+            $ref: '#/components/schemas/AgentProviderEntryResponse'
+          type: array
+          title: Providers
+        available_models:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          type: object
+          title: Available Models
+        encryption_configured:
+          type: boolean
+          title: Encryption Configured
       type: object
       required:
-      - name
-      - provider
-      title: AgentProviderConfigCreate
-      description: 'Payload to register a new provider for a workspace.
+      - providers
+      - available_models
+      - encryption_configured
+      title: AgentProvidersResponse
+      description: 'The workspace''s registered providers plus UI helper metadata.
 
 
-        Providers are add/remove only (no edit), so secrets are supplied in full at
+        ``available_models`` carries the per-provider selectable lists so the UI can
 
-        creation time; an empty/omitted secret simply means "not set".'
+        populate the dropdown without an extra request, and ``encryption_configured``
+
+        tells the UI whether secret storage (and thus adding providers) is possible.'
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
