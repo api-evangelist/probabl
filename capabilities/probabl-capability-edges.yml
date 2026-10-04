@@ -1,0 +1,37 @@
+slug: probabl
+provider: Probabl
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Projects
+  spec_file: probabl-projects-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.78
+  evidence: POST .../estimator-reports  Create; POST .../cross-validation-reports  Create; schemas CreateCrossValidationReportParameters,
+    ReportMetric, SplitterInfo, ProjectGoal
+  reason: Projects here are containers for machine-learning estimator and cross-validation reports, metrics
+    and model goals — ML experiment tracking and model lifecycle (MLOps). Maps to Artificial Intelligence
+    Management rather than generic project management.
+- tag: Identity
+  spec_file: probabl-identity-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.72
+  evidence: GET /identity/oauth/login  Oauth Login; POST /identity/oauth/token/refresh  Refresh Token;
+    SetMemberRoleRequest, WorkspaceRole, UserAPIKey, Invitation
+  reason: Operations cover OAuth login/logout, token refresh, device authorisation, workspace membership
+    roles, invitations and API keys — federation, authentication and access control. Maps to Identity
+    & Access Management; some ambiguity versus developer credential management within the platform.
