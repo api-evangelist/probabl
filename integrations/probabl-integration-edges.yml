@@ -1,0 +1,22 @@
+edges:
+- partner_name: OpenAI
+  partner: openai
+  partner_match: domain
+  type: contract
+  channel: provider-built
+  relationship: compatible
+  direction: provider-built
+  evidence: https://github.com/api-evangelist/probabl/blob/main/openapi/probabl-openai-compatible-agent-api-openapi.yml#L3
+  contract_reference:
+    repo: probabl
+    spec_file: probabl-openai-compatible-agent-api-openapi.yml
+    property: description
+    value: OpenAI-compatible
+    note: 'probabl declares OpenAI compatibility: ''title: Skore Hub OpenAI Compatible Agent API'''
+    detected_by: sweep-model-routing.py
+    detected: '2026-10-13'
+  detected_by: sweep-model-routing.py
+  first_seen: '2026-10-13'
+generated: '2026-10-13'
+method: searched
+checked: []
