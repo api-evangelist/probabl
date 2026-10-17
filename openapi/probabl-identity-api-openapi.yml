@@ -1392,237 +1392,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    UpdateAPIKeyPayload:
-      properties:
-        name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Name
-        regenerate_api_key:
-          type: boolean
-          title: Regenerate Api Key
-          default: false
-      type: object
-      title: UpdateAPIKeyPayload
-      description: API key update payload.
-    LoginResponse:
-      properties:
-        authorization_url:
-          type: string
-          title: Authorization Url
-      type: object
-      required:
-      - authorization_url
-      title: LoginResponse
-      description: "Represents a response containing the authorization URL.\n\nAttributes\n----------\nauthorization_url : str\n    The URL where the user should be redirected to complete the login."
-    SetMemberRoleRequest:
-      properties:
-        role:
-          $ref: '#/components/schemas/WorkspaceRole'
-      type: object
-      required:
-      - role
-      title: SetMemberRoleRequest
-      description: Set a member's role; permissions are replaced from the static role map.
-    UserAPIKey:
-      properties:
-        id:
-          type: integer
-          title: Id
-        user_id:
-          type: string
-          title: User Id
-        workspace_id:
-          type: integer
-          title: Workspace Id
-        name:
-          anyOf:
-          - type: string
-            maxLength: 150
-          - type: 'null'
-          title: Name
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-        updated_at:
-          type: string
-          format: date-time
-          title: Updated At
-        expires_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Expires At
-      type: object
-      required:
-      - id
-      - user_id
-      - workspace_id
-      - created_at
-      - updated_at
-      title: UserAPIKey
-      description: 'User API key.
-
-
-        Allows users to access the Skore Hub API without an IDP bearer token.
-
-
-        The API key itself (hashed version) is not accessible; users must copy
-
-        and save it upon generation.
-
-
-        If the key is lost, the user must generate a new key hash.'
-    Permission:
-      type: string
-      enum:
-      - create:project
-      - read:project
-      - update:project
-      - delete:project
-      - create:invitation
-      - read:invitation
-      - delete:invitation
-      title: Permission
-      description: 'A permission.
-
-
-        The actual ground-truth permissions are the ones stored in the
-
-        database; this type is used to avoid typos in permissions.'
-    Token:
-      properties:
-        access_token:
-          type: string
-          title: Access Token
-        expires_in:
-          type: integer
-          title: Expires In
-        id_token:
-          type: string
-          title: Id Token
-        token_type:
-          type: string
-          title: Token Type
-        scope:
-          type: string
-          title: Scope
-        expires_at:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Expires At
-        refresh_token:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Refresh Token
-      type: object
-      required:
-      - access_token
-      - expires_in
-      - id_token
-      - token_type
-      - scope
-      title: Token
-      description: "Represents an access token and related details obtained during authentication.\n\nAttributes\n----------\naccess_token : str\n    The token used to access protected resources.\nexpires_in : int\n    The duration (in seconds) until the token expires.\nid_token : str\n    The token containing identity claims for the authenticated user.\ntoken_type : str\n    The type of token (e.g., \"Bearer\").\nscope : str\n    The scope of permissions granted by the token.\nrefresh_token : str | None, optional\n    The token used to obtain a new access token without re-authenticating.\nexpires_at: datetime | None, optional\n    The access_token expiration timestamp."
-    WorkspaceMember:
-      properties:
-        workspace_id:
-          type: integer
-          title: Workspace Id
-        user_id:
-          type: string
-          title: User Id
-        role:
-          $ref: '#/components/schemas/WorkspaceRole'
-        invited_by:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Invited By
-      type: object
-      required:
-      - workspace_id
-      - user_id
-      - role
-      title: WorkspaceMember
-      description: Workspace member.
-    WorkspaceMembershipInfo:
-      properties:
-        workspace_id:
-          type: integer
-          title: Workspace Id
-        public_id:
-          type: string
-          maxLength: 64
-          title: Public Id
-        role:
-          $ref: '#/components/schemas/WorkspaceRole'
-        permissions:
-          items:
-            type: string
-          type: array
-          title: Permissions
-      type: object
-      required:
-      - workspace_id
-      - public_id
-      - role
-      - permissions
-      title: WorkspaceMembershipInfo
-      description: One workspace membership with role and effective permission names.
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-        input:
-          title: Input
-        ctx:
-          type: object
-          title: Context
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    Body_create_workspace_invitation_identity_workspaces__workspace_id__invitations_post:
-      properties:
-        email:
-          type: string
-          format: email
-          title: Email
-        role:
-          $ref: '#/components/schemas/WorkspaceRole'
-      type: object
-      required:
-      - email
-      - role
-      title: Body_create_workspace_invitation_identity_workspaces__workspace_id__invitations_post
     UserProfileDto:
       properties:
         id:
@@ -1671,40 +1440,38 @@ components:
       - workspace_memberships
       title: UserProfileDto
       description: 'Public user profile: identity fields and per-workspace role and permissions.'
-    CreateWorkspaceInvitationLinkRequest:
+    CreateAPIKeyResponse:
       properties:
-        role:
-          $ref: '#/components/schemas/WorkspaceRole'
-      type: object
-      required:
-      - role
-      title: CreateWorkspaceInvitationLinkRequest
-      description: Create a shareable workspace invitation URL.
-    WorkspaceRole:
-      type: string
-      enum:
-      - owner
-      - contributor
-      - reader
-      title: WorkspaceRole
-      description: Role of a user within a workspace.
-    SortOrder:
-      type: string
-      enum:
-      - ASC
-      - DESC
-      title: SortOrder
-      description: Sort order.
-    CreateWorkspaceResponse:
-      properties:
-        id:
+        api_key_id:
           type: integer
-          title: Id
+          title: Api Key Id
+        api_key:
+          type: string
+          title: Api Key
       type: object
       required:
-      - id
-      title: CreateWorkspaceResponse
-      description: Workspace creation response.
+      - api_key_id
+      - api_key
+      title: CreateAPIKeyResponse
+      description: Response of "create API key" endpoint.
+    InitiateDeviceAuthResponse:
+      properties:
+        authorization_url:
+          type: string
+          title: Authorization Url
+        device_code:
+          type: string
+          title: Device Code
+        user_code:
+          type: string
+          title: User Code
+      type: object
+      required:
+      - authorization_url
+      - device_code
+      - user_code
+      title: InitiateDeviceAuthResponse
+      description: Response with device authentication details.
     Workspace:
       properties:
         id:
@@ -1762,6 +1529,28 @@ components:
         `updated_at` (`datetime`): Timestamp of the last update to the workspace.
 
         `deleted_at` (`datetime`): Timestamp when the workspace was deleted (if applicable).'
+    CreateWorkspaceRequest:
+      properties:
+        public_id:
+          type: string
+          maxLength: 64
+          minLength: 1
+          title: Public Id
+      type: object
+      required:
+      - public_id
+      title: CreateWorkspaceRequest
+      description: Workspace creation request.
+    WorkspaceInvitationLinkResponse:
+      properties:
+        url:
+          type: string
+          title: Url
+      type: object
+      required:
+      - url
+      title: WorkspaceInvitationLinkResponse
+      description: Shareable invitation URL (same acceptance path as email invitations).
     RefreshTokenRequest:
       properties:
         refresh_token:
@@ -1777,129 +1566,23 @@ components:
       type: object
       title: RefreshTokenRequest
       description: "Represents a request to refresh an access token.\n\nThe access token is refreshed using the refresh token provided during login.\nOnce a new access token is issued, the previous one becomes invalid immediately.\n\nAttributes\n----------\nrefresh_token : str\n    The refresh token obtained from the most recent authorization code exchange\n    with the IDP.\nsuccess_uri : str | None, optional\n    The URI to redirect the user to after a successful token refresh."
-    WorkspaceInvitationLinkResponse:
-      properties:
-        url:
-          type: string
-          title: Url
-      type: object
-      required:
-      - url
-      title: WorkspaceInvitationLinkResponse
-      description: Shareable invitation URL (same acceptance path as email invitations).
-    Body_oauth_device_callback_validation_identity_oauth_device_callback_post:
-      properties:
-        state:
-          type: string
-          title: State
-        user_code:
-          type: string
-          title: User Code
-      type: object
-      required:
-      - state
-      - user_code
-      title: Body_oauth_device_callback_validation_identity_oauth_device_callback_post
-    CreateAPIKeyPayload:
-      properties:
-        name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Name
-        permissions:
-          items:
-            $ref: '#/components/schemas/Permission'
-          type: array
-          title: Permissions
-        workspace_id:
-          type: integer
-          title: Workspace Id
-        expires_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Expires At
-      type: object
-      required:
-      - permissions
-      - workspace_id
-      title: CreateAPIKeyPayload
-      description: API key creation payload.
-    CreateWorkspaceRequest:
-      properties:
-        public_id:
-          type: string
-          maxLength: 64
-          minLength: 1
-          title: Public Id
-      type: object
-      required:
-      - public_id
-      title: CreateWorkspaceRequest
-      description: Workspace creation request.
-    InitiateDeviceAuthResponse:
-      properties:
-        authorization_url:
-          type: string
-          title: Authorization Url
-        device_code:
-          type: string
-          title: Device Code
-        user_code:
-          type: string
-          title: User Code
-      type: object
-      required:
-      - authorization_url
-      - device_code
-      - user_code
-      title: InitiateDeviceAuthResponse
-      description: Response with device authentication details.
-    ExchangeCodeResponse:
-      properties:
-        token:
-          $ref: '#/components/schemas/Token'
-        success_uri:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Success Uri
-      type: object
-      required:
-      - token
-      title: ExchangeCodeResponse
-      description: "Response containing the exchanged token.\n\nAttributes\n----------\ntoken : Token\n    The token obtained from the authorization code exchange with IDP.\nsuccess_uri : str | None\n    The URI to redirect the user at in case of successful login flow."
-    ListWorkspaceResponse:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/Workspace'
-          type: array
-          title: Items
-        next_cursor:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Next Cursor
-      type: object
-      required:
-      - items
-      title: ListWorkspaceResponse
-      description: List workspaces request.
-    UpdateWorkspaceRequest:
-      properties:
-        public_id:
-          type: string
-          maxLength: 64
-          minLength: 1
-          title: Public Id
-      type: object
-      required:
-      - public_id
-      title: UpdateWorkspaceRequest
-      description: Workspace update request.
+    Permission:
+      type: string
+      enum:
+      - create:project
+      - read:project
+      - update:project
+      - delete:project
+      - create:invitation
+      - read:invitation
+      - delete:invitation
+      title: Permission
+      description: 'A permission.
+
+
+        The actual ground-truth permissions are the ones stored in the
+
+        database; this type is used to avoid typos in permissions.'
     Invitation:
       properties:
         id:
@@ -1943,17 +1626,334 @@ components:
       - updated_at
       title: Invitation
       description: Represents a user invitation to join a Workspace.
-    CreateAPIKeyResponse:
+    WorkspaceMember:
       properties:
-        api_key_id:
+        workspace_id:
           type: integer
-          title: Api Key Id
-        api_key:
+          title: Workspace Id
+        user_id:
           type: string
-          title: Api Key
+          title: User Id
+        role:
+          $ref: '#/components/schemas/WorkspaceRole'
+        invited_by:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Invited By
       type: object
       required:
-      - api_key_id
-      - api_key
-      title: CreateAPIKeyResponse
-      description: Response of "create API key" endpoint.
+      - workspace_id
+      - user_id
+      - role
+      title: WorkspaceMember
+      description: Workspace member.
+    UpdateWorkspaceRequest:
+      properties:
+        public_id:
+          type: string
+          maxLength: 64
+          minLength: 1
+          title: Public Id
+      type: object
+      required:
+      - public_id
+      title: UpdateWorkspaceRequest
+      description: Workspace update request.
+    ListWorkspaceResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/Workspace'
+          type: array
+          title: Items
+        next_cursor:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - items
+      title: ListWorkspaceResponse
+      description: List workspaces request.
+    Body_oauth_device_callback_validation_identity_oauth_device_callback_post:
+      properties:
+        state:
+          type: string
+          title: State
+        user_code:
+          type: string
+          title: User Code
+      type: object
+      required:
+      - state
+      - user_code
+      title: Body_oauth_device_callback_validation_identity_oauth_device_callback_post
+    WorkspaceRole:
+      type: string
+      enum:
+      - owner
+      - contributor
+      - reader
+      title: WorkspaceRole
+      description: Role of a user within a workspace.
+    ExchangeCodeResponse:
+      properties:
+        token:
+          $ref: '#/components/schemas/Token'
+        success_uri:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Success Uri
+      type: object
+      required:
+      - token
+      title: ExchangeCodeResponse
+      description: "Response containing the exchanged token.\n\nAttributes\n----------\ntoken : Token\n    The token obtained from the authorization code exchange with IDP.\nsuccess_uri : str | None\n    The URI to redirect the user at in case of successful login flow."
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    LoginResponse:
+      properties:
+        authorization_url:
+          type: string
+          title: Authorization Url
+      type: object
+      required:
+      - authorization_url
+      title: LoginResponse
+      description: "Represents a response containing the authorization URL.\n\nAttributes\n----------\nauthorization_url : str\n    The URL where the user should be redirected to complete the login."
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    SetMemberRoleRequest:
+      properties:
+        role:
+          $ref: '#/components/schemas/WorkspaceRole'
+      type: object
+      required:
+      - role
+      title: SetMemberRoleRequest
+      description: Set a member's role; permissions are replaced from the static role map.
+    WorkspaceMembershipInfo:
+      properties:
+        workspace_id:
+          type: integer
+          title: Workspace Id
+        public_id:
+          type: string
+          maxLength: 64
+          title: Public Id
+        role:
+          $ref: '#/components/schemas/WorkspaceRole'
+        permissions:
+          items:
+            type: string
+          type: array
+          title: Permissions
+      type: object
+      required:
+      - workspace_id
+      - public_id
+      - role
+      - permissions
+      title: WorkspaceMembershipInfo
+      description: One workspace membership with role and effective permission names.
+    UserAPIKey:
+      properties:
+        id:
+          type: integer
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        workspace_id:
+          type: integer
+          title: Workspace Id
+        name:
+          anyOf:
+          - type: string
+            maxLength: 150
+          - type: 'null'
+          title: Name
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        expires_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Expires At
+      type: object
+      required:
+      - id
+      - user_id
+      - workspace_id
+      - created_at
+      - updated_at
+      title: UserAPIKey
+      description: 'User API key.
+
+
+        Allows users to access the Skore Hub API without an IDP bearer token.
+
+
+        The API key itself (hashed version) is not accessible; users must copy
+
+        and save it upon generation.
+
+
+        If the key is lost, the user must generate a new key hash.'
+    CreateAPIKeyPayload:
+      properties:
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+        permissions:
+          items:
+            $ref: '#/components/schemas/Permission'
+          type: array
+          title: Permissions
+        workspace_id:
+          type: integer
+          title: Workspace Id
+        expires_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Expires At
+      type: object
+      required:
+      - permissions
+      - workspace_id
+      title: CreateAPIKeyPayload
+      description: API key creation payload.
+    SortOrder:
+      type: string
+      enum:
+      - ASC
+      - DESC
+      title: SortOrder
+      description: Sort order.
+    CreateWorkspaceResponse:
+      properties:
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - id
+      title: CreateWorkspaceResponse
+      description: Workspace creation response.
+    Body_create_workspace_invitation_identity_workspaces__workspace_id__invitations_post:
+      properties:
+        email:
+          type: string
+          format: email
+          title: Email
+        role:
+          $ref: '#/components/schemas/WorkspaceRole'
+      type: object
+      required:
+      - email
+      - role
+      title: Body_create_workspace_invitation_identity_workspaces__workspace_id__invitations_post
+    UpdateAPIKeyPayload:
+      properties:
+        name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Name
+        regenerate_api_key:
+          type: boolean
+          title: Regenerate Api Key
+          default: false
+      type: object
+      title: UpdateAPIKeyPayload
+      description: API key update payload.
+    CreateWorkspaceInvitationLinkRequest:
+      properties:
+        role:
+          $ref: '#/components/schemas/WorkspaceRole'
+      type: object
+      required:
+      - role
+      title: CreateWorkspaceInvitationLinkRequest
+      description: Create a shareable workspace invitation URL.
+    Token:
+      properties:
+        access_token:
+          type: string
+          title: Access Token
+        expires_in:
+          type: integer
+          title: Expires In
+        id_token:
+          type: string
+          title: Id Token
+        token_type:
+          type: string
+          title: Token Type
+        scope:
+          type: string
+          title: Scope
+        expires_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Expires At
+        refresh_token:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Refresh Token
+      type: object
+      required:
+      - access_token
+      - expires_in
+      - id_token
+      - token_type
+      - scope
+      title: Token
+      description: "Represents an access token and related details obtained during authentication.\n\nAttributes\n----------\naccess_token : str\n    The token used to access protected resources.\nexpires_in : int\n    The duration (in seconds) until the token expires.\nid_token : str\n    The token containing identity claims for the authenticated user.\ntoken_type : str\n    The type of token (e.g., \"Bearer\").\nscope : str\n    The scope of permissions granted by the token.\nrefresh_token : str | None, optional\n    The token used to obtain a new access token without re-authenticating.\nexpires_at: datetime | None, optional\n    The access_token expiration timestamp."
