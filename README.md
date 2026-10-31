@@ -64,6 +64,126 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Probabl is a company surfaced as a portfolio company of serena and added to the API Evangelist network as a stub for enrichment. Sector: open-source. This profile is a lead awaiting the enrichment pipeline.
+Probabl (styled ":probabl.") is the French, Inria-spun-out company behind scikit-learn — "the Tabular AI company by the creators of scikit-learn" — founded in 2023 to develop, maintain and commercially sustain the open-source Python data-science stack (scikit-learn, skrub, skore). Its commercial product is Skore: an open-source Python library (`skore`) that turns model training into structured, auditable artifacts — estimator reports, cross-validation reports, comparison reports, data and metric diagnostics — plus Skore Hub, a hosted collaboration platform where teams push, compare and track those artifacts across workspaces and projects. Skore Hub exposes a public REST API (Skore Hub, OpenAPI 3.1.0, 67 operations) covering identity/OAuth, workspaces, members and API keys, projects, estimator/cross-validation/comparison reports, artifacts, project goals, and OpenAI/Anthropic-compatible agent endpoints. Probabl also publishes a first-party Agent Skills package (probabl-skills, BSD-3-Clause) of 14 data-science skills for coding agents such as Claude Code and Cursor, a `skore` CLI, training via Skolar, and the Scikit-learn Central ecosystem explorer.
 
-Source: portfolio company of [serena](https://github.com/api-evangelist/serena) — https://probabl.ai/
+**Areas:** Company · Open Source · Machine Learning · Data Science · scikit-learn · MLOps · Model Evaluation · Experiment Tracking · Agent Skills · Artificial Intelligence · Python · France
+
+## Probabl on APIs.io
+
+Everything profiled for Probabl is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/probabl/](https://apis.io/providers/probabl/)** — or go straight to one of the APIs or properties below.
+
+### APIs (8)
+
+- [Probabl Anthropic Compatible Agent API](https://apis.io/apis/probabl/probabl-anthropic-compatible-agent-api/) — The Anthropic Compatible Agent API from Probabl — 1 operation(s) for anthropic compatible agent.
+- [Probabl Health API](https://apis.io/apis/probabl/probabl-health-api/) — The Health API from Probabl — 1 operation(s) for health.
+- [Probabl Identity API](https://apis.io/apis/probabl/probabl-identity-api/) — The identity API from Probabl — 22 operation(s) for identity.
+- [Probabl Liveness API](https://apis.io/apis/probabl/probabl-liveness-api/) — The Liveness API from Probabl — 1 operation(s) for liveness.
+- [Probabl LLM Provider API](https://apis.io/apis/probabl/probabl-llm-provider-api/) — The LLM Provider API from Probabl — 3 operation(s) for llm provider.
+- [Probabl OpenAI Compatible Agent API](https://apis.io/apis/probabl/probabl-openai-compatible-agent-api/) — The OpenAI Compatible Agent API from Probabl — 3 operation(s) for openai compatible agent.
+- [Probabl Projects API](https://apis.io/apis/probabl/probabl-projects-api/) — The projects API from Probabl — 19 operation(s) for projects.
+- [Probabl Readiness API](https://apis.io/apis/probabl/probabl-readiness-api/) — The Readiness API from Probabl — 1 operation(s) for readiness.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [probabl-mcp.yml](https://apis.io/servers/probabl/probabl-mcp-yml/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Probabl Skore Hub Overlay](https://apis.io/overlays/probabl/probabl-skore-hub-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Probabl Authentication](https://apis.io/security/probabl/probabl-authentication/)
+- [Probabl Domain Security](https://apis.io/security/probabl/probabl-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Probabl Plans Pricing](https://apis.io/plans/probabl/probabl-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Probabl Rate Limits](https://apis.io/rate-limits/probabl/probabl-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://probabl.ai/)
+- [Documentation](https://docs.skore.probabl.ai/stable/)
+- [Getting started](https://docs.skore.probabl.ai/stable/install.html)
+- [API reference](https://api.skore.probabl.ai/docs)
+- [Support](https://discord.probabl.ai/)
+- [Blog](https://blog.probabl.ai/)
+- [Terms of service](https://www.probabl.ai/legal/skore-eula/)
+- [Privacy policy](https://www.probabl.ai/legal/privacy-policy/)
+- [GitHub](https://github.com/probabl-ai)
+- [Status](https://status.probabl.ai/)
+
+## API Evangelist rating
+
+**Kin Score 41.5** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 68.3 |
+| Contract quality | 41.9 |
+| Contract governance | 4.5 |
+| Operational transparency | 26.3 |
+| Developer ergonomics | 71.4 |
+| Access clarity | 27.6 |
+
+**Agent readiness 32.6** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | documented (partial credit) |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | derived (partial credit) |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | yes |
+| Well Known Catalog | yes |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | — |
+
+**Regulatory alignment 22.7** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/probabl/](https://apis.io/providers/probabl/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Probabl: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/probabl/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
